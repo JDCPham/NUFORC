@@ -1,8 +1,9 @@
+//Package
 package requirementX;
 
+//Imports
 import java.awt.BorderLayout;
 import java.awt.Color;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -11,32 +12,34 @@ import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTextArea;
 import javax.swing.SpinnerNumberModel;
-
 import api.ripley.Ripley;
 
 public class Panel1 {
 
-public static void main(String[] args) {
+	public static void main(String[] args) {
 		
 		//Initializing ripley
 		Ripley ripley = new Ripley("10tLI3CWstqyVD6ql2OMtA==", "tBgm4pRo9grVqL46EnH7ew==");
+		
 		//Creating JFrame
-		JFrame firstFrame = new JFrame("");
-		firstFrame.setSize(700, 700);
-		firstFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	
-		//Adding north, center, south panels to first frame
-		firstFrame.setLayout(new BorderLayout());	
+		JFrame mainFrame = new JFrame("UFO");
+		mainFrame.setSize(700, 700);
+		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainFrame.setLayout(new BorderLayout());	
+		
+		//Creating Panels
 		JPanel panelNorth = new JPanel();
 		JPanel panelCenter = new JPanel();
 		JPanel panelSouth = new JPanel();
-		firstFrame.add(panelNorth, BorderLayout.NORTH);
-		firstFrame.add(panelCenter, BorderLayout.CENTER);
-		firstFrame.add(panelSouth, BorderLayout.SOUTH);
 		
-		JLabel centerLabel = new JLabel("asdknadsa");
+		//Add panels to main frame
+		mainFrame.add(panelNorth, BorderLayout.NORTH);
+		mainFrame.add(panelCenter, BorderLayout.CENTER);
+		mainFrame.add(panelSouth, BorderLayout.SOUTH);
+		
+		//Create centre label and add to centre panel
+		JLabel centerLabel = new JLabel("I am a label");
 		panelCenter.add(centerLabel);
-		
 		
 		//Adding north-east panel
 		panelNorth.setLayout(new BorderLayout());
@@ -88,7 +91,7 @@ public static void main(String[] args) {
 		JTextArea centerTextArea = new JTextArea();
 		JScrollPane centerScrollPane = new JScrollPane(centerTextArea);
 		
-		firstFrame.setVisible(true);
+		mainFrame.setVisible(true);
 		
 	}
 }

@@ -13,6 +13,7 @@ public class RipleyTest {
 		
 		// Call getLastUpdated method from ripley object and print to console
 		System.out.println(ripley.getLastUpdated());
+		
 
 	}
 
