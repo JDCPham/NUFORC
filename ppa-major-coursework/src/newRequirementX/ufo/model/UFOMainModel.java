@@ -28,8 +28,6 @@ public class UFOMainModel extends Observable{
 	
 	public UFOMainModel(){
 		
-		System.out.println(currentPanel);
-		
 		// Initialise panels array
 		panels = new ArrayList<JPanel>();
 		
