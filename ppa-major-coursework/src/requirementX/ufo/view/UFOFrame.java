@@ -162,7 +162,7 @@ public class UFOFrame extends JFrame implements Observer{
 		mainPanel.add(getCurrentPanel());
 		mainPanel.revalidate();
 		mainPanel.repaint();
-	}
+		}
 	
 	@Override
 	public void update(Observable arg0, Object arg1) {

@@ -11,19 +11,18 @@ public class UFOModel extends Observable{
 	
 	private int fromYear;
 	private int toYear;
-
 	private int currentPanel;
-	
 	private boolean dataReady;
 	
 	private Ripley ripley;
 	
 	
 	
-	public UFOModel(){
+	public UFOModel() throws InterruptedException{
 		currentPanel = 0;
 		dataReady = false;
 		setRipley();
+
 	}
 	
 	public double getVersion(){
