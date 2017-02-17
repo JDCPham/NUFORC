@@ -23,21 +23,19 @@ public class UFOFrame extends JFrame implements Observer{
 	
 	private Ripley ripley;
 	private UFOModel ufoModel;
-	private ArrayList<JPanel> view;
+	private ArrayList<JPanel> views;
+	private JPanel mainPanel;
 	
-	public UFOFrame(UFOModel ufoModel){
+	public UFOFrame(UFOModel ufoModel, ArrayList<JPanel> views){
 		super("UFO");
 		ripley = new Ripley("10tLI3CWstqyVD6ql2OMtA==", "tBgm4pRo9grVqL46EnH7ew==");
-		this.view = new ArrayList<JPanel>();
+	
+		this.views = views;
 		
 		this.ufoModel = ufoModel;
 		ufoModel.addObserver(this);
+		
 		initWidgets();
-		
-		view.add(new UFOWelcome(ufoModel));
-		view.add(new UFOMap(ufoModel));
-		view.add(new UFOStat(ufoModel));
-		
 		updatePanel();
 	}
 	
@@ -110,19 +108,19 @@ public class UFOFrame extends JFrame implements Observer{
 		
 		leftButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				setPreviousPanel();
+			
 			}	
 		});
 
 		// Create panels
 		JPanel topPanel = new JPanel();
-		JPanel centrePanel = new JPanel();
+		mainPanel = new JPanel();
 		JPanel bottomPanel = new JPanel();
 		
 		// Set panel properties and layout
 		topPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		bottomPanel.setLayout(new BorderLayout());
-		centrePanel.setLayout(new GridLayout(1, 1));
+		mainPanel.setLayout(new GridLayout(1, 1));
 		
 		// Add widgets to panels
 		topPanel.add(fromLabel);
@@ -137,10 +135,15 @@ public class UFOFrame extends JFrame implements Observer{
 		// Add panels to frame
 		add(topPanel, BorderLayout.NORTH);
 		add(bottomPanel, BorderLayout.SOUTH);
+		add(mainPanel, BorderLayout.CENTER);
 		updatePanel();
 		
 		// Pack frame
 		pack();
+	}
+	
+	public JPanel getCurrentPanel(){
+		return views.get(ufoModel.getCurrentPanel());
 	}
 	
 	public void setFromYear(String year){
@@ -151,23 +154,16 @@ public class UFOFrame extends JFrame implements Observer{
 		ufoModel.setToYear(year);	
 	}
 	
-	public void setNextPanel(){
-		
-	}
-	
-	public void setPreviousPanel(){
-		
-	}
 	
 	public void doSetNextPanel(){
-		remove(view.get(ufoModel.getCurrentPanel()));
-		ufoModel.setNextPanel();
+		ufoModel.setNextPanel(views);
 	}
 	
 	public void updatePanel(){
-		
-		int currentPanel = ufoModel.getCurrentPanel();
-		this.add(view.get(currentPanel), BorderLayout.CENTER);
+		mainPanel.removeAll();
+		mainPanel.add(getCurrentPanel());
+		mainPanel.revalidate();
+		mainPanel.repaint();
 	}
 	
 	@Override

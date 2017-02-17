@@ -24,8 +24,14 @@ public class UFOModel extends Observable{
 		currentPanel = i;
 	}
 	
-	public void setNextPanel(){
-		currentPanel++;
+	public void setNextPanel(ArrayList<JPanel> views){
+		System.out.print(currentPanel);
+		
+		if (currentPanel < views.size()-1){
+			currentPanel++;
+		} else {
+			currentPanel = 0;
+		}
 		setChanged();
 		notifyObservers();
 	}
