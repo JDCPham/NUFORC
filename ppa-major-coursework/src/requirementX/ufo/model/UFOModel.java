@@ -5,6 +5,8 @@ import java.util.Observable;
 
 import javax.swing.JPanel;
 
+import api.ripley.Ripley;
+
 public class UFOModel extends Observable{
 	
 	private int fromYear;
@@ -12,21 +14,27 @@ public class UFOModel extends Observable{
 
 	private int currentPanel;
 	
+	private boolean dataReady;
+	
+	private Ripley ripley;
+	
+	
+	
 	public UFOModel(){
-		this.currentPanel = 0;
+		currentPanel = 0;
+		dataReady = false;
+		setRipley();
+	}
+	
+	public double getVersion(){
+		return ripley.getVersion();
 	}
 	
 	public int getCurrentPanel(){
 		return currentPanel;
 	}
 	
-	public void setCurrentPanel(int i){
-		currentPanel = i;
-	}
-	
-	public void setNextPanel(ArrayList<JPanel> views){
-		System.out.print(currentPanel);
-		
+	public void setNextPanel(ArrayList<JPanel> views){		
 		if (currentPanel < views.size()-1){
 			currentPanel++;
 		} else {
@@ -38,10 +46,14 @@ public class UFOModel extends Observable{
 	
 	public void setFromYear(String year){
 		fromYear = Integer.parseInt(year);
+		setChanged();
+		notifyObservers();
 	}
 	
 	public void setToYear(String year){
 		toYear = Integer.parseInt(year);
+		setChanged();
+		notifyObservers();
 	}
 	
 	public int getFromYear(){
@@ -50,6 +62,26 @@ public class UFOModel extends Observable{
 	
 	public int getToYear(){
 		return toYear;
+	}
+	
+	public boolean isDataReady(){
+		return dataReady;
+	}
+	
+	public void setRipley(){
+		ripley = new Ripley("10tLI3CWstqyVD6ql2OMtA==", "tBgm4pRo9grVqL46EnH7ew==");
+	}
+	
+	public int getStartYear(){
+		return ripley.getStartYear();
+	}
+	
+	public int getLatestYear(){
+		return ripley.getLatestYear();
+	}
+	
+	public String getLastUpdated(){
+		return ripley.getLastUpdated();
 	}
 	
 

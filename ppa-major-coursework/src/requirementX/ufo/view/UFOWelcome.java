@@ -33,16 +33,16 @@ public class UFOWelcome extends JPanel implements Observer{
 	}
 	
 	public void updateLabel(){
-		
-		mainLabel.setText("<html><center>Welcome to the Ripley API v1.0<br>"
-				+ "Please select from the dates above, in order to<br>"
-				+ "begin analysing UFO sighting data.<br><br>"
-				+ "Date range selected, " + ufoModel.getFromYear() + " - " + ufoModel.getToYear() + " <br><br>"
-				+ "Grabbing data...<br>"
-				+ "Data grabbed in 1 minutes, 17 seconds...<br>"
-				+ "<b>Please now interact with this data using the buttons<br>"
-				+ "to the left and the right</b></center></html>");
-		
+
+			mainLabel.setText("<html><center>Welcome to the Ripley API v" + ufoModel.getVersion()+ "<br>"
+					+ "Please select from the dates above, in order to<br>"
+					+ "begin analysing UFO sighting data.<br><br>"
+					+ "Date range selected, " + ufoModel.getFromYear() + " - " + ufoModel.getToYear() + " <br><br>"
+					+ "Grabbing data...<br>"
+					+ "Data grabbed in 1 minutes, 17 seconds...<br>"
+					+ "<b>Please now interact with this data using the buttons<br>"
+					+ "to the left and the right</b></center></html>");
+
 	}
 
 	@Override

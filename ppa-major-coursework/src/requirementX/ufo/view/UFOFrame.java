@@ -16,25 +16,26 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import api.ripley.Ripley;
 import requirementX.ufo.model.UFOModel;
 
 public class UFOFrame extends JFrame implements Observer{
 	
-	private Ripley ripley;
 	private UFOModel ufoModel;
 	private ArrayList<JPanel> views;
 	private JPanel mainPanel;
 	
 	public UFOFrame(UFOModel ufoModel, ArrayList<JPanel> views){
+		// Set window title
 		super("UFO");
-		ripley = new Ripley("10tLI3CWstqyVD6ql2OMtA==", "tBgm4pRo9grVqL46EnH7ew==");
 	
+		// Add views
 		this.views = views;
 		
+		// Set model and observers
 		this.ufoModel = ufoModel;
 		ufoModel.addObserver(this);
 		
+		// Set up ripley, initialise GUI, and update the main panel
 		initWidgets();
 		updatePanel();
 	}
@@ -43,24 +44,23 @@ public class UFOFrame extends JFrame implements Observer{
 		
 		JComboBox<String> comboBox = new JComboBox<String>();
 		
-		int startYear = ripley.getStartYear();
-		int latestYear = ripley.getLatestYear();
+		int startYear = ufoModel.getStartYear();
+		int latestYear = ufoModel.getLatestYear();
 		
 		int noOfYears = latestYear - startYear;
 		int currentYear = startYear;
+	
 		
 		for (int i = 0; i <= noOfYears; i++){
 			comboBox.addItem(Integer.toString(currentYear));
 			currentYear++;
 		}
-			
+		
+		comboBox.addItem(" - ");
 		return comboBox;	
 	}
 	
 	public void initWidgets(){
-		
-		// New ripley
-		Ripley ripley = new Ripley("10tLI3CWstqyVD6ql2OMtA==", "tBgm4pRo9grVqL46EnH7ew==");
 		
 		// Set frame properties and layout
 		setPreferredSize(new Dimension(600, 300));
@@ -70,7 +70,7 @@ public class UFOFrame extends JFrame implements Observer{
 		// Create widgets
 		JLabel fromLabel = new JLabel("From: ");
 		JLabel toLabel = new JLabel("To: ");
-		JLabel lastUpdatedLabel = new JLabel(ripley.getLastUpdated());
+		JLabel lastUpdatedLabel = new JLabel(ufoModel.getLastUpdated());
 		JComboBox<String> fromComboBox = makeComboBox();
 		JComboBox<String> toComboBox = makeComboBox();
 		JButton leftButton = new JButton("<");
@@ -82,10 +82,8 @@ public class UFOFrame extends JFrame implements Observer{
 		rightButton.setEnabled(true);
 		
 		// Set default values
-		fromComboBox.setSelectedItem("2014");
-		setFromYear((String)fromComboBox.getSelectedItem());
-		toComboBox.setSelectedItem("2017");
-		setToYear((String)toComboBox.getSelectedItem());
+		fromComboBox.setSelectedItem(" - ");
+		toComboBox.setSelectedItem(" - ");
 		
 		// Add Action listeners
 		fromComboBox.addActionListener(new ActionListener(){
@@ -94,9 +92,9 @@ public class UFOFrame extends JFrame implements Observer{
 			}
 		});
 		
-		fromComboBox.addActionListener(new ActionListener(){
+		toComboBox.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				setToYear((String)fromComboBox.getSelectedItem());
+				setToYear((String)toComboBox.getSelectedItem());
 			}
 		});
 		
