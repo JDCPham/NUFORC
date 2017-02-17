@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -16,23 +17,28 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import api.ripley.Ripley;
-import requirementX.ufo.model.UFO;
+import requirementX.ufo.model.UFOModel;
 
 public class UFOFrame extends JFrame implements Observer{
 	
 	private Ripley ripley;
-	private UFO ufo;
-	private JLabel panelOneLabel;
-	private JPanel mainPanel;
+	private UFOModel ufoModel;
+	private ArrayList<JPanel> view;
 	
-	public UFOFrame(UFO ufo){
+	public UFOFrame(UFOModel ufoModel){
 		super("UFO");
 		ripley = new Ripley("10tLI3CWstqyVD6ql2OMtA==", "tBgm4pRo9grVqL46EnH7ew==");
+		this.view = new ArrayList<JPanel>();
 		
-		this.ufo = ufo;
-		ufo.addObserver(this);
+		this.ufoModel = ufoModel;
+		ufoModel.addObserver(this);
 		initWidgets();
-		updateLabel();
+		
+		view.add(new UFOWelcome(ufoModel));
+		view.add(new UFOMap(ufoModel));
+		view.add(new UFOStat(ufoModel));
+		
+		updatePanel();
 	}
 	
 	public JComboBox<String> makeComboBox(){
@@ -67,7 +73,6 @@ public class UFOFrame extends JFrame implements Observer{
 		JLabel fromLabel = new JLabel("From: ");
 		JLabel toLabel = new JLabel("To: ");
 		JLabel lastUpdatedLabel = new JLabel(ripley.getLastUpdated());
-		panelOneLabel = new JLabel();
 		JComboBox<String> fromComboBox = makeComboBox();
 		JComboBox<String> toComboBox = makeComboBox();
 		JButton leftButton = new JButton("<");
@@ -75,10 +80,8 @@ public class UFOFrame extends JFrame implements Observer{
 	
 		// Set widget properties
 		lastUpdatedLabel.setHorizontalAlignment(JLabel.CENTER);
-		panelOneLabel.setVerticalAlignment(JLabel.CENTER);
-		panelOneLabel.setHorizontalAlignment(JLabel.CENTER);
 		leftButton.setEnabled(false);
-		rightButton.setEnabled(false);
+		rightButton.setEnabled(true);
 		
 		// Set default values
 		fromComboBox.setSelectedItem("2014");
@@ -93,10 +96,22 @@ public class UFOFrame extends JFrame implements Observer{
 			}
 		});
 		
-		toComboBox.addActionListener(new ActionListener(){
+		fromComboBox.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				setToYear((String)toComboBox.getSelectedItem());
+				setToYear((String)fromComboBox.getSelectedItem());
 			}
+		});
+		
+		rightButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				doSetNextPanel();
+			}
+		});
+		
+		leftButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				setPreviousPanel();
+			}	
 		});
 
 		// Create panels
@@ -119,42 +134,45 @@ public class UFOFrame extends JFrame implements Observer{
 		bottomPanel.add(lastUpdatedLabel, BorderLayout.CENTER);
 		bottomPanel.add(rightButton, BorderLayout.EAST);
 		
-		centrePanel.add(panelOneLabel);
-		
 		// Add panels to frame
 		add(topPanel, BorderLayout.NORTH);
 		add(bottomPanel, BorderLayout.SOUTH);
-		add(centrePanel, BorderLayout.CENTER);
+		updatePanel();
 		
 		// Pack frame
 		pack();
 	}
 	
 	public void setFromYear(String year){
-		ufo.setFromYear(year);
+		ufoModel.setFromYear(year);
 	}
 	
 	public void setToYear(String year){
-		ufo.setToYear(year);	
+		ufoModel.setToYear(year);	
 	}
 	
-	private void updateLabel(){
+	public void setNextPanel(){
 		
-		panelOneLabel.setText("<html><center>Welcome to the Ripley API v1.0<br>"
-				+ "Please select from the dates above, in order to<br>"
-				+ "begin analysing UFO sighting data.<br><br>"
-				+ "Date range selected, " + ufo.getFromYear() + " - " + ufo.getToYear() + " <br><br>"
-				+ "Grabbing data...<br>"
-				+ "Data grabbed in 1 minutes, 17 seconds...<br>"
-				+ "<b>Please now interact with this data using the buttons<br>"
-				+ "to the left and the right</b></center></html>");
+	}
+	
+	public void setPreviousPanel(){
 		
+	}
+	
+	public void doSetNextPanel(){
+		remove(view.get(ufoModel.getCurrentPanel()));
+		ufoModel.setNextPanel();
+	}
+	
+	public void updatePanel(){
 		
+		int currentPanel = ufoModel.getCurrentPanel();
+		this.add(view.get(currentPanel), BorderLayout.CENTER);
 	}
 	
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		updateLabel();
+		updatePanel();
 	}
 	
 
