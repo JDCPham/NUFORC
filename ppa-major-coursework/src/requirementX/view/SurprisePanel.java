@@ -6,17 +6,14 @@ import java.awt.GridLayout;
 import javax.swing.JPanel;
 
 import requirementX.model.MainModel;
-import requirementX.model.MapModel;
 
-public class MapPanel extends JPanel {
+public class SurprisePanel extends JPanel {
 	
 	private MainModel mainModel;
-	private MapModel mapModel;
 	
-	public MapPanel(MainModel mainModel, MapModel mapModel) {
+	public SurprisePanel(MainModel mainModel) {
 		
 		this.mainModel = mainModel;
-		this.mapModel = mapModel;
 		initWidgets();
 		
 	}
@@ -26,7 +23,7 @@ public class MapPanel extends JPanel {
 	public void initWidgets() {
 		
 		setLayout(new GridLayout(1, 1));
-		setBackground(Color.BLUE);
+		setBackground(Color.YELLOW);
 		
 	}
 
