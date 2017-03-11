@@ -17,10 +17,16 @@ public class Main {
 		Ripley ripley = new Ripley("10tLI3CWstqyVD6ql2OMtA==", "tBgm4pRo9grVqL46EnH7ew==");
 		
 		// Create models
-		WelcomeModel welcomeModel = new WelcomeModel(ripley);
-		MapModel mapModel = new MapModel(ripley);
-		StatsModel statsModel = new StatsModel(ripley);
 		MainModel mainModel = new MainModel(ripley);
+		WelcomeModel welcomeModel = new WelcomeModel(mainModel);
+		MapModel mapModel = new MapModel(mainModel);
+		StatsModel statsModel = new StatsModel(mainModel);
+		
+		// Add other models
+		mainModel.setModels(welcomeModel, mapModel, statsModel);
+		welcomeModel.setModels(mapModel, statsModel);
+		mapModel.setModels(welcomeModel, statsModel);
+		statsModel.setModels(welcomeModel, mapModel);
 		
 		// Create frame
 		MainFrame mainFrame = new MainFrame(mainModel, welcomeModel, mapModel, statsModel);

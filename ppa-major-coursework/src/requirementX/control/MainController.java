@@ -40,7 +40,7 @@ public class MainController implements ActionListener {
 			JComboBox<String> widget = (JComboBox<String>) e.getSource();
 			String year = (String) widget.getSelectedItem();
 			mainModel.setFromSelectionYear(Integer.parseInt(year));
-			mainModel.setDateValid();
+			if (mainModel.setDateValid()) mainModel.getData();
 
 		}
 		
@@ -49,7 +49,7 @@ public class MainController implements ActionListener {
 			JComboBox<String> widget = (JComboBox<String>) e.getSource();
 			String year = (String) widget.getSelectedItem();
 			mainModel.setToSelectionYear(Integer.parseInt(year));
-			mainModel.setDateValid();
+			if (mainModel.setDateValid()) mainModel.getData();
 
 		}
 

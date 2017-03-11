@@ -4,6 +4,7 @@ import java.awt.GridLayout;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.xml.soap.Text;
 
 import api.ripley.Ripley;
 import requirementX.model.MainModel;
@@ -35,6 +36,14 @@ public class WelcomePanel extends JPanel{
 		updateLabel();
 
 	}
+	
+	
+	public boolean isDateSelected() {
+		
+		if ((mainModel.getFromSelectionYear() == 0) || (mainModel.getToSelectionYear()) == 0) return false;
+		else return true;
+		
+	}
 
 
 
@@ -46,23 +55,30 @@ public class WelcomePanel extends JPanel{
 				+ "Please select from the dates above, in order to<br>"
 				+ "begin analysing UFO sighting data.<br><br>";
 		
-		if ((mainModel.getFromSelectionYear() == 0) || (mainModel.getToSelectionYear()) == 0) {
+		if (isDateSelected() && mainModel.isDateValid() && isDateSelected() && mainModel.isGrabbingData()){
 			
-			text += "Please select a date range";
+			text += "Date range selected: " + mainModel.getFromSelectionYear() + " - " 
+					+ mainModel.getToSelectionYear() + "<br><br><b>Grabbing Data...</b>";
 			
-		} else {
+		} else if (isDateSelected() && mainModel.isDateValid() && isDateSelected()){
 			
-			text += "Date range selected: " + mainModel.getFromSelectionYear() + " - " + mainModel.getToSelectionYear();
+			text += "Date range selected: " + mainModel.getFromSelectionYear() + " - " 
+					+ mainModel.getToSelectionYear();
+			
+		} else if (isDateSelected() && !mainModel.isDateValid() && isDateSelected()){
+			
+			text += "You have entered an invalid date. Select another date range.";
 			
 		}
 
-		text = "<html><center>" + text + "</html></center>";
+		text = "<html><center>" + text + "</center></html>";
 
 		mainLabel.setText(text);
-		
+
 		return text;
-		
+
 	}
+
 
 
 }

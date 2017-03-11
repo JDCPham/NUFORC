@@ -1,3 +1,4 @@
+
 package requirementX.model;
 
 import java.util.Observable;
@@ -6,17 +7,30 @@ import api.ripley.Ripley;
 
 public class WelcomeModel extends Observable{
 	
-	private Ripley ripley;
-	
 	private double version;
 	
-	public WelcomeModel(Ripley ripley) {
-		
-		// Set ripley object
-		this.ripley = ripley;
+	private MainModel mainModel;
+	private MapModel mapModel;
+	private StatsModel statsModel;
+	
+	
+	
+	public WelcomeModel(MainModel mainModel) {
+
+		// Add Main Model
+		this.mainModel = mainModel;
 		
 		// Get version
-		version = ripley.getVersion();
+		version = this.mainModel.ripley.getVersion();
+		
+	}
+	
+	
+	
+	public void setModels(MapModel mapModel, StatsModel statsModel) {
+		
+		this.mapModel = mapModel;
+		this.statsModel = statsModel;
 		
 	}
 	

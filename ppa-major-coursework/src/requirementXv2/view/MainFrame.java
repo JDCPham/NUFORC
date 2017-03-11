@@ -1,4 +1,4 @@
-package requirementX.view;
+package requirementXv2.view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -12,38 +12,49 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import requirementX.control.MainController;
-import requirementX.model.MainModel;
-import requirementX.model.MapModel;
-import requirementX.model.StatsModel;
-import requirementX.model.WelcomeModel;
+import requirementXv2.control.MainController;
+import requirementXv2.model.MainModel;
+import requirementXv2.model.MapModel;
+import requirementXv2.model.StatsModel;
+import requirementXv2.model.WelcomeModel;
 
 public class MainFrame extends JFrame implements Observer {
 
-	private static final long serialVersionUID = 1L;
+	// Model
+	protected MainModel mainModel;
+	private WelcomeModel welcomeModel;
+	private MapModel mapModel;
+	private StatsModel statsModel;
 
-	private MainModel mainModel;
+	// Controller
+	protected MainController mainController;
+
+	// Widgets
 	private JButton leftButton;
 	private JButton rightButton;
 	private JComboBox<String> fromComboBox;
 	private JComboBox<String> toComboBox;
+
+	// Panels
 	private JPanel[] panels;
 
-	public MainFrame(MainModel mainModel, WelcomeModel welcomeModel, MapModel mapModel, StatsModel statsModel){
+	public MainFrame(MainModel mainModel, WelcomeModel welcomeModel, MapModel mapModel){
 
-		super("Application");
+		super();
 		this.mainModel = mainModel;
-		initPanels(mainModel, welcomeModel, mapModel, statsModel);
+		this.welcomeModel = welcomeModel;
+		this.mapModel = mapModel;
+		this.mainController = new MainController(mainModel, welcomeModel, mapModel);
+		initPanels(mainModel, welcomeModel, mapModel);
 		initWidgets();
 
 	}
 
 
-
 	public void initWidgets(){
 
 		// Set frame properties and layout
-		setPreferredSize(new Dimension(1080, 720));
+		setPreferredSize(new Dimension(900, 562));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
 		setResizable(false);
@@ -61,22 +72,16 @@ public class MainFrame extends JFrame implements Observer {
 		lastUpdatedLabel.setHorizontalAlignment(JLabel.CENTER);
 		leftButton.setEnabled(false);
 
-		// Set widget names
-		leftButton.setName("Left Button");
-		rightButton.setName("Right Button");
-		fromComboBox.setName("From ComboBox");
-		toComboBox.setName("To ComboBox");
-
 		// Set default values
 		fromComboBox.setSelectedItem("-");
 		toComboBox.setSelectedItem("-");
 
 		// Add Action Listeners
-		leftButton.addActionListener(new MainController(mainModel));
-		rightButton.addActionListener(new MainController(mainModel));
-		fromComboBox.addActionListener(new MainController(mainModel));
-		toComboBox.addActionListener(new MainController(mainModel));
-
+		leftButton.addActionListener(mainController.new LeftButtonListener());
+		rightButton.addActionListener(mainController.new RightButtonListener());
+		fromComboBox.addActionListener(mainController.new FromComboBoxListener());
+		toComboBox.addActionListener(mainController.new ToComboBoxListener());
+		
 		// Create panels
 		JPanel topPanel = new JPanel();
 		JPanel bottomPanel = new JPanel();
@@ -107,14 +112,15 @@ public class MainFrame extends JFrame implements Observer {
 
 
 
-	public void initPanels(MainModel mainModel, WelcomeModel welcomeModel, MapModel mapModel, StatsModel statsModel) {
+	public void initPanels(MainModel mainModel, WelcomeModel welcomeModel, MapModel mapModel) {
 
 		panels = new JPanel[4];
 
 		panels[0] = new WelcomePanel(mainModel, welcomeModel);
 		panels[1] = new MapPanel(mainModel, mapModel);
-		panels[2] = new StatsPanel(mainModel, statsModel);
-		panels[3] = new SurprisePanel(mainModel);
+		panels[2] = new MapPanel(mainModel, mapModel);
+		panels[3] = new MapPanel(mainModel, mapModel);
+
 
 	}
 
@@ -147,29 +153,29 @@ public class MainFrame extends JFrame implements Observer {
 		return comboBox;	
 
 	}
-	
-	
-	
+
+
+
 	public void updatePanel() {
-		
+
 		int current;
 		current = mainModel.getCurrentPanel();
-		
+
 		if (current == MainModel.WELCOME_PANEL) leftButton.setEnabled(false);	
 		else if (current == MainModel.SURPRISE_PANEL) rightButton.setEnabled(false);	
 		else {
-			
+
 			leftButton.setEnabled(true);
 			rightButton.setEnabled(true);
-			
+
 		}
-		
+
 		for (int i = 0; i < 4; i++) remove(panels[i]);
-			
+
 		add(panels[current], BorderLayout.CENTER);
 		revalidate();
 		repaint();
-	
+
 	}
 
 
@@ -177,11 +183,18 @@ public class MainFrame extends JFrame implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		
-		if (arg.equals("Current Panel Changed")) updatePanel();
-		if (arg.equals("Date Selection Changed")) ((WelcomePanel) panels[MainModel.WELCOME_PANEL]).updateLabel();
-		if (arg.equals("Date Valid Changed")) ((WelcomePanel) panels[MainModel.WELCOME_PANEL]).updateLabel();
-		if (arg.equals("Grabbing Data")) ((WelcomePanel) panels[MainModel.WELCOME_PANEL]).updateLabel();
+		if (o instanceof MainModel) {
 			
+			if (arg.equals("Panel changed")) updatePanel();
+			
+		}
+
+
 	}
 
+
+
 }
+
+
+

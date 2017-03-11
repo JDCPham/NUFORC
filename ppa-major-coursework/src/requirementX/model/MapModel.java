@@ -6,11 +6,22 @@ import api.ripley.Ripley;
 
 public class MapModel extends Observable {
 	
-	Ripley ripley;
+	private MainModel mainModel;
+	private WelcomeModel welcomeModel;
+	private StatsModel statsModel;
 	
-	public MapModel(Ripley ripley) {
+	public MapModel(MainModel mainModel) {
 		
-		this.ripley = ripley;
+		this.mainModel = mainModel;
+		
+	}
+	
+	
+	
+	public void setModels(WelcomeModel welcomeModel, StatsModel statsModel) {
+		
+		this.welcomeModel = welcomeModel;
+		this.statsModel = statsModel;
 		
 	}
 
