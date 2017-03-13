@@ -27,6 +27,8 @@ public class Main {
 
 		// Set visibility 
 		mainFrame.setVisible(true);
+		
+		System.out.print("hello im caoky");
 
 	}
 
