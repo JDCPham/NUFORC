@@ -1,26 +1,43 @@
 package requirementX.model;
 
-import javax.swing.JPanel;
+import java.util.Observable;
 
 import api.ripley.Ripley;
-import requirementX.view.WelcomePanel;
 
-public class MainModel {
+public class MainModel extends Observable {
 
+	// Final Fields
 	public static final int WELCOME_PANEL = 0;
 	public static final int MAP_PANEL = 1;
 	public static final int STATS_PANEL = 2;
+	public static final int SURPRISE_PANEL = 3;
+	
+	// Models
+	private MapModel mapModel;
+	private StatsModel statsModel;
+	private WelcomeModel welcomeModel;
 
-	private Ripley ripley;
+	// Ripley 
+	Ripley ripley;
+	
+	// Data 
 	private int startYear;
 	private int latestYear;
+	private int fromSelectionYear;
+	private int toSelectionYear;
 	private String lastUpdated;
+	
+	// Current state 
 	private int currentPanel;
+	private boolean dateValid;
+	private boolean grabbingData;
+	private boolean dataReady;
+	
 
-	public MainModel() {
+	public MainModel(Ripley ripley) {
 
 		// Set up Ripley
-		ripley = new Ripley("10tLI3CWstqyVD6ql2OMtA==", "tBgm4pRo9grVqL46EnH7ew==");
+		this.ripley = ripley;
 
 		// Set current panel
 		currentPanel = WELCOME_PANEL;
@@ -32,14 +49,124 @@ public class MainModel {
 		// Get when data last updated
 		lastUpdated = ripley.getLastUpdated();
 		
-
+		// Set date valid
+		dateValid = false;
+		grabbingData = false;
+		dataReady = false;
+		
 	}
 	
 	
-
-	public Ripley getRipley() {
+	
+	public void setModels(WelcomeModel welcomeModel, MapModel mapModel, StatsModel statsModel) {
 		
-		return ripley;
+		this.welcomeModel = welcomeModel;
+		this.mapModel = mapModel;
+		this.statsModel = statsModel;
+		
+	}
+	
+	
+	
+	public void setFromYear(String year){
+		
+		if (!year.equals("-")) fromSelectionYear = Integer.parseInt(year);
+		else fromSelectionYear = 0;
+		
+		setChanged();
+		notifyObservers();
+		
+	}
+	
+	
+	
+	
+	public void setToYear(String year){
+		
+		if (!year.equals("-")) toSelectionYear = Integer.parseInt(year);
+		else toSelectionYear = 0;
+			
+		setChanged();
+		notifyObservers();
+		
+	}
+	
+	
+	
+	public void setNextPanel() {
+		
+		if (currentPanel != SURPRISE_PANEL) {
+			
+			currentPanel++;
+			setChanged();
+			notifyObservers("Current Panel Changed");
+			
+		}
+		
+	}
+	
+	
+	
+	
+	public void setPreviousPanel() {
+		
+		if (currentPanel != WELCOME_PANEL) {
+			
+			currentPanel--;
+			setChanged();
+			notifyObservers("Current Panel Changed");
+			
+		}
+		
+	}
+	
+	
+	
+	public void setFromSelectionYear(int year){
+		
+		this.fromSelectionYear = year;
+		setChanged();
+		notifyObservers("Date Selection Changed");
+		
+	}
+	
+	
+	
+	public void setToSelectionYear(int year) {
+		
+		this.toSelectionYear = year;
+		setChanged();
+		notifyObservers("Date Selection Changed");
+		
+	}
+	
+	
+	
+	public boolean setDateValid() {
+		
+		if (fromSelectionYear <= toSelectionYear) dateValid = true;
+		else dateValid = false;
+
+		setChanged();
+		notifyObservers("Date Valid Changed");
+		
+		return dateValid;
+		
+	}
+	
+	
+	
+	public int getFromSelectionYear() {
+		
+		return fromSelectionYear;
+		
+	}
+	
+	
+	
+	public int getToSelectionYear() {
+		
+		return toSelectionYear;
 		
 	}
 	
@@ -74,8 +201,40 @@ public class MainModel {
 		return startYear;
 
 	}
+	
+	
+	
+	public boolean isDateValid() {
+		
+		return dateValid;
+		
+	}
+	
+	
+	public boolean isGrabbingData() {
+		
+		return grabbingData;
+		
+	}
+	
+	
+	public boolean isDataReady() {
+		
+		return dataReady;
+		
+	}
 
 
+
+	public void getData() {
+		
+		grabbingData = true;
+		setChanged();
+		notifyObservers("Grabbing Data");
+	
+		
+	}
+	
 
 
 }
