@@ -33,7 +33,6 @@ public class MainModel extends Observable {
 
 	// Current state 
 	private int currentPanel;
-	private boolean dateValid;
 
 	/** Constructor **/
 
@@ -52,9 +51,6 @@ public class MainModel extends Observable {
 		// Get when data last updated
 		lastUpdated = ripley.getLastUpdated();
 
-		// Set date valid
-		dateValid = false;
-
 	}
 
 	/** Useful **/
@@ -67,6 +63,22 @@ public class MainModel extends Observable {
 		else return true;
 		
 	}
+	
+	
+	public boolean isDateValid() {
+		
+		if ((fromSelectionYear <= toSelectionYear) && (fromSelectionYear != NO_SELECTION) && (toSelectionYear != NO_SELECTION)) {
+			
+			return true;
+			
+		} else {
+			
+			return false;
+			
+		}
+			
+	}
+	
 
 
 	/** Getters **/
@@ -82,8 +94,6 @@ public class MainModel extends Observable {
 	public int getToSelectionYear() { return toSelectionYear; }
 
 	public String getLastUpdated() { return lastUpdated; }
-
-	public boolean isDateValid() { return dateValid; }
 
 
 	/** Setters **/

@@ -1,10 +1,6 @@
 package requirementXv2.view;
 
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.GridLayout;
-import java.awt.Insets;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -14,9 +10,7 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import javax.imageio.ImageIO;
-import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import requirementXv2.model.MainModel;
 import requirementXv2.model.MapModel;
@@ -37,10 +31,14 @@ public class MapPanel extends JPanel implements Observer {
 
 		this.mainModel = mainModel;
 		this.mapModel = mapModel;
+		mapModel.addObserver(this);
+		mainModel.addObserver(this);
 		initWidgets();
 
 	}
 	
+	
+	/** Creating widgets **/
 	
 	public void initWidgets() {
 		
@@ -50,6 +48,9 @@ public class MapPanel extends JPanel implements Observer {
 		
 	}
 	
+	
+	/** Alien heads **/
+	
 	public void placeIcons() {
 		
 		removeAll();
@@ -58,9 +59,9 @@ public class MapPanel extends JPanel implements Observer {
 		
 		for (String currentState: statesIterable) {
 			
-			if (states.get(currentState) <= 200) newIcon(1, currentState);
-			else if ((states.get(currentState) > 200) && (states.get(currentState) <= 400)) newIcon(2, currentState);
-			else newIcon(3, currentState);
+			if (states.get(currentState) <= 200) addIcon(1, currentState);
+			else if ((states.get(currentState) > 200) && (states.get(currentState) <= 400)) addIcon(2, currentState);
+			else addIcon(3, currentState);
 				
 		}
 		
@@ -77,22 +78,15 @@ public class MapPanel extends JPanel implements Observer {
 	
 	public void setBackgroundImage(String path) {
 		
-		try {
-			
-			background = ImageIO.read(new File(path));
-			
-		} catch (IOException e) {
-			
-			e.printStackTrace();
-			
-		}
+		try { background = ImageIO.read(new File(path)); } 
+		catch (IOException e) { e.printStackTrace(); }
 				
 	}
 	
 	
-	public void newIcon(int size, String location) {
+	public void addIcon(int size, String location) {
 		
-		AlienIcon icon = new AlienIcon(size);
+		AlienIcon icon = new AlienIcon(size, location, mapModel);
 		if (location.equals("CA")) icon.setBounds(110, 260, 50, 50); 
 		else if (location.equals("AZ")) icon.setBounds(200, 260, 50, 50); 
 		else if (location.equals("FL")) icon.setBounds(630, 380, 50, 50);
@@ -126,14 +120,9 @@ public class MapPanel extends JPanel implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 
-		
-		
-		
+		if (arg.equals("State Data Updated")) placeIcons();
 	}
 	
-	
-	
-
 }
 
 

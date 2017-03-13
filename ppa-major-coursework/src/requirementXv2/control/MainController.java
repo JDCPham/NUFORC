@@ -3,11 +3,13 @@ package requirementXv2.control;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 
 import requirementXv2.model.MainModel;
 import requirementXv2.model.MapModel;
 import requirementXv2.model.WelcomeModel;
+import requirementXv2.view.StatesFrame;
 
 public class MainController {
 	
@@ -58,9 +60,9 @@ public class MainController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
-			JComboBox<String> comboBox = (JComboBox<String>) e.getSource();
-			String year = (String) comboBox.getSelectedItem();
+			String year = getSelectedItem(e);
 			mainModel.setFromSelectionYear(year);
+			if (mainModel.isDateValid()) mapModel.updateStates();
 			
 		}
 		
@@ -71,13 +73,49 @@ public class MainController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
-			JComboBox<String> comboBox = (JComboBox<String>) e.getSource();
-			String year = (String) comboBox.getSelectedItem();
+
+			String year = getSelectedItem(e);
 			mainModel.setToSelectionYear(year);
+			if (mainModel.isDateValid()) mapModel.updateStates();
 			
 		}
 		
 	}
+	
+	
+	public class AlienIconListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			new StatesFrame(mapModel, getState(e));
+			
+		}
+		
+		
+		
+	}
+	
+	
+	/** Useful **/
+	
+	public JComboBox<String> getComboBox(ActionEvent e) { return (JComboBox<String>) e.getSource(); }
+	
+	public String getSelectedItem(ActionEvent e) { 
+		
+		JComboBox<String> comboBox = getComboBox(e);
+		comboBox.hidePopup();
+		return (String) comboBox.getSelectedItem(); 
+		
+	}
+	
+	public String getState(ActionEvent e) {
+		
+		JButton button = (JButton) e.getSource();
+		String state = button.getName();
+		return state;
+		
+	}
+	
 
 }

@@ -38,6 +38,9 @@ public class MainFrame extends JFrame implements Observer {
 	// Panels
 	private JPanel[] panels;
 
+	
+	/** Constructor **/
+	
 	public MainFrame(MainModel mainModel, WelcomeModel welcomeModel, MapModel mapModel){
 
 		super();
@@ -50,6 +53,8 @@ public class MainFrame extends JFrame implements Observer {
 
 	}
 
+	
+	/** Creating Widgets **/
 
 	public void initWidgets(){
 
@@ -155,6 +160,7 @@ public class MainFrame extends JFrame implements Observer {
 	}
 
 
+	/** Updating view **/
 
 	public void updatePanel() {
 
@@ -179,7 +185,6 @@ public class MainFrame extends JFrame implements Observer {
 	}
 
 
-
 	@Override
 	public void update(Observable o, Object arg) {
 		
@@ -189,10 +194,7 @@ public class MainFrame extends JFrame implements Observer {
 			
 		}
 
-
 	}
-
-
 
 }
 

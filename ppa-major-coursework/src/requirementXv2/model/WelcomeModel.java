@@ -1,11 +1,7 @@
 package requirementXv2.model;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.ListIterator;
-import java.util.Set;
 import java.util.TreeMap;
-import java.util.TreeSet;
 
 import api.ripley.Incident;
 
@@ -37,11 +33,7 @@ public class WelcomeModel {
 	public double ripleyVersion() { return mainModel.ripley.getVersion(); }
 
 
-
-
 	/** Useful **/
-
-	
 	
 
 	/** Getters **/

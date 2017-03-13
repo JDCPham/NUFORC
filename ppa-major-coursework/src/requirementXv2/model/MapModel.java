@@ -9,13 +9,15 @@ import java.util.TreeSet;
 
 import api.ripley.Incident;
 
-public class MapModel extends Observable{
+public class MapModel extends Observable {
 	
 	// Main Model
 	private MainModel mainModel;
 	
 	private ArrayList<Incident> incidents;
 	private TreeMap<String, Integer> states;
+
+	
 	
 	/** Constructor **/
 	
@@ -88,12 +90,13 @@ public class MapModel extends Observable{
 	}
 	
 	
-	
 	/** Getters **/
 	
 	public Set<String> getStatesIterable() { return states.keySet(); }
 	
 	public TreeMap<String, Integer> getStateCount() { return states; }
+	
+	public ArrayList<Incident> getIncidents() { return incidents; }
 	
 
 }
