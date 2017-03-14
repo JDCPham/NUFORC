@@ -28,11 +28,6 @@ public class Main {
 		// Set visibility 
 		mainFrame.setVisible(true);
 		
-<<<<<<< HEAD
-		System.out.print("hello im caoky");
-=======
-		System.out.println("ehj");
->>>>>>> branch 'master' of https://github.kcl.ac.uk/K1631403/ppa-major-coursework.git
 
 	}
 
