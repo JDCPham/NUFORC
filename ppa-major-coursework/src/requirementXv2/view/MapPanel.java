@@ -121,7 +121,9 @@ public class MapPanel extends JPanel implements Observer {
 	public void update(Observable o, Object arg) {
 
 		if (arg.equals("State Data Updated")) placeIcons();
+		System.out.println("hi");
 	}
+
 	
 }
 
