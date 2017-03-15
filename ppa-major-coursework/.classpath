@@ -1,27 +1,8 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry excluding="src/" kind="src" path=""/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="lib" path="libraries/ripley.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="jar:platform:/resource/ppa-major-coursework/libraries/ripley-docs.jar!/doc"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="libraries/natty-0.14-SNAPSHOT.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="jar:platform:/resource/ppa-major-coursework/libraries/doc.zip!/doc"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="libraries/slf4j-simple-1.7.22.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="ripley.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
-=======
-<?xml version="1.0" encoding="UTF-8"?>
-<classpath>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Ripley"/>
-	<classpathentry kind="output" path="bin"/>
-</classpath>
->>>>>>> refs/remotes/origin/emmanuelwondimu
