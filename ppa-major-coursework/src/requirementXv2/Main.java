@@ -24,6 +24,7 @@ public class Main {
 		// Set observers
 		mainModel.addObserver(mainFrame);
 		mapModel.addObserver(mainFrame);
+		welcomeModel.addObserver(mainFrame);
 
 		// Set visibility 
 		mainFrame.setVisible(true);

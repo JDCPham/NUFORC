@@ -60,9 +60,21 @@ public class MainController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
+			long start;
+			long end;
+			long time;
+			
 			String year = getSelectedItem(e);
+			start = System.currentTimeMillis();
 			mainModel.setFromSelectionYear(year);
-			if (mainModel.isDateValid()) mapModel.updateStates();
+			
+			if (mainModel.isDateValid()) {
+				mapModel.updateStates();
+				mainModel.setDataReady();
+				end = System.currentTimeMillis();
+				time = end - start;
+				welcomeModel.setDataGrabTime(time);
+			} 
 			
 		}
 		
@@ -73,10 +85,22 @@ public class MainController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			
+			long start;
+			long end;
+			long time;
 
 			String year = getSelectedItem(e);
+			start = System.currentTimeMillis();
 			mainModel.setToSelectionYear(year);
-			if (mainModel.isDateValid()) mapModel.updateStates();
+			
+			if (mainModel.isDateValid()) {
+				mapModel.updateStates();
+				mainModel.setDataReady();
+				end = System.currentTimeMillis();
+				time = end - start;
+				welcomeModel.setDataGrabTime(time);
+			}
 			
 		}
 		

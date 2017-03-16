@@ -10,6 +10,7 @@ import javax.swing.JList;
 import javax.swing.JScrollPane;
 
 import api.ripley.Incident;
+import requirementXv2.control.MapController;
 import requirementXv2.model.MapModel;
 
 public class StatesFrame extends JFrame {
@@ -37,7 +38,7 @@ public class StatesFrame extends JFrame {
 	public void initWidgets() {
 
 		// Frame properties
-		setPreferredSize(new Dimension(300, 200));
+		setPreferredSize(new Dimension(700, 300));
 		setTitle(state);
 		System.out.println(state);
 		setLayout(new BorderLayout());
@@ -47,6 +48,9 @@ public class StatesFrame extends JFrame {
 		JList<String> listA = new JList<String>(modelA);
 		JScrollPane paneA = new JScrollPane(listA);
 		JComboBox<String> boxA = new JComboBox<String>();
+		
+		// Action listeners
+		listA.addMouseListener(new MapController(mapModel).new ListListener());
 
 		// Add items to combo box
 		boxA.addItem("-");
@@ -69,12 +73,16 @@ public class StatesFrame extends JFrame {
 
 	public void pop(String s) {
 
-		for (Incident i: mapModel.getIncidents()){ 
+		for (Incident i: mapModel.getIncidents()) { 
 			
 			if (i.getState().equals(s)) {
 
-				modelA.addElement("City: " + i.getCity() + " Country: " + i.getPosted() + "State: " + i.getState());
-				
+				modelA.addElement("Time: " + i.getDateAndTime() 
+						+ " City: " + i.getCity()
+						+ " Shape: " + i.getShape()
+						+ " Duration: " + i.getDuration()
+						+ " Posted: " + i.getPosted());
+							
 			}
 		}
 	}

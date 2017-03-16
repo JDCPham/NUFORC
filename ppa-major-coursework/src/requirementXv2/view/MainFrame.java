@@ -38,9 +38,9 @@ public class MainFrame extends JFrame implements Observer {
 	// Panels
 	private JPanel[] panels;
 
-	
+
 	/** Constructor **/
-	
+
 	public MainFrame(MainModel mainModel, WelcomeModel welcomeModel, MapModel mapModel){
 
 		super();
@@ -53,7 +53,7 @@ public class MainFrame extends JFrame implements Observer {
 
 	}
 
-	
+
 	/** Creating Widgets **/
 
 	public void initWidgets(){
@@ -76,6 +76,7 @@ public class MainFrame extends JFrame implements Observer {
 		// Set widget properties
 		lastUpdatedLabel.setHorizontalAlignment(JLabel.CENTER);
 		leftButton.setEnabled(false);
+		rightButton.setEnabled(false);
 
 		// Set default values
 		fromComboBox.setSelectedItem("-");
@@ -86,7 +87,7 @@ public class MainFrame extends JFrame implements Observer {
 		rightButton.addActionListener(mainController.new RightButtonListener());
 		fromComboBox.addActionListener(mainController.new FromComboBoxListener());
 		toComboBox.addActionListener(mainController.new ToComboBoxListener());
-		
+
 		// Create panels
 		JPanel topPanel = new JPanel();
 		JPanel bottomPanel = new JPanel();
@@ -187,12 +188,22 @@ public class MainFrame extends JFrame implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		
+
 		if (o instanceof MainModel) {
-			
+
 			if (arg.equals("Panel changed")) updatePanel();
-			
+
+			if (arg.equals("Date Selection changed")) {
+				
+				if (mainModel.isDateValid()) rightButton.setEnabled(true);
+				else rightButton.setEnabled(false);
+					
+			}
+
+
 		}
+
+
 
 	}
 

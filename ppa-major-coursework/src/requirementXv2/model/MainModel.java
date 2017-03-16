@@ -50,8 +50,14 @@ public class MainModel extends Observable {
 
 		// Get when data last updated
 		lastUpdated = ripley.getLastUpdated();
+		
+		// Set default from and to selection years
+		fromSelectionYear = NO_SELECTION;
+		toSelectionYear = NO_SELECTION;
+		
 
 	}
+	
 
 	/** Useful **/
 
@@ -139,7 +145,13 @@ public class MainModel extends Observable {
 		}
 
 	}
-
+	
+	public void setDataReady() {
+		
+		setChanged();
+		notifyObservers("Data Ready");
+		
+	}
 
 
 

@@ -16,6 +16,7 @@ public class MapModel extends Observable {
 	
 	private ArrayList<Incident> incidents;
 	private TreeMap<String, Integer> states;
+	
 
 	
 	
@@ -88,6 +89,10 @@ public class MapModel extends Observable {
 		for (String s: set) states.put(s, 0);
 		
 	}
+	
+
+	
+	
 	
 	
 	/** Getters **/
