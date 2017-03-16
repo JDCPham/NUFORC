@@ -2,6 +2,9 @@ package requirementXv2.view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
@@ -12,11 +15,14 @@ import javax.swing.JScrollPane;
 import api.ripley.Incident;
 import requirementXv2.control.MapController;
 import requirementXv2.model.MapModel;
+import requirementXv2.model.Sighting;
 
-public class StatesFrame extends JFrame {
+public class StatesFrame extends JFrame{
 
 	private MapModel mapModel;
-	DefaultListModel<String> modelA;
+	private JList<Sighting> listA;
+	DefaultListModel<Sighting> modelA;
+	private ArrayList<Sighting> sightings;
 	private String state;
 
 
@@ -28,7 +34,8 @@ public class StatesFrame extends JFrame {
 		this.mapModel = mapModel;
 		this.state = state;
 		initWidgets();
-		pop(state);
+		addSightings(state);
+		updateList(mapModel.getSightings());
 
 	}
 
@@ -39,18 +46,36 @@ public class StatesFrame extends JFrame {
 
 		// Frame properties
 		setPreferredSize(new Dimension(700, 300));
-		setTitle(state);
-		System.out.println(state);
+		setTitle(getStateName(state) + " (" + state + ")");
 		setLayout(new BorderLayout());
 
 		// Create Widgets
-		modelA = new DefaultListModel<String>();
-		JList<String> listA = new JList<String>(modelA);
+		modelA = new DefaultListModel<Sighting>();
+		listA = new JList<Sighting>(modelA);
 		JScrollPane paneA = new JScrollPane(listA);
 		JComboBox<String> boxA = new JComboBox<String>();
-		
+
 		// Action listeners
 		listA.addMouseListener(new MapController(mapModel).new ListListener());
+		boxA.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				String value = getValue(e);
+				
+				if (value.equals("-")) updateList(mapModel.getSightings());
+				else if (value.equals("City")) updateList(mapModel.getSightingsByCity());
+				else if (value.equals("Shape")) updateList(mapModel.getSightingsByShape());
+				else if (value.equals("Duration")) updateList(mapModel.getSightingsByDuration());
+				else if (value.equals("Date")) updateList(mapModel.getSightingsByDate());
+				else if (value.equals("Posted")) updateList(mapModel.getSightingsByPosted());
+
+			}
+
+
+
+		});
 
 		// Add items to combo box
 		boxA.addItem("-");
@@ -71,23 +96,69 @@ public class StatesFrame extends JFrame {
 	}
 
 
-	public void pop(String s) {
+	public String getStateName(String state) {
 
-		for (Incident i: mapModel.getIncidents()) { 
-			
-			if (i.getState().equals(s)) {
+		if (state.equals("CA")) return "California";
+		else if (state.equals("NY")) return "New York";
+		else if (state.equals("NC")) return "North Carolina";
+		else return null;
 
-				modelA.addElement("Time: " + i.getDateAndTime() 
-						+ " City: " + i.getCity()
-						+ " Shape: " + i.getShape()
-						+ " Duration: " + i.getDuration()
-						+ " Posted: " + i.getPosted());
-							
-			}
-		}
 	}
 
 
+	public void addSightings(String s) {
+		
+		mapModel.getSightings().clear();
 
+		for (Incident i: mapModel.getIncidents()) { 
+
+			if (i.getState().equals(s)) {
+
+				mapModel.addSighting(setSighting(i));
+
+			}
+		}
+		
+		mapModel.sortSightings();
+	}
+
+	public void updateList(ArrayList<Sighting> s) {
+
+		modelA.clear();
+
+		for (Sighting sighting: s) {
+
+			modelA.addElement(sighting);
+
+		}
+		
+	}
+
+
+	public Sighting setSighting(Incident i) {
+
+		Sighting s = new Sighting();
+
+		s.setDateTime(i.getDateAndTime());
+		s.setCity(i.getCity());
+		s.setID(i.getIncidentID());
+		s.setState(i.getState());
+		s.setShape(i.getShape());
+		s.setSummary(i.getSummary());
+		s.setDuration(i.getDuration());
+		s.setPosted(i.getPosted());
+
+		return s;
+
+	}
+
+
+	public String getValue(ActionEvent e) {
+
+		JComboBox<String> combo = (JComboBox<String>) e.getSource();
+		String value = (String) combo.getSelectedItem();
+		return value;
+
+	}
 
 }

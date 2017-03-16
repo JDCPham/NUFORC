@@ -6,9 +6,12 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JList;
 
 import requirementXv2.model.MapModel;
+import requirementXv2.model.Sighting;
 import requirementXv2.view.SightingDialog;
 import requirementXv2.view.StatesFrame;
 
@@ -16,18 +19,21 @@ public class MapController {
 
 	private MapModel mapModel;
 
+	
+	/** Constructor **/
+	
 	public MapController(MapModel mapModel) {
 
 		this.mapModel = mapModel;
 
 	}
 
-	public MapController() {
+	public MapController() {}
 
 
-	}
-
-
+	
+	/** Action Listener **/
+	
 	public class AlienIconListener implements ActionListener {
 
 		@Override
@@ -39,6 +45,26 @@ public class MapController {
 
 
 	}
+	
+	public class CloseListener implements ActionListener {
+		
+		private JDialog dialog;
+		
+		public CloseListener(JDialog dialog) {
+			
+			this.dialog = dialog;
+			
+		}
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+
+			dialog.dispose();
+
+		}
+
+	}
+	
 
 	public class ListListener implements MouseListener {
 
@@ -47,9 +73,8 @@ public class MapController {
 
 			if (e.getClickCount() == 2) {
 				
-				String item = getSelectedListItem(e);
-				System.out.println(item);
-				new SightingDialog();
+				Sighting item = getSelectedListItem(e);
+				new SightingDialog(item.getSummary());
 
 			}
 
@@ -68,6 +93,7 @@ public class MapController {
 		public void mouseExited(MouseEvent e) {}
 
 	}
+	
 
 	
 	/** Convert from events to source **/
@@ -80,10 +106,18 @@ public class MapController {
 
 	}
 	
-	public String getSelectedListItem(MouseEvent e) {
+	public String getValue(ActionEvent e) {
 		
-		JList<String> list = (JList<String>) e.getSource();
-		String item = list.getSelectedValue();
+		JComboBox<String> combo = (JComboBox<String>) e.getSource();
+		String value = (String) combo.getSelectedItem();
+		return value;
+		
+	}
+	
+	public Sighting getSelectedListItem(MouseEvent e) {
+		
+		JList<Sighting> list = (JList<Sighting>) e.getSource();
+		Sighting item = list.getSelectedValue();
 		return item;
 		
 	}
