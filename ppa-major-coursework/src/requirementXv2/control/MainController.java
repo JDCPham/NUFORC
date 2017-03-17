@@ -8,6 +8,7 @@ import javax.swing.JComboBox;
 
 import requirementXv2.model.MainModel;
 import requirementXv2.model.MapModel;
+import requirementXv2.model.StatsModel;
 import requirementXv2.model.WelcomeModel;
 import requirementXv2.view.StatesFrame;
 
@@ -17,14 +18,16 @@ public class MainController {
 	private MainModel mainModel;
 	private WelcomeModel welcomeModel;
 	private MapModel mapModel;
+	private StatsModel statsModel;
 	
 	/** Constructor **/
 	
-	public MainController(MainModel mainModel, WelcomeModel welcomeModel, MapModel mapModel) {
+	public MainController(MainModel mainModel, WelcomeModel welcomeModel, MapModel mapModel, StatsModel statsModel) {
 		
 		this.mainModel = mainModel;
 		this.welcomeModel = welcomeModel;
 		this.mapModel = mapModel;
+		this.statsModel = statsModel;
 		
 	}
 	
@@ -60,9 +63,21 @@ public class MainController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
+			long start;
+			long end;
+			long time;
+			
 			String year = getSelectedItem(e);
+			start = System.currentTimeMillis();
 			mainModel.setFromSelectionYear(year);
-			if (mainModel.isDateValid()) mapModel.updateStates();
+			
+			if (mainModel.isDateValid()) {
+				mapModel.updateStates();
+				mainModel.setDataReady();
+				end = System.currentTimeMillis();
+				time = end - start;
+				welcomeModel.setDataGrabTime(time);
+			} 
 			
 		}
 		
@@ -73,10 +88,22 @@ public class MainController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			
+			long start;
+			long end;
+			long time;
 
 			String year = getSelectedItem(e);
+			start = System.currentTimeMillis();
 			mainModel.setToSelectionYear(year);
-			if (mainModel.isDateValid()) mapModel.updateStates();
+			
+			if (mainModel.isDateValid()) {
+				mapModel.updateStates();
+				mainModel.setDataReady();
+				end = System.currentTimeMillis();
+				time = end - start;
+				welcomeModel.setDataGrabTime(time);
+			}
 			
 		}
 		
