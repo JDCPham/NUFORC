@@ -8,6 +8,7 @@ import javax.swing.JComboBox;
 
 import requirementXv2.model.MainModel;
 import requirementXv2.model.MapModel;
+import requirementXv2.model.StatsModel;
 import requirementXv2.model.WelcomeModel;
 import requirementXv2.view.StatesFrame;
 
@@ -17,14 +18,16 @@ public class MainController {
 	private MainModel mainModel;
 	private WelcomeModel welcomeModel;
 	private MapModel mapModel;
+	private StatsModel statsModel;
 	
 	/** Constructor **/
 	
-	public MainController(MainModel mainModel, WelcomeModel welcomeModel, MapModel mapModel) {
+	public MainController(MainModel mainModel, WelcomeModel welcomeModel, MapModel mapModel, StatsModel statsModel) {
 		
 		this.mainModel = mainModel;
 		this.welcomeModel = welcomeModel;
 		this.mapModel = mapModel;
+		this.statsModel = statsModel;
 		
 	}
 	

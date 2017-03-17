@@ -39,6 +39,8 @@ public class MapModel extends Observable {
 		sightingsByCity = new ArrayList<Sighting>();
 		sightingsByShape = new ArrayList<Sighting>();
 		sightingsByDuration = new ArrayList<Sighting>();
+		sightingsByPosted = new ArrayList<Sighting>();
+		sightingsByDate = new ArrayList<Sighting>();
 
 	}
 
@@ -64,6 +66,7 @@ public class MapModel extends Observable {
 		incidents = ripleyIncidents(mainModel.getFromSelectionYear(), mainModel.getToSelectionYear());
 		initialStates(incidents);
 		countIncidents(incidents);
+		
 		setChanged();
 		notifyObservers("State Data Updated");
 

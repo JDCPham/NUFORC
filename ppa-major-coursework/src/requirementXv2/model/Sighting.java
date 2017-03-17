@@ -13,6 +13,9 @@ public class Sighting {
 	
 	public static final Pattern DATE_A = Pattern.compile("^\\d{4}-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2}$");
 	
+	public static final Pattern DURATION_A = Pattern.compile("^\\d{1,2}\\s[Mm]inutes?$");
+	public static final Pattern DURATION_B = Pattern.compile("^\\d{1,2}\\s[Ss]econds?$");
+	
 		
 	
 	// Fields
@@ -94,8 +97,22 @@ public class Sighting {
 	
 	public void setDuration(String duration) {
 		
-		if (duration.equals("Not specified.")) this.duration = -1;
-		else this.duration = 2;
+		Matcher matcherA = DURATION_A.matcher(duration);
+		Matcher matcherB = DURATION_B.matcher(duration);
+		
+		if (matcherA.find()) {
+			
+			String rawDuration = matcherA.group();
+			rawDuration = rawDuration.replaceAll("\\s[Mm]inutes?$", "");
+			this.duration = Integer.parseInt(rawDuration);
+			
+		} else if (matcherB.find()) {
+			
+			String rawDuration = matcherB.group();
+			rawDuration = rawDuration.replaceAll("\\s[Ss]econds?$", "");
+			this.duration = (Integer.parseInt(rawDuration) % 3600) / 60;
+			
+		} else this.duration = -1;
 		
 		System.out.println(duration);
 		
@@ -146,7 +163,7 @@ public class Sighting {
 	
 	public String toString() {
 		
-		return "Time: "+ dateTime + " City: " + city + " Shape: " + shape + " Duration: " + duration + " Posted: " + postedString;
+		return "Time: "+ dateTime + ", City: " + city + ", Shape: " + shape + ", Duration: " + duration + " minutes, Posted: " + postedString;
 		
 	}
 

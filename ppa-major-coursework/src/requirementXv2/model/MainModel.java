@@ -100,6 +100,8 @@ public class MainModel extends Observable {
 	public int getToSelectionYear() { return toSelectionYear; }
 
 	public String getLastUpdated() { return lastUpdated; }
+	
+	public MapModel getMapModel() { return mapModel; }
 
 
 	/** Setters **/

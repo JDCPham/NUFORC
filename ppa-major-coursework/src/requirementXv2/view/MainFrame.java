@@ -41,14 +41,15 @@ public class MainFrame extends JFrame implements Observer {
 
 	/** Constructor **/
 
-	public MainFrame(MainModel mainModel, WelcomeModel welcomeModel, MapModel mapModel){
+	public MainFrame(MainModel mainModel, WelcomeModel welcomeModel, MapModel mapModel, StatsModel statsModel){
 
 		super();
 		this.mainModel = mainModel;
 		this.welcomeModel = welcomeModel;
 		this.mapModel = mapModel;
-		this.mainController = new MainController(mainModel, welcomeModel, mapModel);
-		initPanels(mainModel, welcomeModel, mapModel);
+		this.statsModel = statsModel;
+		this.mainController = new MainController(mainModel, welcomeModel, mapModel, statsModel);
+		initPanels(mainModel, welcomeModel, mapModel, statsModel);
 		initWidgets();
 
 	}
@@ -118,13 +119,13 @@ public class MainFrame extends JFrame implements Observer {
 
 
 
-	public void initPanels(MainModel mainModel, WelcomeModel welcomeModel, MapModel mapModel) {
+	public void initPanels(MainModel mainModel, WelcomeModel welcomeModel, MapModel mapModel, StatsModel statsModel) {
 
 		panels = new JPanel[4];
 
 		panels[0] = new WelcomePanel(mainModel, welcomeModel);
 		panels[1] = new MapPanel(mainModel, mapModel);
-		panels[2] = new MapPanel(mainModel, mapModel);
+		panels[2] = new StatsPanel(mainModel, statsModel);
 		panels[3] = new MapPanel(mainModel, mapModel);
 
 
