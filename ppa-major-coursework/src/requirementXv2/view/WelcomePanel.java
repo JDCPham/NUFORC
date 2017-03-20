@@ -1,6 +1,9 @@
 package requirementXv2.view;
 
 import java.awt.GridLayout;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -8,7 +11,7 @@ import javax.swing.JPanel;
 import requirementXv2.model.MainModel;
 import requirementXv2.model.WelcomeModel;
 
-public class WelcomePanel extends JPanel{
+public class WelcomePanel extends JPanel implements Observer{
 	
 	// Models
 	private MainModel mainModel;
@@ -23,6 +26,8 @@ public class WelcomePanel extends JPanel{
 		
 		this.mainModel = mainModel;
 		this.welcomeModel = welcomeModel;
+		mainModel.addObserver(this);
+		welcomeModel.addObserver(this);
 		initWidgets();
 		
 	}
@@ -37,7 +42,7 @@ public class WelcomePanel extends JPanel{
 		mainLabel.setHorizontalAlignment(JLabel.CENTER);
 		mainLabel.setVerticalAlignment(JLabel.CENTER);
 		add(mainLabel);	
-		updateLabel();
+		updateLabel(false);
 		
 	}
 	
@@ -45,13 +50,54 @@ public class WelcomePanel extends JPanel{
 	
 	/** Updating views **/
 	
-	public void updateLabel() {
+	public void updateLabel(boolean dataReady) {
 		
 		String text; 
+		text = "Welcome to the Ripley API v" + welcomeModel.getVersion() + "<br>"
+				+ "Please select from the dates above, in order to <br>" 
+				+ "begin analysing UFO sighting data.";
 		
-		text = "This is test text";
+		if (mainModel.isDateValid()) {
+			
+			text += "<br><br>Date range selected, ";
+			text += mainModel.getFromSelectionYear() + " - " + mainModel.getToSelectionYear();
+			
+			if (!dataReady) {
+				
+				text += "<br><br>Grabbing data...";
+				
+			} else {
+				
+				text += "<br><br>Data Grabbed in " + millisToTime(welcomeModel.getDataGrabTime());
+				text += "<br><br><b>Please now interact with this data using the"
+						+ "<br>buttons to the left and the right</b>";
+				
+			}
+			
+		}
 		
 		mainLabel.setText("<html><center>" + text + "</center></html>");
+		
+	}
+	
+	
+	/** Useful **/
+	
+	private String millisToTime(long millis) {
+		
+		return String.format("%02d min, %02d sec", 
+			    TimeUnit.MILLISECONDS.toMinutes(millis),
+			    TimeUnit.MILLISECONDS.toSeconds(millis) - 
+			    TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));	
+		
+	}
+
+
+	@Override
+	public void update(Observable o, Object arg) {
+		
+		if (arg.equals("Data Ready")) updateLabel(true);
+		if (arg.equals("Date Selection changed")) updateLabel(false);
 		
 	}
 	

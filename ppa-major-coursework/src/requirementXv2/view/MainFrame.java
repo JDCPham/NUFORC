@@ -38,22 +38,23 @@ public class MainFrame extends JFrame implements Observer {
 	// Panels
 	private JPanel[] panels;
 
-	
+
 	/** Constructor **/
-	
-	public MainFrame(MainModel mainModel, WelcomeModel welcomeModel, MapModel mapModel){
+
+	public MainFrame(MainModel mainModel, WelcomeModel welcomeModel, MapModel mapModel, StatsModel statsModel){
 
 		super();
 		this.mainModel = mainModel;
 		this.welcomeModel = welcomeModel;
 		this.mapModel = mapModel;
-		this.mainController = new MainController(mainModel, welcomeModel, mapModel);
-		initPanels(mainModel, welcomeModel, mapModel);
+		this.statsModel = statsModel;
+		this.mainController = new MainController(mainModel, welcomeModel, mapModel, statsModel);
+		initPanels(mainModel, welcomeModel, mapModel, statsModel);
 		initWidgets();
 
 	}
 
-	
+
 	/** Creating Widgets **/
 
 	public void initWidgets(){
@@ -76,6 +77,7 @@ public class MainFrame extends JFrame implements Observer {
 		// Set widget properties
 		lastUpdatedLabel.setHorizontalAlignment(JLabel.CENTER);
 		leftButton.setEnabled(false);
+		rightButton.setEnabled(false);
 
 		// Set default values
 		fromComboBox.setSelectedItem("-");
@@ -86,7 +88,7 @@ public class MainFrame extends JFrame implements Observer {
 		rightButton.addActionListener(mainController.new RightButtonListener());
 		fromComboBox.addActionListener(mainController.new FromComboBoxListener());
 		toComboBox.addActionListener(mainController.new ToComboBoxListener());
-		
+
 		// Create panels
 		JPanel topPanel = new JPanel();
 		JPanel bottomPanel = new JPanel();
@@ -117,13 +119,13 @@ public class MainFrame extends JFrame implements Observer {
 
 
 
-	public void initPanels(MainModel mainModel, WelcomeModel welcomeModel, MapModel mapModel) {
+	public void initPanels(MainModel mainModel, WelcomeModel welcomeModel, MapModel mapModel, StatsModel statsModel) {
 
 		panels = new JPanel[4];
 
 		panels[0] = new WelcomePanel(mainModel, welcomeModel);
 		panels[1] = new MapPanel(mainModel, mapModel);
-		panels[2] = new MapPanel(mainModel, mapModel);
+		panels[2] = new StatsPanel(mainModel, statsModel);
 		panels[3] = new MapPanel(mainModel, mapModel);
 
 
@@ -187,12 +189,22 @@ public class MainFrame extends JFrame implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		
+
 		if (o instanceof MainModel) {
-			
+
 			if (arg.equals("Panel changed")) updatePanel();
-			
+
+			if (arg.equals("Date Selection changed")) {
+				
+				if (mainModel.isDateValid()) rightButton.setEnabled(true);
+				else rightButton.setEnabled(false);
+					
+			}
+
+
 		}
+
+
 
 	}
 
