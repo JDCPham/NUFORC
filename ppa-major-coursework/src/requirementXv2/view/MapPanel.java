@@ -187,8 +187,7 @@ public class MapPanel extends JPanel implements Observer {
 		if (sightings.isEmpty()) return 0;
 		
 		max = sightings.firstEntry().getValue();
-		System.out.println(max);
-	
+		
 		for (String s: states) {
 			
 			current = sightings.get(s);

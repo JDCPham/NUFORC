@@ -73,8 +73,6 @@ public class StatesFrame extends JFrame{
 
 			}
 
-
-
 		});
 
 		// Add items to combo box
@@ -111,34 +109,31 @@ public class StatesFrame extends JFrame{
 	}
 
 
+	
 	public void addSightings(String s) {
 		
 		mapModel.getSightings().clear();
 
 		for (Incident i: mapModel.getIncidents()) { 
 
-			if (i.getState().equals(s)) {
+			if (i.getState().equals(s)) mapModel.addSighting(setSighting(i));
 
-				mapModel.addSighting(setSighting(i));
-
-			}
 		}
 		
 		mapModel.sortSightings();
 	}
 
+	
+	
 	public void updateList(ArrayList<Sighting> s) {
 
 		modelA.clear();
 
-		for (Sighting sighting: s) {
-
-			modelA.addElement(sighting);
-
-		}
+		for (Sighting sighting: s) modelA.addElement(sighting);
 		
 	}
 
+	
 
 	public Sighting setSighting(Incident i) {
 
@@ -157,6 +152,7 @@ public class StatesFrame extends JFrame{
 
 	}
 
+	
 
 	public String getValue(ActionEvent e) {
 
