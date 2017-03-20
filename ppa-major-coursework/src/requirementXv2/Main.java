@@ -15,18 +15,20 @@ public class Main {
 		MainModel mainModel = new MainModel();
 		WelcomeModel welcomeModel = new WelcomeModel(mainModel);
 		MapModel mapModel = new MapModel(mainModel);
-		StatsModel statsModel = new StatsModel(mainModel);
+		StatsModel statsModel = new StatsModel(mainModel, mapModel);
 		SurpriseModel surpriseModel = new SurpriseModel(mainModel);
 		
 		// Create frame
-		MainFrame mainFrame = new MainFrame(mainModel, welcomeModel, mapModel);
+		MainFrame mainFrame = new MainFrame(mainModel, welcomeModel, mapModel, statsModel);
 		
 		// Set observers
 		mainModel.addObserver(mainFrame);
 		mapModel.addObserver(mainFrame);
+		welcomeModel.addObserver(mainFrame);
 
 		// Set visibility 
 		mainFrame.setVisible(true);
+		
 
 	}
 
