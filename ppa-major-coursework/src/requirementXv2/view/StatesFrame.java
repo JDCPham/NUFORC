@@ -106,6 +106,7 @@ public class StatesFrame extends JFrame{
 		else if (state.equals("CO")) return "Colorado";
 		else if (state.equals("CT")) return "Connecticut";
 		else if (state.equals("DE")) return "Delaware";
+		else if (state.equals("FL")) return "Florida";
 		else if (state.equals("GA")) return "Georgia";
 		else if (state.equals("HI")) return "Hawaii";
 		else if (state.equals("ID")) return "Idaho";
