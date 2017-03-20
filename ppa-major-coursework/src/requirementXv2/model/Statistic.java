@@ -6,6 +6,19 @@ public class Statistic {
 	private String stat;
 	
 	
+	public Statistic() {
+		
+		
+	}
+	
+	public Statistic(String t, String s) {
+		
+		title = t;
+		stat = s;
+		
+	}
+	
+	
 	/** Getters **/
 	
 	public String getTitle() { return title; }

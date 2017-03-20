@@ -99,6 +99,11 @@ public class StatesFrame extends JFrame{
 	public String getStateName(String state) {
 
 		if (state.equals("CA")) return "California";
+		else if (state.equals("AL")) return "Alabama";
+		else if (state.equals("AZ")) return "Arizona";
+		else if (state.equals("AR")) return "Arkansas";
+		else if (state.equals("CO")) return "Colorado";
+		else if (state.equals("CT")) return "Connecticut";
 		else if (state.equals("NY")) return "New York";
 		else if (state.equals("NC")) return "North Carolina";
 		else return null;

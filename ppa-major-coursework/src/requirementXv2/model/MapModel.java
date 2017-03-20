@@ -46,27 +46,16 @@ public class MapModel extends Observable {
 
 
 
-	/** Retrieving data from Ripley **/
-
-	public ArrayList<Incident> ripleyIncidents(int from, int to) { 
-
-		String fromYear = Integer.toString(from);
-		String toYear = Integer.toString(to);
-
-		return mainModel.ripley.getIncidentsInRange(fromYear + "-01-01 00:00:00", toYear + "-12-31 23:59:59"); 
-
-	}
-
-
 
 	/** Main **/
 
 	public void updateStates() {
 
-		incidents = ripleyIncidents(mainModel.getFromSelectionYear(), mainModel.getToSelectionYear());
+		incidents = mainModel.ripleyIncidents(mainModel.getFromSelectionYear(), mainModel.getToSelectionYear());
+		mainModel.setIncidents(incidents);
 		initialStates(incidents);
 		countIncidents(incidents);
-		
+
 		setChanged();
 		notifyObservers("State Data Updated");
 
@@ -74,11 +63,32 @@ public class MapModel extends Observable {
 
 
 	/** Useful **/
+	
+	
+	public void initialStates(ArrayList<Incident> ripleyIncidents) {
+
+		TreeSet<String> set;
+		ListIterator<Incident> incidents;
+		
+		states = new TreeMap<String, Integer>();
+		set = new TreeSet<String>();
+		incidents = ripleyIncidents.listIterator();
+
+		while (incidents.hasNext()) set.add(incidents.next().getState());
+
+		for (String s: set) states.put(s, 0);
+
+	}
+
+	
+	
 
 	public void countIncidents(ArrayList<Incident> ripleyIncidents) {
 
-		ListIterator<Incident> incidents = ripleyIncidents.listIterator();	
+		ListIterator<Incident> incidents;
 		String currentState;
+		
+		incidents = ripleyIncidents.listIterator();	
 
 		while (incidents.hasNext()){
 
@@ -94,29 +104,15 @@ public class MapModel extends Observable {
 
 
 
-	public void initialStates(ArrayList<Incident> ripleyIncidents) {
-
-		states = new TreeMap<String, Integer>();
-		TreeSet<String> set = new TreeSet<String>();
-		ListIterator<Incident> incidents = ripleyIncidents.listIterator();
-
-		while (incidents.hasNext()) set.add(incidents.next().getState());
-
-		for (String s: set) states.put(s, 0);
-
-	}
-
-
-
 	public void addSighting(Sighting sighting) {
 
 		sightings.add(sighting);
 
 	}
 
+	
+	
 	public void sortSightings() {
-
-		// BY CITY
 
 		sightingsByCity = new ArrayList<Sighting>();
 		sightingsByShape = new ArrayList<Sighting>();
@@ -134,22 +130,13 @@ public class MapModel extends Observable {
 
 		}
 
-		Collections.sort(sightingsByCity, new CityComparator());
-		Collections.sort(sightingsByShape, new ShapeComparator());
-		Collections.sort(sightingsByDuration, new DurationComparator());
-		Collections.sort(sightingsByDate, new DateComparator());
-		Collections.sort(sightingsByPosted, new PostedComparator());
-
-		// BY SHAPE
-
-
-
+		Collections.sort(sightingsByCity, new CustomComparators(). new CityComparator());
+		Collections.sort(sightingsByShape, new CustomComparators(). new ShapeComparator());
+		Collections.sort(sightingsByDuration, new CustomComparators(). new DurationComparator());
+		Collections.sort(sightingsByDate, new CustomComparators(). new DateComparator());
+		Collections.sort(sightingsByPosted, new CustomComparators(). new PostedComparator());
 
 	}
-
-
-
-
 
 
 	/** Getters **/
@@ -163,13 +150,13 @@ public class MapModel extends Observable {
 	public ArrayList<Sighting> getSightings() { return sightings; }
 
 	public ArrayList<Sighting> getSightingsByCity() { return sightingsByCity; }
-	
+
 	public ArrayList<Sighting> getSightingsByShape() { return sightingsByShape; }
-	
+
 	public ArrayList<Sighting> getSightingsByDuration() { return sightingsByDuration; }
-	
+
 	public ArrayList<Sighting> getSightingsByDate() { return sightingsByDate; }
-	
+
 	public ArrayList<Sighting> getSightingsByPosted() { return sightingsByPosted; }
 
 
