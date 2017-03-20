@@ -116,6 +116,25 @@ public class StatesFrame extends JFrame{
 		else if (state.equals("KY")) return "Kentucky";
 		else if (state.equals("LA")) return "Louisiana";
 		else if (state.equals("ME")) return "Maine";
+		
+		else if (state.equals("MD")) return "Maryland";
+		else if (state.equals("MA")) return "Massachusetts";
+		else if (state.equals("MI")) return "Michigan";
+		else if (state.equals("MN")) return "Minnesota";
+		else if (state.equals("MS")) return "Mississippi";
+		else if (state.equals("MO")) return "Missouri";
+		else if (state.equals("MT")) return "Montana";
+		else if (state.equals("NE")) return "Nebraska";
+		else if (state.equals("NV")) return "Nevada";
+		else if (state.equals("NH")) return "New Hampshire";
+		else if (state.equals("NJ")) return "New Jersey";
+		else if (state.equals("NM")) return "New Mexico";
+		else if (state.equals("NY")) return "New York";
+		else if (state.equals("NC")) return "North Carolina";
+		else if (state.equals("ND")) return "North Dakota";
+		else if (state.equals("OH")) return "Ohio";
+		else if (state.equals("OK")) return "Oklahoma";
+		
 		else if (state.equals("CO")) return "Colorado";
 		else if (state.equals("CT")) return "Connecticut";
 		else if (state.equals("NY")) return "New York";
@@ -148,6 +167,7 @@ public class StatesFrame extends JFrame{
 		else if (state.equals("CT")) return "Connecticut";
 		else if (state.equals("NY")) return "New York";
 		else if (state.equals("NC")) return "North Carolina";
+		
 		else return null;
 
 	}
