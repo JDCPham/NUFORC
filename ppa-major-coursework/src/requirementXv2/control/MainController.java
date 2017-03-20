@@ -77,6 +77,7 @@ public class MainController {
 				end = System.currentTimeMillis();
 				time = end - start;
 				welcomeModel.setDataGrabTime(time);
+				statsModel.updateStats();
 			} 
 			
 		}
@@ -103,6 +104,7 @@ public class MainController {
 				end = System.currentTimeMillis();
 				time = end - start;
 				welcomeModel.setDataGrabTime(time);
+				statsModel.updateStats();
 			}
 			
 		}
