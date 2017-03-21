@@ -25,7 +25,7 @@ public class EscapeChatFrame extends JPanel implements Observer {
 	private EscapePicturePanel sidePanelAlien6;
 	private EscapePicturePanel sidePanelAlien7;
 	private EscapePicturePanel sidePanelAlien8;
-
+	private EscapePicturePanel headerBackground;
 	private EscapePicturePanel leftSidePanelSpace;
 	private EscapePicturePanel rightSidePanelSpace;
 	private JTextField jtfChatInput;
@@ -53,23 +53,25 @@ public class EscapeChatFrame extends JPanel implements Observer {
 		sidePanelAlien8 = new EscapePicturePanel("Picture/AlienHead.png");
 		leftSidePanelSpace = new EscapePicturePanel("Picture/SpaceBackground.jpg");
 		rightSidePanelSpace = new EscapePicturePanel("Picture/SpaceBackground.jpg");
+		headerBackground = new EscapePicturePanel("Picture/GameHeaderBackground.jpg");
 		
 		jtfChatInput = new JTextField();
 		jtfChatInput.setPreferredSize(new Dimension(20, 40));
 
 		jtaChatRoom = new JTextArea();
-		jlWelcome = new JLabel("");
+		jpNorth = new JPanel();
+		jlWelcome = new JLabel("Welcome aboard");
 		
 		rightSidePanelSpace.setPreferredSize(new Dimension(140, 500));
 		leftSidePanelSpace.setPreferredSize(new Dimension(140, 500));
 		jtaChatRoom.setPreferredSize(new Dimension(140, 500));
 
-		add(jlWelcome, BorderLayout.NORTH);
+		add(headerBackground, BorderLayout.NORTH);
 		add(rightSidePanelSpace, BorderLayout.EAST);
 		add(leftSidePanelSpace, BorderLayout.WEST);
 		add(jtfChatInput, BorderLayout.SOUTH);
 		add(jtaChatRoom, BorderLayout.CENTER);
-		
+				
 		rightSidePanelSpace.setLayout(new GridLayout(4, 1));
 		rightSidePanelSpace.add(sidePanelAlien1);
 		rightSidePanelSpace.add(sidePanelAlien2);
