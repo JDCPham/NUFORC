@@ -39,16 +39,16 @@ public class EscapeChatFrame extends JPanel implements Observer {
 		jtfChatInput = new JTextField();
 		jtaChatRoom = new JTextArea();
 		
-		rightSidePanelSpace.setPreferredSize(new Dimension(400, 500));
-		leftSidePanelSpace.setPreferredSize(new Dimension(400, 500));
-		jtaChatRoom.setPreferredSize(new Dimension(400, 500));
+		rightSidePanelSpace.setPreferredSize(new Dimension(140, 500));
+		leftSidePanelSpace.setPreferredSize(new Dimension(140, 500));
+		jtaChatRoom.setPreferredSize(new Dimension(140, 500));
 
 		add(rightSidePanelSpace, BorderLayout.EAST);
 		add(leftSidePanelSpace, BorderLayout.WEST);
 		add(jtfChatInput, BorderLayout.SOUTH);
 		add(jtaChatRoom, BorderLayout.CENTER);
 		
-		jtfChatInput.setPreferredSize(new Dimension(getHeight(), 40));
+		jtfChatInput.setPreferredSize(new Dimension(20, 40));
 		
 	}
 	

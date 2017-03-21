@@ -1,6 +1,8 @@
 package requirementXv2.view;
 
 import javax.swing.JPanel;
+
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -13,6 +15,8 @@ public class EscapePicturePanel extends JPanel {
 
 	public EscapePicturePanel(String path)
 	{
+		
+		setPreferredSize(new Dimension(200, 50));
 		try {
 			
 			this.image = ImageIO.read(new File(path));
