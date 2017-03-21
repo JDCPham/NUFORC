@@ -1,7 +1,9 @@
 package requirementXv2.view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.util.Observable;
 import java.util.Observer;
@@ -31,7 +33,6 @@ public class EscapeChatFrame extends JPanel implements Observer {
 	private JTextField jtfChatInput;
 	private JTextArea jtaChatRoom;
 	private JLabel jlWelcome;
-	private JPanel jpNorth;
 	
 	public EscapeChatFrame()
 	{
@@ -59,9 +60,10 @@ public class EscapeChatFrame extends JPanel implements Observer {
 		jtfChatInput.setPreferredSize(new Dimension(20, 40));
 
 		jtaChatRoom = new JTextArea();
-		jpNorth = new JPanel();
 		jlWelcome = new JLabel("Welcome aboard");
-		
+		jlWelcome.setFont(new Font("Serif", Font.BOLD, 40));
+		jlWelcome.setForeground(Color.green);
+
 		rightSidePanelSpace.setPreferredSize(new Dimension(140, 500));
 		leftSidePanelSpace.setPreferredSize(new Dimension(140, 500));
 		jtaChatRoom.setPreferredSize(new Dimension(140, 500));
@@ -71,7 +73,9 @@ public class EscapeChatFrame extends JPanel implements Observer {
 		add(leftSidePanelSpace, BorderLayout.WEST);
 		add(jtfChatInput, BorderLayout.SOUTH);
 		add(jtaChatRoom, BorderLayout.CENTER);
-				
+		
+		headerBackground.add(jlWelcome);
+		
 		rightSidePanelSpace.setLayout(new GridLayout(4, 1));
 		rightSidePanelSpace.add(sidePanelAlien1);
 		rightSidePanelSpace.add(sidePanelAlien2);
