@@ -11,7 +11,7 @@ import java.util.TreeMap;
 import api.ripley.Incident;
 
 public class StatsModel extends Observable {
-	
+
 	// Regular Expressions
 	public static final Pattern HOAX = Pattern.compile("[Hh][Oo][Aa][Xx]");
 	public static final Pattern VALID_STATES = Pattern.compile("AL|AK|AS|AZ|AR|CA|CO|CT|DE|DC|FL|GA|GU"
@@ -55,14 +55,14 @@ public class StatsModel extends Observable {
 
 		stats = new Statistic[8];
 
-		stats[0] = new Statistic("Suspected Hoaxes", "A");
-		stats[1] = new Statistic("Non-US Sightings", "B");
-		stats[2] = new Statistic("Likeliest State", "C");
-		stats[3] = new Statistic("Sightings via Other Platforms", "D");
-		stats[4] = new Statistic("Total Sightings", "E");
-		stats[5] = new Statistic("Most Common Year", "F");
-		stats[6] = new Statistic("7", "G");
-		stats[7] = new Statistic("8", "H");
+		stats[0] = new Statistic("Suspected Hoaxes");
+		stats[1] = new Statistic("Non-US Sightings");
+		stats[2] = new Statistic("Likeliest State");
+		stats[3] = new Statistic("Sightings via Other Platforms");
+		stats[4] = new Statistic("Total Sightings");
+		stats[5] = new Statistic("6");
+		stats[6] = new Statistic("7");
+		stats[7] = new Statistic("8");
 
 	}
 
@@ -82,12 +82,7 @@ public class StatsModel extends Observable {
 
 	public void nextStat(String position) {
 
-		int i = 0;
-
-		if (position.equals("Top Left")) i = topLeft;
-		else if (position.equals("Top Right")) i = topRight;
-		else if (position.equals("Bottom Left")) i = bottomLeft;
-		else if (position.equals("Bottom Right")) i = bottomRight;
+		int i = getCurrentStat(position);
 
 		while ((i == topLeft) || (i == topRight) || (i == bottomLeft) || (i == bottomRight)) { 
 
@@ -96,10 +91,7 @@ public class StatsModel extends Observable {
 
 		}
 
-		if (position.equals("Top Left")) topLeft = i;
-		else if (position.equals("Top Right")) topRight = i;
-		else if (position.equals("Bottom Left")) bottomLeft = i;
-		else if (position.equals("Bottom Right")) bottomRight = i;
+		setStat(position, i);
 
 		setChanged();
 		notifyObservers("Stats Box Changed");
@@ -109,12 +101,7 @@ public class StatsModel extends Observable {
 
 	public void prevStat(String position) {
 
-		int i = 0;
-
-		if (position.equals("Top Left")) i = topLeft;
-		else if (position.equals("Top Right")) i = topRight;
-		else if (position.equals("Bottom Left")) i = bottomLeft;
-		else if (position.equals("Bottom Right")) i = bottomRight;
+		int i = getCurrentStat(position);
 
 		while ((i == topLeft) || (i == topRight) || (i == bottomLeft) || (i == bottomRight)) { 
 
@@ -123,17 +110,34 @@ public class StatsModel extends Observable {
 
 		}
 
-		if (position.equals("Top Left")) topLeft = i;
-		else if (position.equals("Top Right")) topRight = i;
-		else if (position.equals("Bottom Left")) bottomLeft = i;
-		else if (position.equals("Bottom Right")) bottomRight = i;
+		setStat(position, i);
 
 		setChanged();
 		notifyObservers("Stats Box Changed");
 
 	}
 
-	
+
+	public int getCurrentStat(String position) {
+
+		if (position.equals("Top Left")) return topLeft;
+		else if (position.equals("Top Right")) return topRight;
+		else if (position.equals("Bottom Left")) return bottomLeft;
+		else if (position.equals("Bottom Right")) return bottomRight;
+		else return 0;
+
+	}
+
+	public void setStat(String position, int i) {
+
+		if (position.equals("Top Left")) topLeft = i;
+		else if (position.equals("Top Right")) topRight = i;
+		else if (position.equals("Bottom Left")) bottomLeft = i;
+		else if (position.equals("Bottom Right")) bottomRight = i;
+
+	}
+
+
 	public void updateStats() {
 
 		stats[0].setStat(calculateHoaxes());
@@ -141,7 +145,7 @@ public class StatsModel extends Observable {
 		stats[2].setStat(calculateLikeliestState());
 		stats[3].setStat("S");
 		stats[4].setStat(calculateTotalSightings());
-		stats[5].setStat(calculateMostCommonYear());
+		stats[5].setStat("S");
 		stats[6].setStat("s");
 		stats[7].setStat("S");
 
@@ -150,32 +154,51 @@ public class StatsModel extends Observable {
 
 	}
 
-	
+
 	// Done
 	private String calculateHoaxes() {
 
 		int count = 0;
-		
+
 		for (Incident incident: mainModel.getIncidents()) {
-			
+
 			Matcher matcherA = HOAX.matcher(incident.getSummary());
-			
+
 			if (matcherA.find()) count++;
-			
+
 		}
 
 		return Integer.toString(count);
 
 	}
 
-	
-	
+
+
 	// Done
 	private String calculateLikeliestState() {
 
 		int count = 0;
 		int max = 0;
-		String state = findMaxValue(mainModel.getIncidentCounts());
+		String state = "N/A";
+
+		TreeMap<String, Integer> incidentCount;
+		Set<Entry<String, Integer>> tempSet;
+
+		incidentCount = mainModel.getIncidentCounts();
+		tempSet = incidentCount.entrySet();
+
+		if (!incidentCount.isEmpty()) max = incidentCount.firstEntry().getValue();
+
+		for (Entry<String, Integer> entry: tempSet) {
+
+			if (entry.getValue() >= max) {
+
+				max = entry.getValue();
+				state = entry.getKey();
+
+			}	
+
+		}
 
 		if (state.equals("Not specified.")) state = "N/A";
 
@@ -188,13 +211,13 @@ public class StatsModel extends Observable {
 	private String calculateNonUSSightings() {
 
 		int count = 0;
-		
+
 		for (Incident incident: mainModel.getIncidents()) {
-			
+
 			Matcher matcher = VALID_STATES.matcher(incident.getState());
-			
+
 			if (!matcher.find()) count++;
-			
+
 		}
 
 		return Integer.toString(count);
@@ -202,7 +225,7 @@ public class StatsModel extends Observable {
 	}
 
 
-	
+
 	// Done
 	private String calculateTotalSightings() {
 
@@ -213,85 +236,6 @@ public class StatsModel extends Observable {
 		return Integer.toString(count);
 
 	}
-	
-	
-	
-	// In Progess
-	private String calculateYoutubeSightings() {
-		
-		
-		return null;
-		
-	}
-	
-	
-	// Done
-	private String calculateMostCommonYear() {
-		
-		TreeMap<String, Integer> yearCount;
-		String year;
-		int fromYear;
-		int toYear;
-		
-		fromYear = mainModel.getFromSelectionYear();
-		toYear = mainModel.getToSelectionYear();
-		
-		yearCount = new TreeMap<String, Integer>();
-		
-		for (int i = fromYear; i <= toYear; i++) yearCount.put(Integer.toString(i), 0);
-		
-		for (Incident incident: mainModel.getIncidents()) {
-			
-			year = parseYear(incident.getDateAndTime());
-			yearCount.put(year, yearCount.get(year) + 1);
-			
-		}
-		
-		return findMaxValue(yearCount);
-	}
-	
-	
-	
-	
-	
-	private String parseYear(String dateTime) {
-		
-		String year;
-		
-		year = dateTime.replaceAll("-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2}$", "");
-		
-		return year;
-		
-	}
-	
-	private String findMaxValue(TreeMap<String, Integer> map) {
-		
-		int count = 0;
-		int maxValue = 0;
-		String maxKey = "N/A";
-
-		Set<Entry<String, Integer>> tempSet;
-
-		tempSet = map.entrySet();
-		
-		if (!map.isEmpty()) maxValue = map.firstEntry().getValue();
-
-		for (Entry<String, Integer> entry: tempSet) {
-
-			if (entry.getValue() >= maxValue) {
-
-				maxValue = entry.getValue();
-				maxKey = entry.getKey();
-
-			}	
-
-		}
-		
-		return maxKey;
-	}
-
-
-
 
 }
 
