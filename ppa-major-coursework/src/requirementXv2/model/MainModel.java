@@ -1,5 +1,6 @@
 package requirementXv2.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.ListIterator;
 import java.util.Observable;
@@ -12,8 +13,10 @@ import requirementX.model.MapModel;
 import requirementX.model.StatsModel;
 import requirementX.model.WelcomeModel;
 
-public class MainModel extends Observable {
-
+public class MainModel extends Observable implements Serializable{
+	
+	private static final long serialVersionUID = 2680493143842746133L;
+	
 	// Final Fields
 	public static final int NO_SELECTION = -1;
 	public static final int WELCOME_PANEL = 0;

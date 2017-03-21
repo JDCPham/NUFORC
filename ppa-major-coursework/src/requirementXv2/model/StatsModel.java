@@ -244,19 +244,15 @@ public class StatsModel extends Observable {
 			
 			year = parseYear(incident.getDateAndTime());
 			yearCount.put(year, yearCount.get(year) + 1);
-
+			
 		}
 		
 		return findMaxValue(yearCount);
-		
 	}
 	
 	
 	
 	
-	
-	
-	/** Useful **/
 	
 	private String parseYear(String dateTime) {
 		
@@ -267,8 +263,6 @@ public class StatsModel extends Observable {
 		return year;
 		
 	}
-	
-	
 	
 	private String findMaxValue(TreeMap<String, Integer> map) {
 		
