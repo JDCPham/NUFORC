@@ -1,5 +1,11 @@
+// Package
 package requirementXv2.model;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+// Imports
 import java.util.ArrayList;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
@@ -10,7 +16,12 @@ import java.util.TreeMap;
 
 import api.ripley.Incident;
 
-public class StatsModel extends Observable {
+
+// StatsModel Class
+public class StatsModel extends Observable implements Serializable {
+	
+	// Serial Number
+	private static final long serialVersionUID = 1L;
 
 	// Regular Expressions
 	public static final Pattern HOAX = Pattern.compile("[Hh][Oo][Aa][Xx]");
@@ -18,22 +29,25 @@ public class StatsModel extends Observable {
 			+ "|HI|IA|ID|IL|IN|IS|KS|KY|LA|ME|MD|MH|MA|MI|FM|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|MP|OH|OK"
 			+ "|OR|PW|PA|PR|RI|SC|SD|TN|TX|UT|VT|VA|VI|WA|WV|WI|WY");
 
-	// Main Model
+	// Model Fields
 	private MainModel mainModel;
 	private MapModel mapModel;
 
 	// Statistics
 	private Statistic[] stats;
 
-	// Current
+	// Current Statistics
 	private int topLeft;
 	private int topRight;
 	private int bottomLeft;
 	private int bottomRight;
+	private int currentStatistics[];
 
 	// Incidents
 	private ArrayList<Incident> incidents;
 
+	
+	
 	/** Constructor **/
 
 	public StatsModel(MainModel mainModel, MapModel mapModel) {
@@ -41,10 +55,12 @@ public class StatsModel extends Observable {
 		this.mainModel = mainModel;
 		this.mapModel = mapModel;
 
-		topLeft = 0;
-		topRight = 1;
-		bottomLeft = 2;
-		bottomRight = 3;
+		currentStatistics = new int[4];
+		
+		currentStatistics[0] = 0;
+		currentStatistics[1] = 1;
+		currentStatistics[2] = 2;
+		currentStatistics[3] = 3;
 
 		initStats();
 
@@ -69,13 +85,13 @@ public class StatsModel extends Observable {
 
 	public Statistic getStat(String position) {
 
-		if (position.equals("Top Left")) return stats[topLeft];
+		if (position.equals("Top Left")) return stats[currentStatistics[0]];
 
-		else if (position.equals("Top Right")) return stats[topRight];
+		else if (position.equals("Top Right")) return stats[currentStatistics[1]];
 
-		else if (position.equals("Bottom Left")) return stats[bottomLeft];
+		else if (position.equals("Bottom Left")) return stats[currentStatistics[2]];
 
-		else return stats[bottomRight];
+		else return stats[currentStatistics[3]];
 
 	}
 
@@ -84,7 +100,7 @@ public class StatsModel extends Observable {
 
 		int i = getCurrentStat(position);
 
-		while ((i == topLeft) || (i == topRight) || (i == bottomLeft) || (i == bottomRight)) { 
+		while ((i == currentStatistics[0]) || (i == currentStatistics[1]) || (i == currentStatistics[2]) || (i == currentStatistics[3])) { 
 
 			if (i == 7) i = 0;	
 			else i++;		
@@ -103,7 +119,7 @@ public class StatsModel extends Observable {
 
 		int i = getCurrentStat(position);
 
-		while ((i == topLeft) || (i == topRight) || (i == bottomLeft) || (i == bottomRight)) { 
+		while ((i == currentStatistics[0]) || (i == currentStatistics[1]) || (i == currentStatistics[2]) || (i == currentStatistics[3])) { 
 
 			if (i == 0) i = 7;	
 			else i--;		
@@ -120,20 +136,20 @@ public class StatsModel extends Observable {
 
 	public int getCurrentStat(String position) {
 
-		if (position.equals("Top Left")) return topLeft;
-		else if (position.equals("Top Right")) return topRight;
-		else if (position.equals("Bottom Left")) return bottomLeft;
-		else if (position.equals("Bottom Right")) return bottomRight;
+		if (position.equals("Top Left")) return currentStatistics[0];
+		else if (position.equals("Top Right")) return currentStatistics[1];
+		else if (position.equals("Bottom Left")) return currentStatistics[2];
+		else if (position.equals("Bottom Right")) return currentStatistics[3];
 		else return 0;
 
 	}
 
 	public void setStat(String position, int i) {
 
-		if (position.equals("Top Left")) topLeft = i;
-		else if (position.equals("Top Right")) topRight = i;
-		else if (position.equals("Bottom Left")) bottomLeft = i;
-		else if (position.equals("Bottom Right")) bottomRight = i;
+		if (position.equals("Top Left")) currentStatistics[0] = i;
+		else if (position.equals("Top Right")) currentStatistics[1] = i;
+		else if (position.equals("Bottom Left")) currentStatistics[2] = i;
+		else if (position.equals("Bottom Right")) currentStatistics[3] = i;
 
 	}
 
@@ -235,6 +251,20 @@ public class StatsModel extends Observable {
 
 		return Integer.toString(count);
 
+	}
+	
+	
+	public void serialize() {
+
+		try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("src/requirementXv2/serialize.ser", false))) {
+
+			out.writeObject(topLeft);
+
+		} catch(IOException ex) {
+
+			System.out.println(ex.getMessage());
+
+		}
 	}
 
 }
