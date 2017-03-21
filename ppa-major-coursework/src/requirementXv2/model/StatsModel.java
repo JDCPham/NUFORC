@@ -260,6 +260,9 @@ public class StatsModel extends Observable implements Serializable {
 	}
 	
 	
+	
+	/** Serializable Methods **/
+	
 	public void serialize() {
 
 		try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("src/requirementXv2/serialize.ser", false))) {
@@ -271,6 +274,7 @@ public class StatsModel extends Observable implements Serializable {
 			System.out.println(ex.getMessage());
 
 		}
+		
 	}
 	
 	
