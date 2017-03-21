@@ -1,8 +1,10 @@
 // Package
 package requirementXv2.model;
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 // Imports
@@ -19,6 +21,12 @@ import api.ripley.Incident;
 
 // StatsModel Class
 public class StatsModel extends Observable implements Serializable {
+	
+	// Final fields
+	public static final int TOP_LEFT = 0;
+	public static final int TOP_RIGHT = 1;
+	public static final int BOTTOM_LEFT = 2;
+	public static final int BOTTOM_RIGHT = 3;
 	
 	// Serial Number
 	private static final long serialVersionUID = 1L;
@@ -57,10 +65,7 @@ public class StatsModel extends Observable implements Serializable {
 
 		currentStatistics = new int[4];
 		
-		currentStatistics[0] = 0;
-		currentStatistics[1] = 1;
-		currentStatistics[2] = 2;
-		currentStatistics[3] = 3;
+		deserialize();
 
 		initStats();
 
@@ -150,6 +155,7 @@ public class StatsModel extends Observable implements Serializable {
 		else if (position.equals("Top Right")) currentStatistics[1] = i;
 		else if (position.equals("Bottom Left")) currentStatistics[2] = i;
 		else if (position.equals("Bottom Right")) currentStatistics[3] = i;
+		serialize();
 
 	}
 
@@ -258,13 +264,37 @@ public class StatsModel extends Observable implements Serializable {
 
 		try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("src/requirementXv2/serialize.ser", false))) {
 
-			out.writeObject(topLeft);
+			out.writeObject(currentStatistics);
 
 		} catch(IOException ex) {
 
 			System.out.println(ex.getMessage());
 
 		}
+	}
+	
+	
+	
+	public void deserialize() {
+
+		try( ObjectInputStream in = new ObjectInputStream(new FileInputStream("src/requirementXv2/serialize.ser"))) {
+
+			try {
+
+				this.currentStatistics = (int[]) in.readObject();	
+
+			}   catch (ClassNotFoundException ex) {
+
+				System.out.println(ex.getMessage());
+				
+			}
+
+		} catch (IOException ex) {
+
+			System.out.println(ex.getMessage());
+
+		}
+
 	}
 
 }
