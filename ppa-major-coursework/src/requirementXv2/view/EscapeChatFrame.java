@@ -9,6 +9,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -30,9 +31,11 @@ public class EscapeChatFrame extends JPanel implements Observer {
 	private EscapePicturePanel headerBackground;
 	private EscapePicturePanel leftSidePanelSpace;
 	private EscapePicturePanel rightSidePanelSpace;
-	private JTextField jtfChatInput;
+	//private JTextField jtfChatInput;
 	private JTextArea jtaChatRoom;
 	private JLabel jlWelcome;
+	private JButton jb1, jb2, jb3, jb4, jb5, jb6, jb7, jb8, jb9, jb10;
+	private JPanel jpSouth;
 	
 	public EscapeChatFrame()
 	{
@@ -56,10 +59,34 @@ public class EscapeChatFrame extends JPanel implements Observer {
 		rightSidePanelSpace = new EscapePicturePanel("Picture/SpaceBackground.jpg");
 		headerBackground = new EscapePicturePanel("Picture/GameHeaderBackground.jpg");
 		
-		jtfChatInput = new JTextField();
-		jtfChatInput.setPreferredSize(new Dimension(20, 40));
+		//jtfChatInput = new JTextField();
+		//jtfChatInput.setPreferredSize(new Dimension(20, 40));
 
 		jtaChatRoom = new JTextArea();
+		jb1 = new JButton("Hello");
+		jb2 = new JButton("Hello");
+		jb3 = new JButton("Hello");
+		jb4 = new JButton("Hello");
+		jb5 = new JButton("Hello");
+		jb6 = new JButton("Hello");
+		jb7 = new JButton("Hello");
+		jb8 = new JButton("Hello");
+		jb9 = new JButton("Hello");
+		jb10 = new JButton("Hello");
+		
+		jpSouth = new JPanel();
+		jpSouth.setLayout(new GridLayout(1, 10));
+		jpSouth.add(jb1);
+		jpSouth.add(jb2);
+		jpSouth.add(jb3);
+		jpSouth.add(jb4);
+		jpSouth.add(jb5);
+		jpSouth.add(jb6);
+		jpSouth.add(jb7);
+		jpSouth.add(jb8);
+		jpSouth.add(jb9);
+		jpSouth.add(jb10);
+
 		jlWelcome = new JLabel("Welcome aboard");
 		jlWelcome.setFont(new Font("Serif", Font.BOLD, 40));
 		jlWelcome.setForeground(Color.green);
@@ -71,7 +98,7 @@ public class EscapeChatFrame extends JPanel implements Observer {
 		add(headerBackground, BorderLayout.NORTH);
 		add(rightSidePanelSpace, BorderLayout.EAST);
 		add(leftSidePanelSpace, BorderLayout.WEST);
-		add(jtfChatInput, BorderLayout.SOUTH);
+		add(jpSouth, BorderLayout.SOUTH);
 		add(jtaChatRoom, BorderLayout.CENTER);
 		
 		headerBackground.add(jlWelcome);
