@@ -60,7 +60,7 @@ public class StatsModel extends Observable {
 		stats[2] = new Statistic("Likeliest State", "C");
 		stats[3] = new Statistic("Sightings via Other Platforms", "D");
 		stats[4] = new Statistic("Total Sightings", "E");
-		stats[5] = new Statistic("6", "F");
+		stats[5] = new Statistic("Most Common Year", "F");
 		stats[6] = new Statistic("7", "G");
 		stats[7] = new Statistic("8", "H");
 
@@ -141,7 +141,7 @@ public class StatsModel extends Observable {
 		stats[2].setStat(calculateLikeliestState());
 		stats[3].setStat("S");
 		stats[4].setStat(calculateTotalSightings());
-		stats[5].setStat("S");
+		stats[5].setStat(calculateMostCommonYear());
 		stats[6].setStat("s");
 		stats[7].setStat("S");
 
@@ -175,26 +175,7 @@ public class StatsModel extends Observable {
 
 		int count = 0;
 		int max = 0;
-		String state = "N/A";
-
-		TreeMap<String, Integer> incidentCount;
-		Set<Entry<String, Integer>> tempSet;
-
-		incidentCount = mainModel.getIncidentCounts();
-		tempSet = incidentCount.entrySet();
-		
-		if (!incidentCount.isEmpty()) max = incidentCount.firstEntry().getValue();
-
-		for (Entry<String, Integer> entry: tempSet) {
-
-			if (entry.getValue() >= max) {
-
-				max = entry.getValue();
-				state = entry.getKey();
-
-			}	
-
-		}
+		String state = findMaxValue(mainModel.getIncidentCounts());
 
 		if (state.equals("Not specified.")) state = "N/A";
 
@@ -231,6 +212,88 @@ public class StatsModel extends Observable {
 
 		return Integer.toString(count);
 
+	}
+	
+	
+	
+	// In Progess
+	private String calculateYoutubeSightings() {
+		
+		
+		return null;
+		
+	}
+	
+	
+	// Done
+	private String calculateMostCommonYear() {
+		
+		TreeMap<String, Integer> yearCount;
+		String year;
+		int fromYear;
+		int toYear;
+		
+		fromYear = mainModel.getFromSelectionYear();
+		toYear = mainModel.getToSelectionYear();
+		
+		yearCount = new TreeMap<String, Integer>();
+		
+		for (int i = fromYear; i <= toYear; i++) yearCount.put(Integer.toString(i), 0);
+		
+		for (Incident incident: mainModel.getIncidents()) {
+			
+			year = parseYear(incident.getDateAndTime());
+			yearCount.put(year, yearCount.get(year) + 1);
+
+		}
+		
+		return findMaxValue(yearCount);
+		
+	}
+	
+	
+	
+	
+	
+	
+	/** Useful **/
+	
+	private String parseYear(String dateTime) {
+		
+		String year;
+		
+		year = dateTime.replaceAll("-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2}$", "");
+		
+		return year;
+		
+	}
+	
+	
+	
+	private String findMaxValue(TreeMap<String, Integer> map) {
+		
+		int count = 0;
+		int maxValue = 0;
+		String maxKey = "N/A";
+
+		Set<Entry<String, Integer>> tempSet;
+
+		tempSet = map.entrySet();
+		
+		if (!map.isEmpty()) maxValue = map.firstEntry().getValue();
+
+		for (Entry<String, Integer> entry: tempSet) {
+
+			if (entry.getValue() >= maxValue) {
+
+				maxValue = entry.getValue();
+				maxKey = entry.getKey();
+
+			}	
+
+		}
+		
+		return maxKey;
 	}
 
 
