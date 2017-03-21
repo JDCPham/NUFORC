@@ -41,6 +41,7 @@ public class EscapeChatFrame extends JPanel implements Observer {
 		
 		rightSidePanelSpace.setPreferredSize(new Dimension(400, 500));
 		leftSidePanelSpace.setPreferredSize(new Dimension(400, 500));
+		jtaChatRoom.setPreferredSize(new Dimension(400, 500));
 
 		add(rightSidePanelSpace, BorderLayout.EAST);
 		add(leftSidePanelSpace, BorderLayout.WEST);
@@ -55,4 +56,6 @@ public class EscapeChatFrame extends JPanel implements Observer {
 	public void update(Observable arg0, Object arg1) {
 		
 	}
+	
+	
 }
