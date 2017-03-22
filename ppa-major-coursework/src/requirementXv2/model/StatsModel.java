@@ -21,13 +21,13 @@ import api.ripley.Incident;
 
 // StatsModel Class
 public class StatsModel extends Observable implements Serializable {
-	
+
 	// Final fields
 	public static final int TOP_LEFT = 0;
 	public static final int TOP_RIGHT = 1;
 	public static final int BOTTOM_LEFT = 2;
 	public static final int BOTTOM_RIGHT = 3;
-	
+
 	// Serial Number
 	private static final long serialVersionUID = 1L;
 
@@ -54,8 +54,8 @@ public class StatsModel extends Observable implements Serializable {
 	// Incidents
 	private ArrayList<Incident> incidents;
 
-	
-	
+
+
 	/** Constructor **/
 
 	public StatsModel(MainModel mainModel, MapModel mapModel) {
@@ -64,7 +64,7 @@ public class StatsModel extends Observable implements Serializable {
 		this.mapModel = mapModel;
 
 		currentStatistics = new int[4];
-		
+
 		deserialize();
 
 		initStats();
@@ -81,7 +81,7 @@ public class StatsModel extends Observable implements Serializable {
 		stats[2] = new Statistic("Likeliest State");
 		stats[3] = new Statistic("Sightings via Other Platforms");
 		stats[4] = new Statistic("Total Sightings");
-		stats[5] = new Statistic("6");
+		stats[5] = new Statistic("Most Common Year");
 		stats[6] = new Statistic("7");
 		stats[7] = new Statistic("8");
 
@@ -167,7 +167,7 @@ public class StatsModel extends Observable implements Serializable {
 		stats[2].setStat(calculateLikeliestState());
 		stats[3].setStat("S");
 		stats[4].setStat(calculateTotalSightings());
-		stats[5].setStat("S");
+		stats[5].setStat(calculateMostCommonYear());
 		stats[6].setStat("s");
 		stats[7].setStat("S");
 
@@ -201,26 +201,7 @@ public class StatsModel extends Observable implements Serializable {
 
 		int count = 0;
 		int max = 0;
-		String state = "N/A";
-
-		TreeMap<String, Integer> incidentCount;
-		Set<Entry<String, Integer>> tempSet;
-
-		incidentCount = mainModel.getIncidentCounts();
-		tempSet = incidentCount.entrySet();
-
-		if (!incidentCount.isEmpty()) max = incidentCount.firstEntry().getValue();
-
-		for (Entry<String, Integer> entry: tempSet) {
-
-			if (entry.getValue() >= max) {
-
-				max = entry.getValue();
-				state = entry.getKey();
-
-			}	
-
-		}
+		String state = maxValue(mainModel.getIncidentCounts());
 
 		if (state.equals("Not specified.")) state = "N/A";
 
@@ -258,11 +239,74 @@ public class StatsModel extends Observable implements Serializable {
 		return Integer.toString(count);
 
 	}
+
+
+	// Done
+	private String calculateMostCommonYear() {
+
+		TreeMap<String, Integer> yearCount;
+		String year;
+		int fromYear;
+		int toYear;
+
+		fromYear = mainModel.getFromSelectionYear();
+		toYear = mainModel.getToSelectionYear();
+
+		yearCount = new TreeMap<String, Integer>();
+
+		for (int i = fromYear; i <= toYear; i++) yearCount.put(Integer.toString(i), 0);
+
+		for (Incident incident: mainModel.getIncidents()) {
+
+			year = parseYear(incident.getDateAndTime());
+			yearCount.put(year, yearCount.get(year) + 1);
+
+		}
+
+		return maxValue(yearCount);
+
+	}
+
+
+	/** Useful **/
+
+	private String maxValue(TreeMap<String, Integer> map) {
+
+		int count = 0;
+		int maxValue = 0;
+		String maxKey = "N/A";
+
+		Set<Entry<String, Integer>> tempSet;
+
+		tempSet = map.entrySet();
+
+		if (!map.isEmpty()) maxValue = map.firstEntry().getValue();
+
+		for (Entry<String, Integer> entry: tempSet) {
+
+			if (entry.getValue() >= maxValue) {
+
+				maxValue = entry.getValue();
+				maxKey = entry.getKey();
+
+			}	
+
+		}
+
+		return maxKey;
+	}
+
 	
-	
-	
+
+	private String parseYear(String date) {
+
+		return date.replaceAll("-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2}$", "");
+
+	}
+
+
 	/** Serializable Methods **/
-	
+
 	public void serialize() {
 
 		try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("src/requirementXv2/serialize.ser", false))) {
@@ -274,11 +318,11 @@ public class StatsModel extends Observable implements Serializable {
 			System.out.println(ex.getMessage());
 
 		}
-		
+
 	}
-	
-	
-	
+
+
+
 	public void deserialize() {
 
 		try( ObjectInputStream in = new ObjectInputStream(new FileInputStream("src/requirementXv2/serialize.ser"))) {
@@ -290,7 +334,7 @@ public class StatsModel extends Observable implements Serializable {
 			}   catch (ClassNotFoundException ex) {
 
 				System.out.println(ex.getMessage());
-				
+
 			}
 
 		} catch (IOException ex) {
