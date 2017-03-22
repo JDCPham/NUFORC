@@ -30,16 +30,7 @@ public class Sighting {
 	private String id;
 	private String summary;
 	private int duration;
-	
-	
-	/** Constructor **/
-	
-	public Sighting() {
-	
-		
-	}
-	
-	
+
 	
 	/** Setters **/
 	
