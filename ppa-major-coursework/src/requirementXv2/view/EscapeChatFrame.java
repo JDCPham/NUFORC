@@ -10,13 +10,10 @@ import java.util.Observer;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
 public class EscapeChatFrame extends JPanel implements Observer {
 
@@ -31,7 +28,6 @@ public class EscapeChatFrame extends JPanel implements Observer {
 	private EscapePicturePanel headerBackground;
 	private EscapePicturePanel leftSidePanelSpace;
 	private EscapePicturePanel rightSidePanelSpace;
-	//private JTextField jtfChatInput;
 	private JTextArea jtaChatRoom;
 	private JLabel jlWelcome;
 	private JButton jb1, jb2, jb3, jb4, jb5, jb6, jb7, jb8, jb9, jb10;
@@ -64,6 +60,7 @@ public class EscapeChatFrame extends JPanel implements Observer {
 
 		jtaChatRoom = new JTextArea();
 		jb1 = new JButton("Hello");
+		jb1.setName("Button 1");
 		jb2 = new JButton("Hello");
 		jb3 = new JButton("Hello");
 		jb4 = new JButton("Hello");
