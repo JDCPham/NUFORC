@@ -7,6 +7,10 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+import javax.net.ssl.HttpsURLConnection;
 // Imports
 import java.util.ArrayList;
 import java.util.Map.Entry;
@@ -266,6 +270,7 @@ public class StatsModel extends Observable implements Serializable {
 		return maxValue(yearCount);
 
 	}
+
 
 
 	/** Useful **/

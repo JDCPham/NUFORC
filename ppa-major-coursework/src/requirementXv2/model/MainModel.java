@@ -9,9 +9,6 @@ import java.util.TreeSet;
 
 import api.ripley.Incident;
 import api.ripley.Ripley;
-import requirementX.model.MapModel;
-import requirementX.model.StatsModel;
-import requirementX.model.WelcomeModel;
 
 public class MainModel extends Observable implements Serializable{
 	
