@@ -11,10 +11,9 @@ public class Statistic {
 		
 	}
 	
-	public Statistic(String t, String s) {
+	public Statistic(String t) {
 		
 		title = t;
-		stat = s;
 		
 	}
 	

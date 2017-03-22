@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Set;
@@ -15,7 +16,9 @@ import javax.swing.JPanel;
 import requirementXv2.model.MainModel;
 import requirementXv2.model.MapModel;
 
-public class MapPanel extends JPanel implements Observer {
+public class MapPanel extends JPanel implements Observer, Serializable {
+	
+	private static final long serialVersionUID = 2680493143842746233L;
 
 	// Models
 	private MainModel mainModel;
@@ -187,8 +190,7 @@ public class MapPanel extends JPanel implements Observer {
 		if (sightings.isEmpty()) return 0;
 		
 		max = sightings.firstEntry().getValue();
-		System.out.println(max);
-	
+		
 		for (String s: states) {
 			
 			current = sightings.get(s);
