@@ -126,7 +126,7 @@ public class MainFrame extends JFrame implements Observer {
 		panels[0] = new WelcomePanel(mainModel, welcomeModel);
 		panels[1] = new MapPanel(mainModel, mapModel);
 		panels[2] = new StatsPanel(mainModel, statsModel);
-		panels[3] = new MapPanel(mainModel, mapModel);
+		panels[3] = new EscapeChatFrame();
 
 
 	}

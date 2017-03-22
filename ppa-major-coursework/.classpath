@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry excluding="src/" kind="src" path=""/>
@@ -30,3 +31,13 @@
 	<classpathentry kind="lib" path="libraries/youtube/libs/google-oauth-client-servlet-1.22.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="Picture"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="ripley.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
+>>>>>>> refs/heads/master
