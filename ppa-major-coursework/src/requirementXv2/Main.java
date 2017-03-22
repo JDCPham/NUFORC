@@ -27,7 +27,7 @@ public class Main {
 		welcomeModel.addObserver(mainFrame);
 
 		// Set visibility 
-		mainFrame.setVisible(true);		
+		mainFrame.setVisible(true); 		
 
 	}
 
