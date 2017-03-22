@@ -15,6 +15,8 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import requirementXv2.control.EscapeChatController;
+
 public class EscapeChatFrame extends JPanel implements Observer {
 
 	private EscapePicturePanel sidePanelAlien1;
@@ -61,15 +63,26 @@ public class EscapeChatFrame extends JPanel implements Observer {
 		jtaChatRoom = new JTextArea();
 		jb1 = new JButton("Hello");
 		jb1.setName("Button 1");
+		jb1.addActionListener(new EscapeChatController());
 		jb2 = new JButton("Hello");
+		jb2.addActionListener(new EscapeChatController());
 		jb3 = new JButton("Hello");
+		jb3.addActionListener(new EscapeChatController());
 		jb4 = new JButton("Hello");
+		jb4.addActionListener(new EscapeChatController());
 		jb5 = new JButton("Hello");
+		jb5.addActionListener(new EscapeChatController());
 		jb6 = new JButton("Hello");
+		jb6.addActionListener(new EscapeChatController());
 		jb7 = new JButton("Hello");
+		jb7.addActionListener(new EscapeChatController());
 		jb8 = new JButton("Hello");
+		jb8.addActionListener(new EscapeChatController());
 		jb9 = new JButton("Hello");
+		jb9.addActionListener(new EscapeChatController());
 		jb10 = new JButton("Hello");
+		jb10.addActionListener(new EscapeChatController());
+
 		
 		jpSouth = new JPanel();
 		jpSouth.setLayout(new GridLayout(1, 10));
