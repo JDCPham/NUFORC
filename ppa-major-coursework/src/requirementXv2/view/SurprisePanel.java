@@ -27,13 +27,14 @@ public class SurprisePanel {
 		southPanel.add(rightButton);
 		frame.add(southPanel, BorderLayout.SOUTH);
 		
-		ImagePanel roger = new ImagePanel("Images/female alien.jpg");
-		roger.setPreferredSize(new Dimension(300, 200));
+		JPanel leftPanel = new JPanel();
+		ImagePanel roger = new ImagePanel("Images/female alien.png");
 		roger.setOpaque(false);
-		frame.add(roger);
+		frame.add(roger,BorderLayout.WEST);
+		
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(500,300);
+		frame.setSize(500,470);
 		frame.setVisible(true);
 		
 	}
