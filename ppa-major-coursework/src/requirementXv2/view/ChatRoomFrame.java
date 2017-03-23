@@ -91,5 +91,11 @@ public class ChatRoomFrame extends JPanel implements Observer {
 	@Override
 	public void update(Observable arg0, Object arg1) {
 
+		// Disable the buttons to stop the user from continuing the game.
+		for (JButton jb : buttonList) {
+			
+			jb.setEnabled(false);
+		}
+		
 	}
 }
