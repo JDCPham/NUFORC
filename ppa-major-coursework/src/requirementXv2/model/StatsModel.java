@@ -1,17 +1,20 @@
 // Package
 package requirementXv2.model;
 
+//Imports
+import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import org.json.JSONObject;
 
-import javax.net.ssl.HttpsURLConnection;
-// Imports
 import java.util.ArrayList;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
@@ -21,7 +24,6 @@ import java.util.Set;
 import java.util.TreeMap;	
 
 import api.ripley.Incident;
-
 
 // StatsModel Class
 public class StatsModel extends Observable implements Serializable {
@@ -164,12 +166,12 @@ public class StatsModel extends Observable implements Serializable {
 	}
 
 
-	public void updateStats() {
+	public void updateStats() throws IOException {
 
 		stats[0].setStat(calculateHoaxes());
 		stats[1].setStat(calculateNonUSSightings());
 		stats[2].setStat(calculateLikeliestState());
-		stats[3].setStat("S");
+		stats[3].setStat(calculateYoutubeSightings());
 		stats[4].setStat(calculateTotalSightings());
 		stats[5].setStat(calculateMostCommonYear());
 		stats[6].setStat("s");
@@ -177,6 +179,47 @@ public class StatsModel extends Observable implements Serializable {
 
 		setChanged();
 		notifyObservers("Stats Box Changed");
+
+	}
+
+
+	// Done
+	private String calculateYoutubeSightings() throws IOException {
+
+		// Search parameters
+		String search = "Unidentified%20Flying%20Object%20Sightings%20In&20America";
+		String url = "https://www.googleapis.com/youtube/v3/search";
+		String fromDate = mainModel.getFromSelectionYear() + "-01-01T00:00:00Z";
+		String charset = StandardCharsets.UTF_8.name(); 
+		String fullURL = url + "?part=snippet&q=" + search + "&publishedAfter=" + fromDate + "&key=AIzaSyCpb31Vn10CczseYpYg2m9yAz8CJ02ZyYA" ;	
+
+		// Creating URL and HTTP Objects
+		URL urlObj = new URL(fullURL);
+		HttpURLConnection connection = (HttpURLConnection) urlObj.openConnection();
+
+		// Setting Connection Properties
+		connection.setRequestMethod("GET");
+
+		// Grabbing data from API
+		if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+
+			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+
+			String inputLine;
+			StringBuffer response = new StringBuffer();
+
+			while ((inputLine = in.readLine()) != null) response.append(inputLine);
+
+			in.close();
+
+			// Parses response JSON
+			return parseNumberOfResults(response.toString());
+
+		} else {
+
+			return "Error";
+
+		}
 
 	}
 
@@ -301,11 +344,19 @@ public class StatsModel extends Observable implements Serializable {
 		return maxKey;
 	}
 
-	
+
 
 	private String parseYear(String date) {
 
 		return date.replaceAll("-\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2}$", "");
+
+	}
+
+	private String parseNumberOfResults(String json) {
+
+		JSONObject jsonParser = new JSONObject(json);
+
+		return Integer.toString(jsonParser.getJSONObject("pageInfo").getInt("totalResults"));
 
 	}
 
