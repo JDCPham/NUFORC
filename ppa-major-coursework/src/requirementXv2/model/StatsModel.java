@@ -96,13 +96,13 @@ public class StatsModel extends Observable implements Serializable {
 
 	public Statistic getStat(String position) {
 
-		if (position.equals("Top Left")) return stats[currentStatistics[0]];
+		if (position.equals("Top Left")) return stats[currentStatistics[TOP_LEFT]];
 
-		else if (position.equals("Top Right")) return stats[currentStatistics[1]];
+		else if (position.equals("Top Right")) return stats[currentStatistics[TOP_RIGHT]];
 
-		else if (position.equals("Bottom Left")) return stats[currentStatistics[2]];
+		else if (position.equals("Bottom Left")) return stats[currentStatistics[BOTTOM_LEFT]];
 
-		else return stats[currentStatistics[3]];
+		else return stats[currentStatistics[BOTTOM_RIGHT]];
 
 	}
 
@@ -111,7 +111,10 @@ public class StatsModel extends Observable implements Serializable {
 
 		int i = getCurrentStat(position);
 
-		while ((i == currentStatistics[0]) || (i == currentStatistics[1]) || (i == currentStatistics[2]) || (i == currentStatistics[3])) { 
+		while ((i == currentStatistics[TOP_LEFT]) 
+				|| (i == currentStatistics[TOP_RIGHT]) 
+				|| (i == currentStatistics[BOTTOM_LEFT]) 
+				|| (i == currentStatistics[BOTTOM_RIGHT])) { 
 
 			if (i == 7) i = 0;	
 			else i++;		
@@ -130,7 +133,10 @@ public class StatsModel extends Observable implements Serializable {
 
 		int i = getCurrentStat(position);
 
-		while ((i == currentStatistics[0]) || (i == currentStatistics[1]) || (i == currentStatistics[2]) || (i == currentStatistics[3])) { 
+		while ((i == currentStatistics[TOP_LEFT]) 
+				|| (i == currentStatistics[TOP_RIGHT]) 
+				|| (i == currentStatistics[BOTTOM_LEFT])
+				|| (i == currentStatistics[BOTTOM_RIGHT])) { 
 
 			if (i == 0) i = 7;	
 			else i--;		
@@ -147,20 +153,20 @@ public class StatsModel extends Observable implements Serializable {
 
 	public int getCurrentStat(String position) {
 
-		if (position.equals("Top Left")) return currentStatistics[0];
-		else if (position.equals("Top Right")) return currentStatistics[1];
-		else if (position.equals("Bottom Left")) return currentStatistics[2];
-		else if (position.equals("Bottom Right")) return currentStatistics[3];
+		if (position.equals("Top Left")) return currentStatistics[TOP_LEFT];
+		else if (position.equals("Top Right")) return currentStatistics[TOP_RIGHT];
+		else if (position.equals("Bottom Left")) return currentStatistics[BOTTOM_LEFT];
+		else if (position.equals("Bottom Right")) return currentStatistics[BOTTOM_RIGHT];
 		else return 0;
 
 	}
 
 	public void setStat(String position, int i) {
 
-		if (position.equals("Top Left")) currentStatistics[0] = i;
-		else if (position.equals("Top Right")) currentStatistics[1] = i;
-		else if (position.equals("Bottom Left")) currentStatistics[2] = i;
-		else if (position.equals("Bottom Right")) currentStatistics[3] = i;
+		if (position.equals("Top Left")) currentStatistics[TOP_LEFT] = i;
+		else if (position.equals("Top Right")) currentStatistics[TOP_RIGHT] = i;
+		else if (position.equals("Bottom Left")) currentStatistics[BOTTOM_LEFT] = i;
+		else if (position.equals("Bottom Right")) currentStatistics[BOTTOM_RIGHT] = i;
 		serialize();
 
 	}
