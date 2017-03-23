@@ -35,20 +35,18 @@ public class SurprisePanel implements Observer {
 		
 		JPanel southPanel = new JPanel();
 		aButton = new JButton("A:");
+		aButton.setName("buttonA");
 		aButton.setPreferredSize(new Dimension(50,50));
 		bButton = new JButton("B:");
+		bButton.setName("buttonB");
 		cButton = new JButton("C:");
+		cButton.setName("buttonC");
 		dButton = new JButton("D:");
+		dButton.setName("buttonD");
 		
 		southPanel.setLayout(new GridLayout(2,2));
 		southPanel.add(aButton);
-		aButton.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent e) {
-				textArea.append(aButton.getText()+"\n");
-			}
-			
-		});
+	//	aButton.addActionListener();
 		southPanel.add(bButton);
 		southPanel.add(cButton);
 		southPanel.add(dButton);
@@ -71,6 +69,8 @@ public class SurprisePanel implements Observer {
 		frame.setSize(700,520);
 			
 	}
+	
+	
 
 	@Override
 	public void update(Observable o, Object arg) {
