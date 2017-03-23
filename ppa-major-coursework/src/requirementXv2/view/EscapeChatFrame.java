@@ -20,11 +20,12 @@ import requirementXv2.control.EscapeChatController;
 public class EscapeChatFrame extends JPanel implements Observer {
 
 	private EscapePicturePanel femaleRoger;
-	private EscapePicturePanel heartsHeader;
+	private EscapePicturePanel pinkHeader;
 	private JTextArea jtaChatRoom;
 	private JLabel jlWelcome;
 	private JButton jb1, jb2, jb3, jb4;
 	private JPanel jpSouth;
+	private JPanel jpCenter;
 	
 	public EscapeChatFrame()
 	{
@@ -37,7 +38,7 @@ public class EscapeChatFrame extends JPanel implements Observer {
 		setLayout(new BorderLayout());
  		
 		femaleRoger = new EscapePicturePanel("Picture/FemaleAlien.png");
-		heartsHeader = new EscapePicturePanel("Picture/StringOfHearts.png");
+		pinkHeader = new EscapePicturePanel("Picture/PinkHeaderBackground.jpg");
 		
 		jtaChatRoom = new JTextArea();
 		jb1 = new JButton("Hello");
@@ -57,15 +58,22 @@ public class EscapeChatFrame extends JPanel implements Observer {
 		jpSouth.add(jb3);
 		jpSouth.add(jb4);
 		
+		jpCenter = new JPanel();
+		jpCenter.setLayout(new GridLayout(1, 2));
 		jlWelcome = new JLabel("Welcome to Alien Chat");
 		jlWelcome.setFont(new Font("Serif", Font.BOLD, 40));
-		jlWelcome.setForeground(Color.red);
+		jlWelcome.setForeground(Color.cyan);
 
-		jtaChatRoom.setPreferredSize(new Dimension(140, 500));
+		//jtaChatRoom.setPreferredSize(new Dimension(140, 500));
 
 		add(jpSouth, BorderLayout.SOUTH);
-		add(jtaChatRoom, BorderLayout.CENTER);
-		add(heartsHeader, BorderLayout.NORTH);
+		add(jpCenter, BorderLayout.CENTER);
+		add(pinkHeader, BorderLayout.NORTH);
+		
+		jpCenter.add(femaleRoger);
+		jpCenter.add(jtaChatRoom);
+		
+		pinkHeader.add(jlWelcome);
 	}
 	
 	@Override
