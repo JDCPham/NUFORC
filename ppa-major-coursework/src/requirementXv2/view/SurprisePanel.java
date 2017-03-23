@@ -1,32 +1,57 @@
 package requirementXv2.view;
 
-import java.awt.BorderLayout;
+import java.awt.BorderLayout;  
 import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
-public class SurprisePanel {
-
-	public static void main (String [] args) {
-		JFrame frame = new JFrame("Surprise Panel");
+public class SurprisePanel implements Observer {
+	private JTextArea textArea;
+	private JFrame frame;
+	private JButton aButton;
+	private JButton bButton;
+	private JButton cButton;
+	private JButton dButton;
+	
+	private String question;
+	private String answer;
+	
+	public SurprisePanel() {
+		frame = new JFrame("Surprise Panel");
+		initWidgets();
+		frame.setVisible(true);	
+	}
+	
+	public void initWidgets() {
 		frame.setLayout(new BorderLayout());
 		
 		JPanel southPanel = new JPanel();
-		JButton leftButton = new JButton("left");
-		JButton leftMiddleButton = new JButton("leftMiddle");
-		JButton rightMiddleButton = new JButton("rightMiddle");
-		JButton rightButton = new JButton("right");
+		aButton = new JButton("A:");
+		aButton.setPreferredSize(new Dimension(50,50));
+		bButton = new JButton("B:");
+		cButton = new JButton("C:");
+		dButton = new JButton("D:");
 		
-		southPanel.setLayout(new FlowLayout());
-		southPanel.add(leftButton);
-		southPanel.add(leftMiddleButton);
-		southPanel.add(rightMiddleButton);
-		southPanel.add(rightButton);
+		southPanel.setLayout(new GridLayout(2,2));
+		southPanel.add(aButton);
+		aButton.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				textArea.append(aButton.getText()+"\n");
+			}
+			
+		});
+		southPanel.add(bButton);
+		southPanel.add(cButton);
+		southPanel.add(dButton);
 		frame.add(southPanel, BorderLayout.SOUTH);
 		
 		ImagePanel roger = new ImagePanel("Images/female alien.png");
@@ -34,16 +59,24 @@ public class SurprisePanel {
 		roger.setOpaque(false);
 		frame.add(roger,BorderLayout.WEST);
 		
-		JPanel eastPanel = new JPanel();
-		eastPanel.setLayout(new BorderLayout());
-		JTextArea textArea = new JTextArea();
-		textArea.setPreferredSize(new Dimension(340,380));
-		eastPanel.add(textArea, BorderLayout.NORTH);
+		textArea = new JTextArea();
+		textArea.setEditable(false);
+		textArea.setPreferredSize(new Dimension(440,500));
 		
-		frame.add(eastPanel, BorderLayout.EAST);
+		textArea.append("Try to hook up with her! \n");
+		
+		
+		frame.add(textArea, BorderLayout.EAST);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(600,470);
-		frame.setVisible(true);
+		frame.setSize(700,520);
+			
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		
 		
 	}
+	
+	
 }
