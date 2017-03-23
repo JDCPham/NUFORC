@@ -17,17 +17,17 @@ import javax.swing.JTextArea;
 
 import requirementXv2.control.EscapeChatController;
 
-public class EscapeChatFrame extends JPanel implements Observer {
+public class ChatRoomFrame extends JPanel implements Observer {
 
-	private EscapePicturePanel femaleRoger;
-	private EscapePicturePanel pinkHeader;
+	private ChatRoomPicturePanel femaleRoger;
+	private ChatRoomPicturePanel pinkHeader;
 	private JTextArea jtaChatRoom;
 	private JLabel jlWelcome;
 	private JButton jb1, jb2, jb3, jb4;
 	private JPanel jpSouth;
 	private JPanel jpCenter;
 	
-	public EscapeChatFrame()
+	public ChatRoomFrame()
 	{
 		initWidgets();
 		setVisible(true);
@@ -37,8 +37,8 @@ public class EscapeChatFrame extends JPanel implements Observer {
 	{
 		setLayout(new BorderLayout());
  		
-		femaleRoger = new EscapePicturePanel("Picture/FemaleAlien.png");
-		pinkHeader = new EscapePicturePanel("Picture/PinkHeaderBackground.jpg");
+		femaleRoger = new ChatRoomPicturePanel("Picture/FemaleAlien.png");
+		pinkHeader = new ChatRoomPicturePanel("Picture/PinkHeaderBackground.jpg");
 		
 		jtaChatRoom = new JTextArea();
 		jb1 = new JButton("Hello");
