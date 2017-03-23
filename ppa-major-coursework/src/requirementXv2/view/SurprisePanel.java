@@ -7,6 +7,8 @@ import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 public class SurprisePanel {
 
@@ -32,10 +34,15 @@ public class SurprisePanel {
 		roger.setOpaque(false);
 		frame.add(roger,BorderLayout.WEST);
 		
+		JPanel eastPanel = new JPanel();
+		eastPanel.setLayout(new BorderLayout());
+		JTextArea textArea = new JTextArea();
+		textArea.setPreferredSize(new Dimension(340,380));
+		eastPanel.add(textArea, BorderLayout.NORTH);
 		
-		
+		frame.add(eastPanel, BorderLayout.EAST);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(500,470);
+		frame.setSize(600,470);
 		frame.setVisible(true);
 		
 	}
