@@ -19,20 +19,10 @@ import requirementXv2.control.EscapeChatController;
 
 public class EscapeChatFrame extends JPanel implements Observer {
 
-	private EscapePicturePanel sidePanelAlien1;
-	private EscapePicturePanel sidePanelAlien2;
-	private EscapePicturePanel sidePanelAlien3;
-	private EscapePicturePanel sidePanelAlien4;
-	private EscapePicturePanel sidePanelAlien5;
-	private EscapePicturePanel sidePanelAlien6;
-	private EscapePicturePanel sidePanelAlien7;
-	private EscapePicturePanel sidePanelAlien8;
-	private EscapePicturePanel headerBackground;
-	private EscapePicturePanel leftSidePanelSpace;
-	private EscapePicturePanel rightSidePanelSpace;
+	private EscapePicturePanel femaleRoger;
 	private JTextArea jtaChatRoom;
 	private JLabel jlWelcome;
-	private JButton jb1, jb2, jb3, jb4, jb5, jb6, jb7, jb8, jb9, jb10;
+	private JButton jb1, jb2, jb3, jb4;
 	private JPanel jpSouth;
 	
 	public EscapeChatFrame()
@@ -45,20 +35,7 @@ public class EscapeChatFrame extends JPanel implements Observer {
 	{
 		setLayout(new BorderLayout());
  		
-		sidePanelAlien1 = new EscapePicturePanel("Picture/AlienHead.png");
-		sidePanelAlien2 = new EscapePicturePanel("Picture/AlienHead.png");
-		sidePanelAlien3 = new EscapePicturePanel("Picture/AlienHead.png");
-		sidePanelAlien4 = new EscapePicturePanel("Picture/AlienHead.png");
-		sidePanelAlien5 = new EscapePicturePanel("Picture/AlienHead.png");
-		sidePanelAlien6 = new EscapePicturePanel("Picture/AlienHead.png");
-		sidePanelAlien7 = new EscapePicturePanel("Picture/AlienHead.png");
-		sidePanelAlien8 = new EscapePicturePanel("Picture/AlienHead.png");
-		leftSidePanelSpace = new EscapePicturePanel("Picture/SpaceBackground.jpg");
-		rightSidePanelSpace = new EscapePicturePanel("Picture/SpaceBackground.jpg");
-		headerBackground = new EscapePicturePanel("Picture/GameHeaderBackground.jpg");
-		
-		//jtfChatInput = new JTextField();
-		//jtfChatInput.setPreferredSize(new Dimension(20, 40));
+		femaleRoger = new EscapePicturePanel("Picture/FemaleAlien.png");
 
 		jtaChatRoom = new JTextArea();
 		jb1 = new JButton("Hello");
@@ -70,60 +47,25 @@ public class EscapeChatFrame extends JPanel implements Observer {
 		jb3.addActionListener(new EscapeChatController());
 		jb4 = new JButton("Hello");
 		jb4.addActionListener(new EscapeChatController());
-		jb5 = new JButton("Hello");
-		jb5.addActionListener(new EscapeChatController());
-		jb6 = new JButton("Hello");
-		jb6.addActionListener(new EscapeChatController());
-		jb7 = new JButton("Hello");
-		jb7.addActionListener(new EscapeChatController());
-		jb8 = new JButton("Hello");
-		jb8.addActionListener(new EscapeChatController());
-		jb9 = new JButton("Hello");
-		jb9.addActionListener(new EscapeChatController());
-		jb10 = new JButton("Hello");
-		jb10.addActionListener(new EscapeChatController());
+		
 
 		
 		jpSouth = new JPanel();
-		jpSouth.setLayout(new GridLayout(1, 10));
+		jpSouth.setLayout(new GridLayout(2, 2));
 		jpSouth.add(jb1);
 		jpSouth.add(jb2);
 		jpSouth.add(jb3);
 		jpSouth.add(jb4);
-		jpSouth.add(jb5);
-		jpSouth.add(jb6);
-		jpSouth.add(jb7);
-		jpSouth.add(jb8);
-		jpSouth.add(jb9);
-		jpSouth.add(jb10);
+		
 
-		jlWelcome = new JLabel("Welcome aboard");
+		jlWelcome = new JLabel("Welcome to Alien Chat");
 		jlWelcome.setFont(new Font("Serif", Font.BOLD, 40));
-		jlWelcome.setForeground(Color.green);
+		jlWelcome.setForeground(Color.red);
 
-		rightSidePanelSpace.setPreferredSize(new Dimension(140, 500));
-		leftSidePanelSpace.setPreferredSize(new Dimension(140, 500));
 		jtaChatRoom.setPreferredSize(new Dimension(140, 500));
 
-		add(headerBackground, BorderLayout.NORTH);
-		add(rightSidePanelSpace, BorderLayout.EAST);
-		add(leftSidePanelSpace, BorderLayout.WEST);
 		add(jpSouth, BorderLayout.SOUTH);
 		add(jtaChatRoom, BorderLayout.CENTER);
-		
-		headerBackground.add(jlWelcome);
-		
-		rightSidePanelSpace.setLayout(new GridLayout(4, 1));
-		rightSidePanelSpace.add(sidePanelAlien1);
-		rightSidePanelSpace.add(sidePanelAlien2);
-		rightSidePanelSpace.add(sidePanelAlien3);
-		rightSidePanelSpace.add(sidePanelAlien4);
-		
-		leftSidePanelSpace.setLayout(new GridLayout(4, 1));
-		leftSidePanelSpace.add(sidePanelAlien5);
-		leftSidePanelSpace.add(sidePanelAlien6);
-		leftSidePanelSpace.add(sidePanelAlien7);
-		leftSidePanelSpace.add(sidePanelAlien8);
 	}
 	
 	@Override
