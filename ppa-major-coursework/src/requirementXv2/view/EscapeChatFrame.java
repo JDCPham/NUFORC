@@ -20,6 +20,7 @@ import requirementXv2.control.EscapeChatController;
 public class EscapeChatFrame extends JPanel implements Observer {
 
 	private EscapePicturePanel femaleRoger;
+	private EscapePicturePanel heartsHeader;
 	private JTextArea jtaChatRoom;
 	private JLabel jlWelcome;
 	private JButton jb1, jb2, jb3, jb4;
@@ -36,7 +37,8 @@ public class EscapeChatFrame extends JPanel implements Observer {
 		setLayout(new BorderLayout());
  		
 		femaleRoger = new EscapePicturePanel("Picture/FemaleAlien.png");
-
+		heartsHeader = new EscapePicturePanel("Picture/StringOfHearts.png");
+		
 		jtaChatRoom = new JTextArea();
 		jb1 = new JButton("Hello");
 		jb1.setName("Button 1");
@@ -48,8 +50,6 @@ public class EscapeChatFrame extends JPanel implements Observer {
 		jb4 = new JButton("Hello");
 		jb4.addActionListener(new EscapeChatController());
 		
-
-		
 		jpSouth = new JPanel();
 		jpSouth.setLayout(new GridLayout(2, 2));
 		jpSouth.add(jb1);
@@ -57,7 +57,6 @@ public class EscapeChatFrame extends JPanel implements Observer {
 		jpSouth.add(jb3);
 		jpSouth.add(jb4);
 		
-
 		jlWelcome = new JLabel("Welcome to Alien Chat");
 		jlWelcome.setFont(new Font("Serif", Font.BOLD, 40));
 		jlWelcome.setForeground(Color.red);
@@ -66,6 +65,7 @@ public class EscapeChatFrame extends JPanel implements Observer {
 
 		add(jpSouth, BorderLayout.SOUTH);
 		add(jtaChatRoom, BorderLayout.CENTER);
+		add(heartsHeader, BorderLayout.NORTH);
 	}
 	
 	@Override
