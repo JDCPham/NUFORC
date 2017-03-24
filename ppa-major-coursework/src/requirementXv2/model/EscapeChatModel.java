@@ -7,7 +7,7 @@ public class EscapeChatModel extends Observable {
 	// Game state
 	public static final int GAME_ACTIVE = 1;
 	public static final int GAME_WIN = 2;
-	public static final int GAME_LOSS = 3;
+	public static final int GAME_LOST = 3;
 	
 	// Field to hold gamestate
 	private int gameState;
@@ -24,7 +24,7 @@ public class EscapeChatModel extends Observable {
 		
 		if ( score >= 0 && score < 4) {
 			
-			gameState = GAME_LOSS;
+			gameState = GAME_LOST;
 		}
 		else {
 			

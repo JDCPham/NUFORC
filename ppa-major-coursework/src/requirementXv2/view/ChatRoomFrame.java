@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 import requirementXv2.control.EscapeChatController;
+import requirementXv2.model.EscapeChatModel;
 
 public class ChatRoomFrame extends JPanel implements Observer {
 
@@ -39,10 +40,10 @@ public class ChatRoomFrame extends JPanel implements Observer {
 		pinkHeader = new ChatRoomPicturePanel("Picture/PinkHeaderBackground.jpg");
 
 		jtaChatRoom = new JTextArea();
-		
+
 		// Initialise the button list.
 		buttonList = new ArrayList<JButton>();
-		
+
 		jb1 = new JButton("Hello");
 		jb1.setName("Button 1");
 		buttonList.add(jb1);
@@ -52,16 +53,15 @@ public class ChatRoomFrame extends JPanel implements Observer {
 		buttonList.add(jb3);
 		jb4 = new JButton("Hello");
 		buttonList.add(jb4);
-		
+
 		// Create an action listener.
 		EscapeChatController bal = new EscapeChatController();
-		
+
 		// Add action listener to buttons.
 		for (JButton jb : buttonList) {
-			
+
 			jb.addActionListener(bal);
 		}
-		
 
 		jpSouth = new JPanel();
 		jpSouth.setLayout(new GridLayout(2, 2));
@@ -91,11 +91,24 @@ public class ChatRoomFrame extends JPanel implements Observer {
 	@Override
 	public void update(Observable arg0, Object arg1) {
 
-		// Disable the buttons to stop the user from continuing the game.
-		for (JButton jb : buttonList) {
+		// Read arg1 to determine game state
+		if (arg1 != null && arg1 instanceof Integer) {
+			
+			// Cast the argument as integer
+			int gameState = (Integer) arg1;
+			
+			if (gameState != EscapeChatModel.GAME_ACTIVE) {
+				
+				// Case where an end game state has been reached
+				for (JButton jb : buttonList) {
 			
 			jb.setEnabled(false);
-		}
 		
+			}
+		}
+		// Disable the buttons to stop the user from continuing the game.
+		
+		
+	}
 	}
 }
