@@ -21,7 +21,8 @@ public class ChatRoomFrame extends JPanel implements Observer {
 
 	private ChatRoomPicturePanel femaleRoger;
 	private ChatRoomPicturePanel pinkHeader;
-	private JTextArea jtaChatRoom;
+	private DefaultListModel<String> chatRoomModel;
+	private JList jltChatRoom;
 	private JLabel jlWelcome;
 	private JButton jb1, jb2, jb3, jb4;
 	private JPanel jpSouth;
@@ -40,7 +41,7 @@ public class ChatRoomFrame extends JPanel implements Observer {
 		femaleRoger = new ChatRoomPicturePanel("Picture/FemaleAlien.png");
 		pinkHeader = new ChatRoomPicturePanel("Picture/PinkHeaderBackground.jpg");
 		
-		jtaChatRoom = new JTextArea();
+		jltChatRoom = new JList();
 		jb1 = new JButton("Hello");
 		jb1.setName("Button 1");
 		jb1.addActionListener(new EscapeChatController());
@@ -71,7 +72,7 @@ public class ChatRoomFrame extends JPanel implements Observer {
 		add(pinkHeader, BorderLayout.NORTH);
 		
 		jpCenter.add(femaleRoger);
-		jpCenter.add(jtaChatRoom);
+		jpCenter.add(jltChatRoom);
 		
 		pinkHeader.add(jlWelcome);
 	}
