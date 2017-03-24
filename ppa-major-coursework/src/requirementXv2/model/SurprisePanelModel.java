@@ -1,19 +1,19 @@
 package requirementXv2.model;
 
 import java.util.ArrayList; 
-import java.util.Observable;
 
 public class SurprisePanelModel  {
 	private int score;
 	private ArrayList<Question> questions = new ArrayList<Question>();
 	private ArrayList<String> rewrite = new ArrayList<String>();
+	private int[] markScheme = new int[1];
 	
 	public SurprisePanelModel() {
 		
 		Question question0 = new Question("what is 5+5?");
 		question0.addAnswers("A:10", "B:11", "C:12", "D:9");
 		questions.add(question0);
-		
+		markScheme[0] = 1;
 	}
 	
 	public String getQuestion(int question, int answer) {
@@ -32,6 +32,16 @@ public class SurprisePanelModel  {
 		rewrite.remove(rewrite.size()-1);
 		
 		return rewrite;
+	}
+	
+	public void checkAnswer(int question, int answer) {
+		if (markScheme[question] == answer) {
+			score++;
+		}
+	}
+	
+	public int getScore() {
+		return score;
 	}
 
 

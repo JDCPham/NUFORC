@@ -13,6 +13,7 @@ public class SurprisePanelController implements ActionListener {
 	private SurprisePanel view;
 	private SurprisePanelModel model;
 	private int questionCount;
+	private int answer;
 	
 	public SurprisePanelController(SurprisePanel view, SurprisePanelModel model) {
 		this.view = view;
@@ -33,6 +34,7 @@ public class SurprisePanelController implements ActionListener {
 			view.write(model.rewrite());
 			view.write(model.getQuestion(questionCount, 1));
 			System.out.println("button A pressed");
+			answer = 1;
 			
 		}
 		if (((JButton)e.getSource()).getName().equals("buttonB")) {
@@ -40,12 +42,14 @@ public class SurprisePanelController implements ActionListener {
 			view.write(model.rewrite());
 			view.write(model.getQuestion(questionCount, 2));
 			System.out.println("button B pressed");
+			answer = 2;
 		}
 		if (((JButton)e.getSource()).getName().equals("buttonC")) {
 			
 			view.write(model.rewrite());
 			view.write(model.getQuestion(questionCount, 3));
 			System.out.println("button C pressed");
+			answer = 3;
 			
 		}
 		if (((JButton)e.getSource()).getName().equals("buttonD")) {
@@ -53,8 +57,12 @@ public class SurprisePanelController implements ActionListener {
 			view.write(model.rewrite());
 			view.write(model.getQuestion(questionCount, 4));
 			System.out.println("button D pressed");
-			
+			answer = 4;
+	
 		}
+		
+		//check question is correct
+		
 		questionCount++;
 	}
 	
