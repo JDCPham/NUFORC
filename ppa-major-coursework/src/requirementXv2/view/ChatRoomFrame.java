@@ -24,7 +24,7 @@ public class ChatRoomFrame extends JPanel implements Observer {
 	private DefaultListModel<String> chatRoomModel;
 	private JList jltChatRoom;
 	private JLabel jlWelcome;
-	private JButton jb1, jb2, jb3, jb4;
+	private JButton jbA, jbB, jbC, jbD;
 	private JPanel jpSouth;
 	private JPanel jpCenter;
 	
@@ -41,23 +41,25 @@ public class ChatRoomFrame extends JPanel implements Observer {
 		femaleRoger = new ChatRoomPicturePanel("Picture/FemaleAlien.png");
 		pinkHeader = new ChatRoomPicturePanel("Picture/PinkHeaderBackground.jpg");
 		
-		jltChatRoom = new JList();
-		jb1 = new JButton("Hello");
-		jb1.setName("Button 1");
-		jb1.addActionListener(new EscapeChatController());
-		jb2 = new JButton("Hello");
-		jb2.addActionListener(new EscapeChatController());
-		jb3 = new JButton("Hello");
-		jb3.addActionListener(new EscapeChatController());
-		jb4 = new JButton("Hello");
-		jb4.addActionListener(new EscapeChatController());
+		chatRoomModel = new DefaultListModel<String>();
+		jltChatRoom = new JList<String>(chatRoomModel);		
+		
+		jbA = new JButton("Hello");
+		jbA.setName("Button A");
+		jbA.addActionListener(new EscapeChatController());
+		jbB = new JButton("Hello");
+		jbB.addActionListener(new EscapeChatController());
+		jbC = new JButton("Hello");
+		jbC.addActionListener(new EscapeChatController());
+		jbD = new JButton("Hello");
+		jbD.addActionListener(new EscapeChatController());
 		
 		jpSouth = new JPanel();
 		jpSouth.setLayout(new GridLayout(2, 2));
-		jpSouth.add(jb1);
-		jpSouth.add(jb2);
-		jpSouth.add(jb3);
-		jpSouth.add(jb4);
+		jpSouth.add(jbA);
+		jpSouth.add(jbB);
+		jpSouth.add(jbC);
+		jpSouth.add(jbD);
 		
 		jpCenter = new JPanel();
 		jpCenter.setLayout(new GridLayout(1, 2));
