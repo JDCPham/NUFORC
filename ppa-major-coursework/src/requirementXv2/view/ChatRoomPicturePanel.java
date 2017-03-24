@@ -16,7 +16,6 @@ public class ChatRoomPicturePanel extends JPanel {
 	public ChatRoomPicturePanel(String path)
 	{
 		
-		setPreferredSize(new Dimension(200, 50));
 		try {
 			
 			this.image = ImageIO.read(new File(path));
@@ -24,7 +23,7 @@ public class ChatRoomPicturePanel extends JPanel {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		setOpaque(false);
+		
 	}
 	
 	protected void paintComponent(Graphics g)

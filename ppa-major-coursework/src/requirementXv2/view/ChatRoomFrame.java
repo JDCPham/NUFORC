@@ -8,8 +8,10 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
@@ -25,6 +27,8 @@ public class ChatRoomFrame extends JPanel implements Observer {
 	private JButton jb1, jb2, jb3, jb4;
 	private JPanel jpSouth;
 	private JPanel jpCenter;
+	private JList<String> jList;
+	private DefaultListModel<String> dlm;
 
 	private ArrayList<JButton> buttonList;
 
@@ -35,6 +39,9 @@ public class ChatRoomFrame extends JPanel implements Observer {
 
 	public void initWidgets() {
 		setLayout(new BorderLayout());
+
+		dlm = new DefaultListModel<String>();
+		jList = new JList<String>(dlm);
 
 		femaleRoger = new ChatRoomPicturePanel("Picture/FemaleAlien.png");
 		pinkHeader = new ChatRoomPicturePanel("Picture/PinkHeaderBackground.jpg");
@@ -93,22 +100,37 @@ public class ChatRoomFrame extends JPanel implements Observer {
 
 		// Read arg1 to determine game state
 		if (arg1 != null && arg1 instanceof Integer) {
-			
+
 			// Cast the argument as integer
 			int gameState = (Integer) arg1;
-			
+
 			if (gameState != EscapeChatModel.GAME_ACTIVE) {
-				
 				// Case where an end game state has been reached
-				for (JButton jb : buttonList) {
-			
-			jb.setEnabled(false);
-		
+				promptEndGame(gameState);
+
 			}
 		}
-		// Disable the buttons to stop the user from continuing the game.
-		
-		
+
 	}
+
+	private void promptEndGame(int gameState) {
+		
+		if (gameState == EscapeChatModel.GAME_WIN) {
+			
+			dlm.addElement("Good job, you won a date with an alien, gross but congratulations.");
+			
+			
+		}
+		
+		// S
+		else if (gameState == EscapeChatModel.GAME_LOST) {
+			
+			dlm.addElement("You failed to mate with an alien");
+		}
+		// Disable the buttons to stop the user from continuing the game.
+		for (JButton jb : buttonList) {
+
+			jb.setEnabled(false);
+		}
 	}
 }
