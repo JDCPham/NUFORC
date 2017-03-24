@@ -1,36 +1,36 @@
 package requirementXv2.model;
 
+import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.Observable;
 
 public class SurprisePanelModel extends Observable {
-	private Dictionary<Integer,String> dictionary;
 	private int score;
+	private ArrayList<Question> questions = new ArrayList<Question>();
 	
 	public SurprisePanelModel() {
 		
-		dictionary = new Hashtable<Integer,String>();
-		dictionary.put(0,"A");
-		dictionary.put(1,"A");
-		dictionary.put(2,"B");
-		dictionary.put(3,"D");
-		dictionary.put(4,"D");
-		dictionary.put(5,"C");
-		dictionary.put(6,"C");
-		dictionary.put(7,"A");
-		
+		Question question0 = new Question("what is 5+5?");
+		question0.addAnswers("A:10", "B:11", "C:12", "D:9");
+		questions.add(question0);
 		
 	}
 	
-	public void checkAnswer(int question, String answer) {
+	public String getQuestion(int question, int answer) {
+		return questions.get(question).getQuestion(answer);
+	}
+	
+
+	
+	/*public void checkAnswer(int question, String answer) {
 		if (answer.equals(dictionary.get(question))) {
 			score++;
 			System.out.println("hello");
 		}
 		notifyObservers();
 		setChanged();
-	}
+	}*/
 
 
 }

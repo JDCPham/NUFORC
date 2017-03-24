@@ -1,6 +1,6 @@
 package requirementXv2.view;
 
-import java.awt.BorderLayout;
+import java.awt.BorderLayout; 
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
@@ -12,8 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
-
+ 
 public class SurprisePanel implements Observer {
 	private JList<String> textList;
 	private DefaultListModel<String> dlmText;
@@ -22,30 +21,10 @@ public class SurprisePanel implements Observer {
 	private JButton bButton;
 	private JButton cButton;
 	private JButton dButton;
-	private String[] questions;
-	private String[] options;
-	private int count;
 	
 	public SurprisePanel() {
 		frame = new JFrame("Surprise Panel");
 		initWidgets();
-		questions = new String[7] ;
-		questions[0] = "1+1";
-		questions[1] = "2+1";
-		questions[2] = "3+1";
-		questions[3] = "1+1";
-		questions[4] = "2+1";
-		questions[5] = "3+1";
-		questions[6] = "1+1";
-		
-	/*	for (int i=0; i < 32; i++) {
-			options[i] = "1";
-			options[i] = "2";
-			options[i] = "3";
-			options[i] = "4";
-			
-		}*/
-		
 		frame.setVisible(true);	
 	}
 	
@@ -89,6 +68,10 @@ public class SurprisePanel implements Observer {
 			
 	}
 	
+	public void write(String sentence) {
+		dlmText.addElement(sentence);
+	}
+	
 	public void addActionListener(ActionListener listener) {
 		aButton.addActionListener(listener);
 		bButton.addActionListener(listener);
@@ -98,11 +81,8 @@ public class SurprisePanel implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		if (count < questions.length) {
-			dlmText.addElement(questions[count] +  "\n");
-			count++;
-			
+		
 			System.out.println("hi");
 		}	
 	}
-}
+
