@@ -9,6 +9,7 @@ public class SurprisePanelModel extends Observable {
 	private int score;
 	
 	public SurprisePanelModel() {
+		
 		dictionary = new Hashtable<Integer,String>();
 		dictionary.put(0,"A");
 		dictionary.put(1,"A");
@@ -25,7 +26,10 @@ public class SurprisePanelModel extends Observable {
 	public void checkAnswer(int question, String answer) {
 		if (answer.equals(dictionary.get(question))) {
 			score++;
+			System.out.println("hello");
 		}
+		notifyObservers();
+		setChanged();
 	}
 
 

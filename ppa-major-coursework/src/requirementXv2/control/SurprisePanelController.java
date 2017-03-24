@@ -17,7 +17,8 @@ public class SurprisePanelController implements ActionListener {
 	public SurprisePanelController(SurprisePanel view, SurprisePanelModel model) {
 		this.view = view;
 		this.model = model;
-		
+		view.addActionListener(this);
+		model.addObserver(view);
 	}
 
 	@Override
@@ -25,6 +26,16 @@ public class SurprisePanelController implements ActionListener {
 		if (((JButton)e.getSource()).getName().equals("buttonA")) {
 			model.checkAnswer(questionCount, "A");
 		}
+		if (((JButton)e.getSource()).getName().equals("buttonB")) {
+			model.checkAnswer(questionCount, "B");
+		}
+		if (((JButton)e.getSource()).getName().equals("buttonC")) {
+			model.checkAnswer(questionCount, "C");
+		}
+		if (((JButton)e.getSource()).getName().equals("buttonD")) {
+			model.checkAnswer(questionCount, "D");
+		}
+		questionCount++;
 	}
 	
 }
