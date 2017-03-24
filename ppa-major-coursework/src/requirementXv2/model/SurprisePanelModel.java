@@ -1,13 +1,12 @@
 package requirementXv2.model;
 
-import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.Hashtable;
+import java.util.ArrayList; 
 import java.util.Observable;
 
-public class SurprisePanelModel extends Observable {
+public class SurprisePanelModel  {
 	private int score;
 	private ArrayList<Question> questions = new ArrayList<Question>();
+	private ArrayList<String> rewrite = new ArrayList<String>();
 	
 	public SurprisePanelModel() {
 		
@@ -21,16 +20,19 @@ public class SurprisePanelModel extends Observable {
 		return questions.get(question).getQuestion(answer);
 	}
 	
-
+	public void write(String line) {
+		rewrite.add(line);
+		System.out.println(rewrite);
+	}
 	
-	/*public void checkAnswer(int question, String answer) {
-		if (answer.equals(dictionary.get(question))) {
-			score++;
-			System.out.println("hello");
-		}
-		notifyObservers();
-		setChanged();
-	}*/
+	public ArrayList<String> rewrite() {
+		rewrite.remove(rewrite.size()-1);
+		rewrite.remove(rewrite.size()-1);
+		rewrite.remove(rewrite.size()-1);
+		rewrite.remove(rewrite.size()-1);
+		
+		return rewrite;
+	}
 
 
 }

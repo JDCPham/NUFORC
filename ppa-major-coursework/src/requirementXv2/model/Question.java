@@ -6,6 +6,7 @@ public class Question {
 	//1 question and 4 options
 	private ArrayList<String> question = new ArrayList<String>();
 	
+	
 	public Question(String question) {
 		this.question.add(question);
 		
