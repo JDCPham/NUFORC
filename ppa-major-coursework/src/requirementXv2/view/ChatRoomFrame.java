@@ -3,6 +3,7 @@ package requirementXv2.view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.LineBorder;
 
 import requirementXv2.control.EscapeChatController;
@@ -22,10 +24,10 @@ import requirementXv2.model.EscapeChatModel;
 
 public class ChatRoomFrame extends JPanel implements Observer {
 
-	private ChatRoomPicturePanel crpCenter;
+	private ChatRoomPicturePanel jpEast;
+	private ChatRoomPicturePanel jpSouth;
+	private JPanel jpCenter;
 	private JPanel jpNorth;
-	private JPanel jpSouth;
-	private JPanel jpEast;
 
 	private JButton jButton1, jButton2, jButton3, jButton4;
 
@@ -33,13 +35,14 @@ public class ChatRoomFrame extends JPanel implements Observer {
 
 	private JLabel alienPic;
 	private JLabel userPic;
-
+	
 	private JLabel jlTitle;
 
 	private JList<String> jList;
 	private DefaultListModel<String> dlm;
 
 	public ChatRoomFrame() {
+
 		initWidgets();
 		setVisible(true);
 
@@ -48,17 +51,41 @@ public class ChatRoomFrame extends JPanel implements Observer {
 	private void initWidgets() {
 		setLayout(new BorderLayout());
 
+		initNorth();
 		initCenter();
 		initSouth();
+		initWest();
 
-		add(crpCenter, BorderLayout.CENTER);
+		add(jpNorth, BorderLayout.NORTH);
+		add(jpEast, BorderLayout.WEST);
 		add(jpSouth, BorderLayout.SOUTH);
+		add(jpCenter, BorderLayout.CENTER);	
 
 	}
-
+	
+	private void initNorth() {
+		
+		jpNorth = new JPanel(new FlowLayout());
+		jpNorth.setBackground(Color.RED);
+		jpNorth.setOpaque(true);
+		jlTitle = new JLabel("ARE YOU HAVING TROUBLE WITH GETTING HUMAN GIRLS? "
+				+ "NO WORRIES BECAUSE A 629 YEARS OLD, DIVORCED ALIEN IS NEAR YOUR LOCATION AND IS READY TO MINGLE!!");
+		jlTitle.setFont(new Font(jlTitle.getText(), Font.BOLD, 10));
+		jlTitle.setForeground(Color.WHITE);
+		jpNorth.add(jlTitle);
+	}
 	private void initCenter() {
+		
+		jpCenter = new JPanel(new BorderLayout());
+		dlm = new DefaultListModel<String>();
+		jList = new JList<String>(dlm);
+		JScrollPane sp = new JScrollPane(jList);
+		jpCenter.add(sp, BorderLayout.CENTER);
+	}
 
-		crpCenter = new ChatRoomPicturePanel("Picture/Heart.jpg", new GridLayout(2, 0));
+	private void initWest() {
+
+		jpEast = new ChatRoomPicturePanel("Picture/Heart.jpg", new GridLayout(2, 0));
 
 		alienPic = new JLabel();
 		alienPic.setIcon(new ImageIcon("Picture/Alien.jpg"));
@@ -74,15 +101,13 @@ public class ChatRoomFrame extends JPanel implements Observer {
 		userPic.setVerticalAlignment(JLabel.CENTER);
 		userPic.setBorder(new LineBorder(Color.PINK));
 
-		crpCenter.add(alienPic);
-		crpCenter.add(userPic);
+		jpEast.add(alienPic);
+		jpEast.add(userPic);
 	}
 
 	private void initSouth() {
 
-		jpSouth = new JPanel(new GridLayout(2, 2));
-		jpSouth.setOpaque(true);
-		jpSouth.setBackground(Color.RED);
+		jpSouth = new ChatRoomPicturePanel("Picture/Heart.jpg", new GridLayout(2, 2));
 		// Initialise array list.
 		buttonList = new ArrayList<JButton>();
 
@@ -116,7 +141,6 @@ public class ChatRoomFrame extends JPanel implements Observer {
 		}
 
 	}
-
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
