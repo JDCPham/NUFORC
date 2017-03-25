@@ -19,6 +19,7 @@ public class Main {
 		WelcomeModel welcomeModel = new WelcomeModel(mainModel);
 		MapModel mapModel = new MapModel(mainModel);
 		StatsModel statsModel = new StatsModel(mainModel, mapModel);
+		EscapeChatModel surpriseModel = new EscapeChatModel();
 	
 		
 		

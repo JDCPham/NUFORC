@@ -2,6 +2,7 @@ package requirementXv2.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.util.ArrayList;
@@ -9,57 +10,101 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
+import javax.swing.border.LineBorder;
 
 import requirementXv2.control.EscapeChatController;
 import requirementXv2.model.EscapeChatModel;
 
 public class ChatRoomFrame extends JPanel implements Observer {
 
-	private ChatRoomPicturePanel femaleRoger;
-	private ChatRoomPicturePanel pinkHeader;
-	private JTextArea jtaChatRoom;
-	private JLabel jlWelcome;
-	private JButton jb1, jb2, jb3, jb4;
+	private ChatRoomPicturePanel crpCenter;
+	private JPanel jpNorth;
 	private JPanel jpSouth;
-	private JPanel jpCenter;
-	private JList<String> jList;
-	private DefaultListModel<String> dlm;
+	private JPanel jpEast;
+
+	private JButton jButton1, jButton2, jButton3, jButton4;
 
 	private ArrayList<JButton> buttonList;
+
+	private JLabel alienPic;
+	private JLabel userPic;
+
+	private JLabel jlTitle;
+
+	private JList<String> jList;
+	private DefaultListModel<String> dlm;
 
 	public ChatRoomFrame() {
 		initWidgets();
 		setVisible(true);
+
 	}
 
-	public void initWidgets() {
+	private void initWidgets() {
 		setLayout(new BorderLayout());
 
-		dlm = new DefaultListModel<String>();
-		jList = new JList<String>(dlm);
+		initCenter();
+		initSouth();
 
-		femaleRoger = new ChatRoomPicturePanel("Picture/FemaleAlien.png");
-		pinkHeader = new ChatRoomPicturePanel("Picture/PinkHeaderBackground.jpg");
+		add(crpCenter, BorderLayout.CENTER);
+		add(jpSouth, BorderLayout.SOUTH);
 
-		jtaChatRoom = new JTextArea();
+	}
 
-		// Initialise the button list.
+	private void initCenter() {
+
+		crpCenter = new ChatRoomPicturePanel("Picture/Heart.jpg", new GridLayout(2, 0));
+
+		alienPic = new JLabel();
+		alienPic.setIcon(new ImageIcon("Picture/Alien.jpg"));
+		alienPic.setPreferredSize(new Dimension(160, 220));
+		alienPic.setHorizontalAlignment(JLabel.CENTER);
+		alienPic.setVerticalAlignment(JLabel.CENTER);
+		alienPic.setBorder(new LineBorder(Color.PINK));
+
+		userPic = new JLabel();
+		userPic.setIcon(new ImageIcon("Picture/profile.jpg"));
+		userPic.setPreferredSize(new Dimension(160, 220));
+		userPic.setHorizontalAlignment(JLabel.CENTER);
+		userPic.setVerticalAlignment(JLabel.CENTER);
+		userPic.setBorder(new LineBorder(Color.PINK));
+
+		crpCenter.add(alienPic);
+		crpCenter.add(userPic);
+	}
+
+	private void initSouth() {
+
+		jpSouth = new JPanel(new GridLayout(2, 2));
+		jpSouth.setOpaque(true);
+		jpSouth.setBackground(Color.RED);
+		// Initialise array list.
 		buttonList = new ArrayList<JButton>();
 
-		jb1 = new JButton("Hello");
-		jb1.setName("Button 1");
-		buttonList.add(jb1);
-		jb2 = new JButton("Hello");
-		buttonList.add(jb2);
-		jb3 = new JButton("Hello");
-		buttonList.add(jb3);
-		jb4 = new JButton("Hello");
-		buttonList.add(jb4);
+		jButton1 = new JButton("Button 1");
+		jButton1.setIcon(new ImageIcon("Picture/kiss.jpg"));
+		jpSouth.add(jButton1);
+		buttonList.add(jButton1);
+
+		jButton2 = new JButton("Button 2");
+		jButton2.setIcon(new ImageIcon("Picture/kiss.jpg"));
+		jpSouth.add(jButton2);
+		buttonList.add(jButton2);
+
+		jButton3 = new JButton("Button 3");
+		jButton3.setIcon(new ImageIcon("Picture/kiss.jpg"));
+		jpSouth.add(jButton3);
+		buttonList.add(jButton3);
+
+		jButton4 = new JButton("Button 4");
+		jButton4.setIcon(new ImageIcon("Picture/kiss.jpg"));
+		jpSouth.add(jButton4);
+		buttonList.add(jButton4);
 
 		// Create an action listener.
 		EscapeChatController bal = new EscapeChatController();
@@ -70,30 +115,8 @@ public class ChatRoomFrame extends JPanel implements Observer {
 			jb.addActionListener(bal);
 		}
 
-		jpSouth = new JPanel();
-		jpSouth.setLayout(new GridLayout(2, 2));
-		jpSouth.add(jb1);
-		jpSouth.add(jb2);
-		jpSouth.add(jb3);
-		jpSouth.add(jb4);
-
-		jpCenter = new JPanel();
-		jpCenter.setLayout(new GridLayout(1, 2));
-		jlWelcome = new JLabel("Welcome to Alien Chat");
-		jlWelcome.setFont(new Font("Serif", Font.BOLD, 40));
-		jlWelcome.setForeground(Color.cyan);
-
-		// jtaChatRoom.setPreferredSize(new Dimension(140, 500));
-
-		add(jpSouth, BorderLayout.SOUTH);
-		add(jpCenter, BorderLayout.CENTER);
-		add(pinkHeader, BorderLayout.NORTH);
-
-		jpCenter.add(femaleRoger);
-		jpCenter.add(jtaChatRoom);
-
-		pinkHeader.add(jlWelcome);
 	}
+
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
@@ -114,17 +137,16 @@ public class ChatRoomFrame extends JPanel implements Observer {
 	}
 
 	private void promptEndGame(int gameState) {
-		
+
 		if (gameState == EscapeChatModel.GAME_WIN) {
-			
+
 			dlm.addElement("Good job, you won a date with an alien, gross but congratulations.");
-			
-			
+
 		}
-		
+
 		// S
 		else if (gameState == EscapeChatModel.GAME_LOST) {
-			
+
 			dlm.addElement("You failed to mate with an alien");
 		}
 		// Disable the buttons to stop the user from continuing the game.
