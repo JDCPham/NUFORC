@@ -89,6 +89,7 @@ public class MainController {
 				end = System.currentTimeMillis();
 				time = end - start;
 				welcomeModel.setDataGrabTime(time);
+				System.out.println(time + "ms");
 			} 
 			
 		}
@@ -110,17 +111,24 @@ public class MainController {
 			mainModel.setToSelectionYear(year);
 			
 			if (mainModel.isDateValid()) {
-				mapModel.updateStates();
-				mainModel.setDataReady();
+				
 				try {
+					
+					mapModel.updateStates();
+					mainModel.setDataReady();
 					statsModel.updateStats();
+					
 				} catch (IOException e1) {
 	
 					e1.printStackTrace();
+					
 				}
+				
 				end = System.currentTimeMillis();
 				time = end - start;
 				welcomeModel.setDataGrabTime(time);
+				System.out.println(time + "ms");
+				
 			}
 			
 		}
