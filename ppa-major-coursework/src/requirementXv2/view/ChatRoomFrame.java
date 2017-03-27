@@ -17,7 +17,7 @@ import javax.swing.JScrollPane;
 
 import requirementXv2.control.EscapeChatController;
 
-public class ChatRoomFrame extends JPanel implements Observer {
+public class ChatRoomFrame extends JPanel {
 
 	private ChatRoomPicturePanel femaleRoger;
 	private ChatRoomPicturePanel pinkHeader;
@@ -48,9 +48,7 @@ public class ChatRoomFrame extends JPanel implements Observer {
 		
 		jbA = new JButton("Hello");
 		jbA.setName("Button A");
-		jbA.addActionListener(new EscapeChatController());
 		jbB = new JButton("Hello");
-		jbB.addActionListener(new EscapeChatController());
 		jbC = new JButton("Hello");
 		jbC.addActionListener(new EscapeChatController());
 		jbD = new JButton("Hello");
@@ -79,8 +77,8 @@ public class ChatRoomFrame extends JPanel implements Observer {
 		pinkHeader.add(jlWelcome);
 	}
 	
-	@Override
-	public void update(Observable arg0, Object arg1) {
-		
-	}	
+	public void write(String sentence)
+	{
+		chatRoomModel.addElement(sentence);
+	}
 }
