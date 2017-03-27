@@ -193,7 +193,7 @@ public class StatsModel extends Observable implements Serializable {
 		stats[3].setStat(calculateYoutubeSightings());
 		stats[4].setStat(calculateTotalSightings());
 		stats[5].setStat(calculateMostCommonYear());
-		stats[6].setStat("s");
+		stats[6].setStat(calculateMostCommonShape());
 		stats[7].setStat("S");
 
 		setChanged();
@@ -243,6 +243,18 @@ public class StatsModel extends Observable implements Serializable {
 
 		}
 
+	}
+	
+	
+	
+	// In Prog
+	private String calculateMostCommonShape() {
+		
+		
+		
+		
+		return null;
+		
 	}
 
 
