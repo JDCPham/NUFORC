@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -16,7 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 
-public class ChatRoomFrame extends JPanel implements Observer {
+public class ChatRoomFrame extends JPanel {
 
 	private ChatRoomPicturePanel femaleRoger;
 	private ChatRoomPicturePanel pinkHeader;
@@ -74,8 +76,26 @@ public class ChatRoomFrame extends JPanel implements Observer {
 		pinkHeader.add(jlWelcome);
 	}
 	
-	@Override
-	public void update(Observable arg0, Object arg1) {
-		
-	}	
+	public void write(String sentence)
+	{
+		chatRoomModel.addElement(sentence);
+	}
+	
+	public void write(ArrayList<String> lines)
+	{
+		chatRoomModel.removeAllElements();
+		chatRoomModel.addElement("Try to hook up with her! \n");
+		for(int i = 0; i < lines.size(); i++)
+		{
+			chatRoomModel.addElement(lines.get(i));
+		}
+	}
+	
+	public void addActionListener(ActionListener listener)
+	{
+		jbA.addActionListener(listener);
+		jbB.addActionListener(listener);
+		jbC.addActionListener(listener);
+		jbD.addActionListener(listener);
+	}
 }
