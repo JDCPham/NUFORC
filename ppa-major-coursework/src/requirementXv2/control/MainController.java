@@ -74,10 +74,10 @@ public class MainController {
 			if (mainModel.isDateValid()) {
 				mapModel.updateStates();
 				mainModel.setDataReady();
+				statsModel.updateStats();
 				end = System.currentTimeMillis();
 				time = end - start;
 				welcomeModel.setDataGrabTime(time);
-				statsModel.updateStats();
 			} 
 			
 		}
@@ -101,10 +101,10 @@ public class MainController {
 			if (mainModel.isDateValid()) {
 				mapModel.updateStates();
 				mainModel.setDataReady();
+				statsModel.updateStats();
 				end = System.currentTimeMillis();
 				time = end - start;
 				welcomeModel.setDataGrabTime(time);
-				statsModel.updateStats();
 			}
 			
 		}
