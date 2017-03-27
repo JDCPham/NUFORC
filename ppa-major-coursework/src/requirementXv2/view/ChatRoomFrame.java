@@ -12,10 +12,13 @@ import java.util.Observer;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+
+import requirementXv2.control.SurprisePanelController;
 
 
 public class ChatRoomFrame extends JPanel {
@@ -23,79 +26,99 @@ public class ChatRoomFrame extends JPanel {
 	private ChatRoomPicturePanel femaleRoger;
 	private ChatRoomPicturePanel pinkHeader;
 	private DefaultListModel<String> chatRoomModel;
-	private JList<String> jltChatRoom;
+	private JList<String> textList;
 	private JLabel jlWelcome;
 	private JButton jbA, jbB, jbC, jbD;
 	private JPanel jpSouth;
 	private JPanel jpCenter;
 	private JScrollPane jspChatRoom;
+	private SurprisePanelController controller;
 	
-	public ChatRoomFrame()
-	{
+	public ChatRoomFrame() {
+		
 		initWidgets();
-		setVisible(true);
+		
 	}
 	
-	public void initWidgets()
-	{
+	public void initWidgets() {
+		
+		// Set layout
 		setLayout(new BorderLayout());
- 		
-		femaleRoger = new ChatRoomPicturePanel("Picture/FemaleAlien.png");
-		pinkHeader = new ChatRoomPicturePanel("Picture/PinkHeaderBackground.jpg");
 		
+		// Create models and lists
 		chatRoomModel = new DefaultListModel<String>();
-		jltChatRoom = new JList<String>(chatRoomModel);
-		jspChatRoom = new JScrollPane(jltChatRoom);
+		textList = new JList<String>(chatRoomModel);
 		
-		jbA = new JButton("Hello");
-		jbA.setName("Button A");
-		jbB = new JButton("Hello");
-		jbC = new JButton("Hello");
-		jbD = new JButton("Hello");
-		
+		// Create panel
 		jpSouth = new JPanel();
-		jpSouth.setLayout(new GridLayout(2, 2));
+		
+		// Create buttons
+		jbA = new JButton("A:");
+		jbB = new JButton("B:");
+		jbC = new JButton("C:");
+		jbD = new JButton("D:");
+		
+		// Set button properties
+		jbA.setName("buttonA");
+		jbB.setName("buttonB");
+		jbC.setName("buttonC");
+		jbD.setName("buttonD");
+		
+		jpSouth.setLayout(new GridLayout(2,2));
 		jpSouth.add(jbA);
 		jpSouth.add(jbB);
 		jpSouth.add(jbC);
 		jpSouth.add(jbD);
 		
-		jpCenter = new JPanel();
-		jpCenter.setLayout(new GridLayout(1, 2));
-		jlWelcome = new JLabel("Welcome to Alien Chat");
-		jlWelcome.setFont(new Font("Serif", Font.BOLD, 40));
-		jlWelcome.setForeground(Color.cyan);
-
+		
 		add(jpSouth, BorderLayout.SOUTH);
-		add(jpCenter, BorderLayout.CENTER);
-		add(pinkHeader, BorderLayout.NORTH);
 		
-		jpCenter.add(femaleRoger);
-		jpCenter.add(jspChatRoom);
+		ImagePanel roger = new ImagePanel("Images/female alien.png");
+		roger.setPreferredSize(new Dimension(470,500));
+		roger.setOpaque(false);
+		add(roger,BorderLayout.WEST);
 		
-		pinkHeader.add(jlWelcome);
+		textList.setPreferredSize(new Dimension(440,500));
+		
+		chatRoomModel.addElement("Try to hook up with her! \n");	
+		
+		add(textList, BorderLayout.EAST);
+		setSize(700,520);
+		
 	}
 	
-	public void write(String sentence)
-	{
+	
+	
+	public void write(String sentence) {
+		
 		chatRoomModel.addElement(sentence);
+		
 	}
 	
-	public void write(ArrayList<String> lines)
-	{
+	
+	
+	public void write(ArrayList<String> lines) {
+		
 		chatRoomModel.removeAllElements();
 		chatRoomModel.addElement("Try to hook up with her! \n");
-		for(int i = 0; i < lines.size(); i++)
-		{
+		for(int i = 0; i < lines.size(); i++) {
+			
 			chatRoomModel.addElement(lines.get(i));
+			
 		}
+		
 	}
 	
-	public void addActionListener(ActionListener listener)
-	{
+	
+	
+	public void addActionListener(ActionListener listener) {
+		
 		jbA.addActionListener(listener);
 		jbB.addActionListener(listener);
 		jbC.addActionListener(listener);
 		jbD.addActionListener(listener);
+		
 	}
+	
+	
 }
