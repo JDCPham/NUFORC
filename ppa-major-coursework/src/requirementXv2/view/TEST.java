@@ -9,6 +9,5 @@ public class TEST {
 		SurprisePanel panel = new SurprisePanel();
 		SurprisePanelModel model = new SurprisePanelModel();
 		SurprisePanelController controller = new SurprisePanelController(panel,model);
-		
 	}
 }

@@ -6,7 +6,7 @@ public class SurprisePanelModel  {
 	private int score;
 	private ArrayList<Question> questions = new ArrayList<Question>();
 	private ArrayList<String> rewrite = new ArrayList<String>();
-	private int[] markScheme = new int[1];
+	private int[] markScheme = new int[3];
 	
 	public SurprisePanelModel() {
 		
@@ -14,10 +14,21 @@ public class SurprisePanelModel  {
 		question0.addAnswers("A:10", "B:11", "C:12", "D:9");
 		questions.add(question0);
 		markScheme[0] = 1;
+		
+		Question question1 = new Question("how hot am I?");
+		question1.addAnswers("A:VERY", "B:NOT VERY", "C:CAOKY", "D:10");
+		questions.add(question1);
+		markScheme[1] = 3;
+		
+		Question question2 = new Question("what is 5+5?");
+		question2.addAnswers("A:10", "B:11", "C:12", "D:9");
+		questions.add(question2);
+		markScheme[2] = 1;
 	}
 	
-	public String getQuestion(int question, int answer) {
+	public String getAnswerPicked(int question, int answer) {
 		return questions.get(question).getQuestion(answer);
+		
 	}
 	
 	public void write(String line) {
@@ -35,6 +46,7 @@ public class SurprisePanelModel  {
 	}
 	
 	public void checkAnswer(int question, int answer) {
+		System.out.println("1");
 		if (markScheme[question] == answer) {
 			score++;
 		}

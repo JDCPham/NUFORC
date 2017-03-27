@@ -20,8 +20,8 @@ public class SurprisePanelController implements ActionListener {
 		this.model = model;
 		view.addActionListener(this);
 		for (int i = 0; i<5; i++) {
-			model.write(model.getQuestion(0, i));
-			view.write(model.getQuestion(0,i));
+			model.write(model.getAnswerPicked(0, i));
+			view.write(model.getAnswerPicked(0,i));
 		}
 	}
 
@@ -32,7 +32,9 @@ public class SurprisePanelController implements ActionListener {
 		if (((JButton)e.getSource()).getName().equals("buttonA")) {
 			
 			view.write(model.rewrite());
-			view.write(model.getQuestion(questionCount, 1));
+			view.write(model.getAnswerPicked(questionCount, 1));
+			model.write(model.getAnswerPicked(questionCount, 1));
+			
 			System.out.println("button A pressed");
 			answer = 1;
 			
@@ -40,14 +42,17 @@ public class SurprisePanelController implements ActionListener {
 		if (((JButton)e.getSource()).getName().equals("buttonB")) {
 			
 			view.write(model.rewrite());
-			view.write(model.getQuestion(questionCount, 2));
+			view.write(model.getAnswerPicked(questionCount, 2));
+			model.write(model.getAnswerPicked(questionCount, 2));
+			
 			System.out.println("button B pressed");
 			answer = 2;
 		}
 		if (((JButton)e.getSource()).getName().equals("buttonC")) {
 			
 			view.write(model.rewrite());
-			view.write(model.getQuestion(questionCount, 3));
+			view.write(model.getAnswerPicked(questionCount, 3));
+			model.write(model.getAnswerPicked(questionCount, 3));
 			System.out.println("button C pressed");
 			answer = 3;
 			
@@ -55,15 +60,23 @@ public class SurprisePanelController implements ActionListener {
 		if (((JButton)e.getSource()).getName().equals("buttonD")) {
 			
 			view.write(model.rewrite());
-			view.write(model.getQuestion(questionCount, 4));
+			view.write(model.getAnswerPicked(questionCount, 4));
+			model.write(model.getAnswerPicked(questionCount, 4));
 			System.out.println("button D pressed");
 			answer = 4;
 	
 		}
-		
-		//check question is correct
-		
+		model.checkAnswer(questionCount, answer);
+		System.out.println(model.getScore());
 		questionCount++;
+		showQuestion();
+	}
+	
+	public void showQuestion() {
+		for (int i = 0; i<5; i++) {
+			model.write(model.getAnswerPicked(questionCount, i));
+			view.write(model.getAnswerPicked(questionCount,i));
+		}
 	}
 	
 }
