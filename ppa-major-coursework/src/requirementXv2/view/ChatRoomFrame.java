@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -80,5 +81,15 @@ public class ChatRoomFrame extends JPanel {
 	public void write(String sentence)
 	{
 		chatRoomModel.addElement(sentence);
+	}
+	
+	public void write(ArrayList<String> lines)
+	{
+		chatRoomModel.removeAllElements();
+		chatRoomModel.addElement("Try to hook up with her! \n");
+		for(int i = 0; i < lines.size(); i++)
+		{
+			chatRoomModel.addElement(lines.get(i));
+		}
 	}
 }
