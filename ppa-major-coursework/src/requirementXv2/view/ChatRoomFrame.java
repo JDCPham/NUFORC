@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -91,5 +92,13 @@ public class ChatRoomFrame extends JPanel {
 		{
 			chatRoomModel.addElement(lines.get(i));
 		}
+	}
+	
+	public void addActionListener(ActionListener listener)
+	{
+		jbA.addActionListener(listener);
+		jbB.addActionListener(listener);
+		jbC.addActionListener(listener);
+		jbD.addActionListener(listener);
 	}
 }
