@@ -30,7 +30,8 @@ public class Main {
 		welcomeModel.addObserver(mainFrame);
 
 		// Set visibility to true
-		mainFrame.setVisible(true); 		
+		mainFrame.setVisible(true); 
+		mainFrame.setResizable(true);
 
 	}
 
