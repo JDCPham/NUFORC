@@ -1,7 +1,6 @@
 // Package
 package requirementXv2;
 
-// Imports
 import requirementXv2.model.MainModel;
 import requirementXv2.model.MapModel;
 import requirementXv2.model.StatsModel;
