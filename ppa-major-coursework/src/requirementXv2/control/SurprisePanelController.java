@@ -1,12 +1,13 @@
 package requirementXv2.control;
 
-import java.awt.event.ActionEvent;
+import java.awt.event.ActionEvent; 
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
 import requirementXv2.model.SurprisePanelModel;
 import requirementXv2.view.SurprisePanel;
+
 
 public class SurprisePanelController implements ActionListener {
 
