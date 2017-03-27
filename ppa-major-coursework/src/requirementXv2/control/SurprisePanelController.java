@@ -6,17 +6,18 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 import requirementXv2.model.SurprisePanelModel;
+import requirementXv2.view.ChatRoomFrame;
 import requirementXv2.view.SurprisePanel;
 
 
 public class SurprisePanelController implements ActionListener {
 
-	private SurprisePanel view;
+	private ChatRoomFrame view;
 	private SurprisePanelModel model;
 	private int questionCount;
 	private int answer;
 	
-	public SurprisePanelController(SurprisePanel view, SurprisePanelModel model) {
+	public SurprisePanelController(ChatRoomFrame view, SurprisePanelModel model) {
 		this.view = view;
 		this.model = model;
 		view.addActionListener(this);

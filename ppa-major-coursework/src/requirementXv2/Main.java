@@ -18,7 +18,6 @@ public class Main {
 		WelcomeModel welcomeModel = new WelcomeModel(mainModel);
 		MapModel mapModel = new MapModel(mainModel);
 		StatsModel statsModel = new StatsModel(mainModel, mapModel);
-		SurpriseModel surpriseModel = new SurpriseModel(mainModel);
 		
 		// Create the main frame
 		MainFrame mainFrame = new MainFrame(mainModel, welcomeModel, mapModel, statsModel);

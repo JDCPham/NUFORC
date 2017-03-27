@@ -22,9 +22,11 @@ public class SurprisePanel  {
 	private JButton dButton;
 	
 	public SurprisePanel() {
+		
 		frame = new JFrame("Surprise Panel");
 		initWidgets();
 		frame.setVisible(true);	
+		
 	}
 	
 	public void initWidgets() {
