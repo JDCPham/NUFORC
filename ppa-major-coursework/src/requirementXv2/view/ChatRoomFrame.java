@@ -13,7 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
 
 import requirementXv2.control.EscapeChatController;
 
@@ -22,11 +22,12 @@ public class ChatRoomFrame extends JPanel implements Observer {
 	private ChatRoomPicturePanel femaleRoger;
 	private ChatRoomPicturePanel pinkHeader;
 	private DefaultListModel<String> chatRoomModel;
-	private JList jltChatRoom;
+	private JList<String> jltChatRoom;
 	private JLabel jlWelcome;
 	private JButton jbA, jbB, jbC, jbD;
 	private JPanel jpSouth;
 	private JPanel jpCenter;
+	private JScrollPane jspChatRoom;
 	
 	public ChatRoomFrame()
 	{
@@ -42,7 +43,8 @@ public class ChatRoomFrame extends JPanel implements Observer {
 		pinkHeader = new ChatRoomPicturePanel("Picture/PinkHeaderBackground.jpg");
 		
 		chatRoomModel = new DefaultListModel<String>();
-		jltChatRoom = new JList<String>(chatRoomModel);		
+		jltChatRoom = new JList<String>(chatRoomModel);
+		jspChatRoom = new JScrollPane(jltChatRoom);
 		
 		jbA = new JButton("Hello");
 		jbA.setName("Button A");
@@ -67,14 +69,12 @@ public class ChatRoomFrame extends JPanel implements Observer {
 		jlWelcome.setFont(new Font("Serif", Font.BOLD, 40));
 		jlWelcome.setForeground(Color.cyan);
 
-		//jtaChatRoom.setPreferredSize(new Dimension(140, 500));
-
 		add(jpSouth, BorderLayout.SOUTH);
 		add(jpCenter, BorderLayout.CENTER);
 		add(pinkHeader, BorderLayout.NORTH);
 		
 		jpCenter.add(femaleRoger);
-		jpCenter.add(jltChatRoom);
+		jpCenter.add(jspChatRoom);
 		
 		pinkHeader.add(jlWelcome);
 	}
