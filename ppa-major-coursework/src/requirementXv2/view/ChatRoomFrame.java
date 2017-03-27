@@ -1,6 +1,6 @@
 package requirementXv2.view;
 
-import java.awt.BorderLayout;
+import java.awt.BorderLayout; 
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -15,7 +15,6 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import requirementXv2.control.EscapeChatController;
 
 public class ChatRoomFrame extends JPanel implements Observer {
 
@@ -48,13 +47,9 @@ public class ChatRoomFrame extends JPanel implements Observer {
 		
 		jbA = new JButton("Hello");
 		jbA.setName("Button A");
-		jbA.addActionListener(new EscapeChatController());
 		jbB = new JButton("Hello");
-		jbB.addActionListener(new EscapeChatController());
 		jbC = new JButton("Hello");
-		jbC.addActionListener(new EscapeChatController());
 		jbD = new JButton("Hello");
-		jbD.addActionListener(new EscapeChatController());
 		
 		jpSouth = new JPanel();
 		jpSouth.setLayout(new GridLayout(2, 2));
