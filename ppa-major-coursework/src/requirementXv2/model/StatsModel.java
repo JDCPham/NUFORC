@@ -13,7 +13,6 @@ import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Map.Entry;
@@ -21,7 +20,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.Observable;
 import java.util.Set;
-import java.util.TreeMap;	
+import java.util.TreeMap;
+
+import org.json.JSONObject;
 
 import api.ripley.Incident;
 
@@ -72,12 +73,12 @@ public class StatsModel extends Observable implements Serializable {
 		currentStatistics = new int[4];
 
 		deserialize();
-
 		initStats();
 
 	}
 
 
+	
 	public void initStats() {
 
 		stats = new Statistic[8];
@@ -93,28 +94,37 @@ public class StatsModel extends Observable implements Serializable {
 
 	}
 
+	
 
 	public Statistic getStat(String position) {
 
-		if (position.equals("Top Left")) return stats[currentStatistics[TOP_LEFT]];
-
-		else if (position.equals("Top Right")) return stats[currentStatistics[TOP_RIGHT]];
-
-		else if (position.equals("Bottom Left")) return stats[currentStatistics[BOTTOM_LEFT]];
-
-		else return stats[currentStatistics[BOTTOM_RIGHT]];
+		if (position.equals("Top Left")) {
+			
+			return stats[currentStatistics[TOP_LEFT]];
+			
+		} else if (position.equals("Top Right")) {
+			
+			return stats[currentStatistics[TOP_RIGHT]];
+			
+		} else if (position.equals("Bottom Left")) {
+			
+			return stats[currentStatistics[BOTTOM_LEFT]];
+			
+		} else {
+			
+			return stats[currentStatistics[BOTTOM_RIGHT]];
+			
+		}
 
 	}
 
 
+	
 	public void nextStat(String position) {
 
 		int i = getCurrentStat(position);
 
-		while ((i == currentStatistics[TOP_LEFT]) 
-				|| (i == currentStatistics[TOP_RIGHT]) 
-				|| (i == currentStatistics[BOTTOM_LEFT]) 
-				|| (i == currentStatistics[BOTTOM_RIGHT])) { 
+		while (isStatInView(i)) { 
 
 			if (i == 7) i = 0;	
 			else i++;		
@@ -128,15 +138,13 @@ public class StatsModel extends Observable implements Serializable {
 
 	}
 
+	
 
 	public void prevStat(String position) {
 
 		int i = getCurrentStat(position);
 
-		while ((i == currentStatistics[TOP_LEFT]) 
-				|| (i == currentStatistics[TOP_RIGHT]) 
-				|| (i == currentStatistics[BOTTOM_LEFT])
-				|| (i == currentStatistics[BOTTOM_RIGHT])) { 
+		while (isStatInView(i)) { 
 
 			if (i == 0) i = 7;	
 			else i--;		
@@ -151,27 +159,32 @@ public class StatsModel extends Observable implements Serializable {
 	}
 
 
+	
 	public int getCurrentStat(String position) {
 
 		if (position.equals("Top Left")) return currentStatistics[TOP_LEFT];
 		else if (position.equals("Top Right")) return currentStatistics[TOP_RIGHT];
 		else if (position.equals("Bottom Left")) return currentStatistics[BOTTOM_LEFT];
 		else if (position.equals("Bottom Right")) return currentStatistics[BOTTOM_RIGHT];
-		else return 0;
+		else return -1;
 
 	}
 
+	
+	
 	public void setStat(String position, int i) {
 
 		if (position.equals("Top Left")) currentStatistics[TOP_LEFT] = i;
 		else if (position.equals("Top Right")) currentStatistics[TOP_RIGHT] = i;
 		else if (position.equals("Bottom Left")) currentStatistics[BOTTOM_LEFT] = i;
 		else if (position.equals("Bottom Right")) currentStatistics[BOTTOM_RIGHT] = i;
+		
 		serialize();
 
 	}
 
 
+	
 	public void updateStats() throws IOException {
 
 		stats[0].setStat(calculateHoaxes());
@@ -189,6 +202,9 @@ public class StatsModel extends Observable implements Serializable {
 	}
 
 
+	
+	/** Calculating Statistics **/
+	
 	// Done
 	private String calculateYoutubeSightings() throws IOException {
 
@@ -198,7 +214,7 @@ public class StatsModel extends Observable implements Serializable {
 		String fromDate = mainModel.getFromSelectionYear() + "-01-01T00:00:00Z";
 		String charset = StandardCharsets.UTF_8.name(); 
 		String fullURL = url + "?part=snippet&q=" + search + "&publishedAfter=" + fromDate + "&key=AIzaSyCpb31Vn10CczseYpYg2m9yAz8CJ02ZyYA" ;	
-
+		System.out.println(fullURL);
 		// Creating URL and HTTP Objects
 		URL urlObj = new URL(fullURL);
 		HttpURLConnection connection = (HttpURLConnection) urlObj.openConnection();
@@ -230,6 +246,7 @@ public class StatsModel extends Observable implements Serializable {
 	}
 
 
+	
 	// Done
 	private String calculateHoaxes() {
 
@@ -263,6 +280,7 @@ public class StatsModel extends Observable implements Serializable {
 	}
 
 
+	
 	// Done
 	private String calculateNonUSSightings() {
 
@@ -293,6 +311,7 @@ public class StatsModel extends Observable implements Serializable {
 
 	}
 
+	
 
 	// Done
 	private String calculateMostCommonYear() {
@@ -358,6 +377,8 @@ public class StatsModel extends Observable implements Serializable {
 
 	}
 
+	
+	
 	private String parseNumberOfResults(String json) {
 
 		JSONObject jsonParser = new JSONObject(json);
@@ -365,8 +386,28 @@ public class StatsModel extends Observable implements Serializable {
 		return Integer.toString(jsonParser.getJSONObject("pageInfo").getInt("totalResults"));
 
 	}
+	
+	
+	
+	private boolean isStatInView(int i) {
+		
+		if ((i == currentStatistics[TOP_LEFT]) 
+				|| (i == currentStatistics[TOP_RIGHT]) 
+				|| (i == currentStatistics[BOTTOM_LEFT])
+				|| (i == currentStatistics[BOTTOM_RIGHT])) {
+			
+			return true;
+			
+		} else {
+			
+			return false;
+			
+		}
+			
+	}
 
 
+	
 	/** Serializable Methods **/
 
 	public void serialize() {

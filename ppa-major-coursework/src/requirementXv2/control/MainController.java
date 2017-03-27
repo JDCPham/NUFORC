@@ -73,14 +73,19 @@ public class MainController {
 			mainModel.setFromSelectionYear(year);
 			
 			if (mainModel.isDateValid()) {
-				mapModel.updateStates();
-				mainModel.setDataReady();
+				
 				try {
+					
+					mapModel.updateStates();
+					mainModel.setDataReady();
 					statsModel.updateStats();
+					
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
+					
 					e1.printStackTrace();
+					
 				}
+				
 				end = System.currentTimeMillis();
 				time = end - start;
 				welcomeModel.setDataGrabTime(time);
@@ -148,6 +153,9 @@ public class MainController {
 		return (String) comboBox.getSelectedItem(); 
 		
 	}
+	
+	
+	
 	
 	public String getState(ActionEvent e) {
 		
