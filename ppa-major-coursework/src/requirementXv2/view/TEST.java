@@ -8,6 +8,6 @@ public class TEST {
 	public static void main (String [] args) {
 		SurprisePanel panel = new SurprisePanel();
 		SurprisePanelModel model = new SurprisePanelModel();
-		SurprisePanelController controller = new SurprisePanelController(panel,model);
+		SurprisePanelController controller = new SurprisePanelController(panel, model);
 	}
 }
