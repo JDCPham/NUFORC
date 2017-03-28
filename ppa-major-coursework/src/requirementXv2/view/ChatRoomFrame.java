@@ -45,6 +45,11 @@ public class ChatRoomFrame extends JPanel {
 		// Set layout
 		setLayout(new BorderLayout());
 		
+		// Set text, font and colour of label
+		jlWelcome = new JLabel("Welcome to Alien Chat");
+		jlWelcome.setFont(new Font("Serif", Font.BOLD, 40));
+		jlWelcome.setForeground(Color.cyan);
+		
 		// Create models and lists
 		chatRoomModel = new DefaultListModel<String>();
 		textList = new JList<String>(chatRoomModel);
@@ -77,6 +82,9 @@ public class ChatRoomFrame extends JPanel {
 		roger.setPreferredSize(new Dimension(470,500));
 		roger.setOpaque(false);
 		add(roger,BorderLayout.WEST);
+		
+		ImagePanel pinkHeader = new ImagePanel("Images/PinkHeaderBackground.jpg");
+		add(pinkHeader, BorderLayout.NORTH);
 		
 		textList.setPreferredSize(new Dimension(440,500));
 		
