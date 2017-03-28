@@ -4,7 +4,6 @@ package requirementXv2;
 import requirementXv2.model.MainModel;
 import requirementXv2.model.MapModel;
 import requirementXv2.model.StatsModel;
-import requirementXv2.model.SurpriseModel;
 import requirementXv2.model.WelcomeModel;
 import requirementXv2.view.MainFrame;
 
