@@ -82,6 +82,8 @@ public class ChatRoomFrame extends JPanel {
 		roger.setOpaque(false);
 		
 		ImagePanel pinkHeader = new ImagePanel("Images/PinkHeaderBackground.jpg");
+		pinkHeader.setPreferredSize(new Dimension(2200, 50));
+		pinkHeader.add(jlWelcome);
 		add(pinkHeader, BorderLayout.NORTH);
 		
 		jpCenter.setLayout(new GridLayout(1, 2));
