@@ -77,8 +77,8 @@ public class ChatRoomFrame extends JPanel {
 		
 		add(jpSouth, BorderLayout.SOUTH);
 		
-		ImagePanel roger = new ImagePanel("Images/female alien.png");
-		roger.setPreferredSize(new Dimension(470,500));
+		ImagePanel roger = new ImagePanel("Images/FemaleAlien.png");
+		roger.setPreferredSize(new Dimension(450,600));
 		roger.setOpaque(false);
 		
 		ImagePanel pinkHeader = new ImagePanel("Images/PinkHeaderBackground.jpg");
