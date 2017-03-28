@@ -1,86 +1,137 @@
 package requirementXv2.view;
 
-import java.awt.BorderLayout;
+import java.awt.BorderLayout; 
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
 
-import requirementXv2.control.EscapeChatController;
+import requirementXv2.control.SurprisePanelController;
 
-public class ChatRoomFrame extends JPanel implements Observer {
 
-	private ChatRoomPicturePanel femaleRoger;
-	private ChatRoomPicturePanel pinkHeader;
+public class ChatRoomFrame extends JPanel {
+
 	private DefaultListModel<String> chatRoomModel;
-	private JList jltChatRoom;
+	private JList<String> textList;
 	private JLabel jlWelcome;
 	private JButton jbA, jbB, jbC, jbD;
 	private JPanel jpSouth;
 	private JPanel jpCenter;
+	private JScrollPane jspChatRoom;
+	private SurprisePanelController controller;
 	
-	public ChatRoomFrame()
-	{
+	public ChatRoomFrame() {
+		
 		initWidgets();
-		setVisible(true);
+		
 	}
 	
-	public void initWidgets()
-	{
+	public void initWidgets() {
+		
+		// Set layout
 		setLayout(new BorderLayout());
- 		
-		femaleRoger = new ChatRoomPicturePanel("Picture/FemaleAlien.png");
-		pinkHeader = new ChatRoomPicturePanel("Picture/PinkHeaderBackground.jpg");
 		
+		// Set text, font and colour of label
+		jlWelcome = new JLabel("Welcome to Alien Chat");
+		jlWelcome.setFont(new Font("Serif", Font.BOLD, 40));
+		jlWelcome.setForeground(Color.cyan);
+		
+		// Create models and lists
 		chatRoomModel = new DefaultListModel<String>();
-		jltChatRoom = new JList<String>(chatRoomModel);		
+		textList = new JList<String>(chatRoomModel);
 		
-		jbA = new JButton("Hello");
-		jbA.setName("Button A");
-		jbA.addActionListener(new EscapeChatController());
-		jbB = new JButton("Hello");
-		jbB.addActionListener(new EscapeChatController());
-		jbC = new JButton("Hello");
-		jbC.addActionListener(new EscapeChatController());
-		jbD = new JButton("Hello");
-		jbD.addActionListener(new EscapeChatController());
-		
+		// Create panels
 		jpSouth = new JPanel();
-		jpSouth.setLayout(new GridLayout(2, 2));
+		jpCenter = new JPanel();
+		
+		// Create buttons
+		jbA = new JButton("A:");
+		jbB = new JButton("B:");
+		jbC = new JButton("C:");
+		jbD = new JButton("D:");
+		
+		// Set button properties
+		jbA.setName("buttonA");
+		jbB.setName("buttonB");
+		jbC.setName("buttonC");
+		jbD.setName("buttonD");
+		
+		jpSouth.setLayout(new GridLayout(2,2));
 		jpSouth.add(jbA);
 		jpSouth.add(jbB);
 		jpSouth.add(jbC);
 		jpSouth.add(jbD);
 		
-		jpCenter = new JPanel();
-		jpCenter.setLayout(new GridLayout(1, 2));
-		jlWelcome = new JLabel("Welcome to Alien Chat");
-		jlWelcome.setFont(new Font("Serif", Font.BOLD, 40));
-		jlWelcome.setForeground(Color.cyan);
-
-		//jtaChatRoom.setPreferredSize(new Dimension(140, 500));
-
+		
 		add(jpSouth, BorderLayout.SOUTH);
-		add(jpCenter, BorderLayout.CENTER);
+		
+		ImagePanel roger = new ImagePanel("Images/FemaleAlien.png");
+		roger.setPreferredSize(new Dimension(450,600));
+		roger.setOpaque(false);
+		
+		ImagePanel pinkHeader = new ImagePanel("Images/PinkHeaderBackground.jpg");
+		pinkHeader.setPreferredSize(new Dimension(2200, 50));
+		pinkHeader.add(jlWelcome);
 		add(pinkHeader, BorderLayout.NORTH);
 		
-		jpCenter.add(femaleRoger);
-		jpCenter.add(jltChatRoom);
+		jpCenter.setLayout(new GridLayout(1, 2));
+		jpCenter.add(roger);
+		jpCenter.add(textList);
 		
-		pinkHeader.add(jlWelcome);
+		add(jpCenter, BorderLayout.CENTER);
+		
+		textList.setPreferredSize(new Dimension(440,500));
+		
+		chatRoomModel.addElement("Try to hook up with her! \n");	
+		
+		setSize(700,520);
+		
 	}
 	
-	@Override
-	public void update(Observable arg0, Object arg1) {
+	
+	
+	public void write(String sentence) {
 		
-	}	
+		chatRoomModel.addElement(sentence);
+		
+	}
+	
+	
+	
+	public void write(ArrayList<String> lines) {
+		
+		chatRoomModel.removeAllElements();
+		chatRoomModel.addElement("Try to hook up with her! \n");
+		for(int i = 0; i < lines.size(); i++) {
+			
+			chatRoomModel.addElement(lines.get(i));
+			
+		}
+		
+	}
+	
+	
+	
+	public void addActionListener(ActionListener listener) {
+		
+		jbA.addActionListener(listener);
+		jbB.addActionListener(listener);
+		jbC.addActionListener(listener);
+		jbD.addActionListener(listener);
+		
+	}
+	
+	
 }
