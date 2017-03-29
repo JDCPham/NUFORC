@@ -1,11 +1,9 @@
 // Package
 package requirementXv2;
 
-// Imports
 import requirementXv2.model.MainModel;
 import requirementXv2.model.MapModel;
 import requirementXv2.model.StatsModel;
-import requirementXv2.model.SurpriseModel;
 import requirementXv2.model.WelcomeModel;
 import requirementXv2.view.MainFrame;
 
@@ -19,7 +17,6 @@ public class Main {
 		WelcomeModel welcomeModel = new WelcomeModel(mainModel);
 		MapModel mapModel = new MapModel(mainModel);
 		StatsModel statsModel = new StatsModel(mainModel, mapModel);
-		SurpriseModel surpriseModel = new SurpriseModel(mainModel);
 		
 		// Create the main frame
 		MainFrame mainFrame = new MainFrame(mainModel, welcomeModel, mapModel, statsModel);
@@ -30,8 +27,10 @@ public class Main {
 		welcomeModel.addObserver(mainFrame);
 
 		// Set visibility to true
-		mainFrame.setVisible(true); 		
+		mainFrame.setVisible(true); 
+		mainFrame.setResizable(true);
 
 	}
 
 }
+ 

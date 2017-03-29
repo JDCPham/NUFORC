@@ -9,11 +9,11 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-public class EscapePicturePanel extends JPanel {
+public class ChatRoomPicturePanel extends JPanel {
 	
 	private BufferedImage image;
 
-	public EscapePicturePanel(String path)
+	public ChatRoomPicturePanel(String path)
 	{
 		
 		setPreferredSize(new Dimension(200, 50));

@@ -2,6 +2,7 @@ package requirementXv2.control;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -72,12 +73,23 @@ public class MainController {
 			mainModel.setFromSelectionYear(year);
 			
 			if (mainModel.isDateValid()) {
-				mapModel.updateStates();
-				mainModel.setDataReady();
-				statsModel.updateStats();
+				
+				try {
+					
+					mapModel.updateStates();
+					mainModel.setDataReady();
+					statsModel.updateStats();
+					
+				} catch (IOException e1) {
+					
+					e1.printStackTrace();
+					
+				}
+				
 				end = System.currentTimeMillis();
 				time = end - start;
 				welcomeModel.setDataGrabTime(time);
+				System.out.println(time + "ms");
 			} 
 			
 		}
@@ -99,12 +111,24 @@ public class MainController {
 			mainModel.setToSelectionYear(year);
 			
 			if (mainModel.isDateValid()) {
-				mapModel.updateStates();
-				mainModel.setDataReady();
-				statsModel.updateStats();
+				
+				try {
+					
+					mapModel.updateStates();
+					mainModel.setDataReady();
+					statsModel.updateStats();
+					
+				} catch (IOException e1) {
+	
+					e1.printStackTrace();
+					
+				}
+				
 				end = System.currentTimeMillis();
 				time = end - start;
 				welcomeModel.setDataGrabTime(time);
+				System.out.println(time + "ms");
+				
 			}
 			
 		}
@@ -137,6 +161,9 @@ public class MainController {
 		return (String) comboBox.getSelectedItem(); 
 		
 	}
+	
+	
+	
 	
 	public String getState(ActionEvent e) {
 		

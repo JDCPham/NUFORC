@@ -13,9 +13,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import requirementXv2.control.MainController;
+import requirementXv2.control.SurprisePanelController;
 import requirementXv2.model.MainModel;
 import requirementXv2.model.MapModel;
 import requirementXv2.model.StatsModel;
+import requirementXv2.model.SurprisePanelModel;
 import requirementXv2.model.WelcomeModel;
 
 public class MainFrame extends JFrame implements Observer {
@@ -126,7 +128,7 @@ public class MainFrame extends JFrame implements Observer {
 		panels[0] = new WelcomePanel(mainModel, welcomeModel);
 		panels[1] = new MapPanel(mainModel, mapModel);
 		panels[2] = new StatsPanel(mainModel, statsModel);
-		panels[3] = new EscapeChatFrame();
+		panels[3] = initSurprisePanel();
 
 
 	}
@@ -159,6 +161,17 @@ public class MainFrame extends JFrame implements Observer {
 		comboBox.addItem("-");
 		return comboBox;	
 
+	}
+	
+	
+	private ChatRoomFrame initSurprisePanel() {
+		
+		ChatRoomFrame panel = new ChatRoomFrame();
+		SurprisePanelModel model = new SurprisePanelModel();
+		SurprisePanelController controller = new SurprisePanelController(panel, model);
+		
+		return panel;
+		
 	}
 
 
@@ -201,10 +214,7 @@ public class MainFrame extends JFrame implements Observer {
 					
 			}
 
-
 		}
-
-
 
 	}
 
