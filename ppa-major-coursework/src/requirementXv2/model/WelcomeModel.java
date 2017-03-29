@@ -39,7 +39,13 @@ public class WelcomeModel extends Observable{
 	
 	/** Setters **/
 	
-	public void setDataGrabTime(long time) { this.dataGrabTime = time; }
+	public void setDataGrabTime(long time) { 
+		
+		this.dataGrabTime = time; 
+		setChanged();
+		notifyObservers("Data Grabbed Time Changed");
+	
+	}
 	
 
 	/** Getters **/

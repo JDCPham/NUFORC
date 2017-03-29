@@ -112,11 +112,13 @@ public class WelcomePanel extends JPanel implements Observer{
 	 * @return
 	 */
 	private String millisToTime(long millis) {
-
-		return String.format("%02d min, %02d sec", 
-				TimeUnit.MILLISECONDS.toMinutes(millis),
-				TimeUnit.MILLISECONDS.toSeconds(millis) - 
-				TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));	
+		
+		int intMillis = (int) (millis);
+		int minutes = (intMillis / (1000 * 60)) % 60;
+		int seconds = (intMillis / 1000) % 60;
+		System.out.println(millis);
+		
+		return minutes + " minutes and " + seconds + " seconds.";
 
 	}
 
@@ -130,6 +132,7 @@ public class WelcomePanel extends JPanel implements Observer{
 
 		if (arg.equals("Data Ready")) updateLabel(true);
 		if (arg.equals("Date Selection changed")) updateLabel(false);
+		if (arg.equals("Data Grabbed Time Changed")) updateLabel(true);
 
 	}
 

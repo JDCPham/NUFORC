@@ -23,8 +23,6 @@ import requirementXv2.control.SurprisePanelController;
 
 public class ChatRoomFrame extends JPanel {
 
-	private ChatRoomPicturePanel femaleRoger;
-	private ChatRoomPicturePanel pinkHeader;
 	private DefaultListModel<String> chatRoomModel;
 	private JList<String> textList;
 	private JLabel jlWelcome;
@@ -45,12 +43,18 @@ public class ChatRoomFrame extends JPanel {
 		// Set layout
 		setLayout(new BorderLayout());
 		
+		// Set text, font and colour of label
+		jlWelcome = new JLabel("Welcome to Alien Chat");
+		jlWelcome.setFont(new Font("Serif", Font.BOLD, 40));
+		jlWelcome.setForeground(Color.cyan);
+		
 		// Create models and lists
 		chatRoomModel = new DefaultListModel<String>();
 		textList = new JList<String>(chatRoomModel);
 		
-		// Create panel
+		// Create panels
 		jpSouth = new JPanel();
+		jpCenter = new JPanel();
 		
 		// Create buttons
 		jbA = new JButton("A:");
@@ -73,16 +77,25 @@ public class ChatRoomFrame extends JPanel {
 		
 		add(jpSouth, BorderLayout.SOUTH);
 		
-		ImagePanel roger = new ImagePanel("Images/female alien.png");
-		roger.setPreferredSize(new Dimension(470,500));
+		ImagePanel roger = new ImagePanel("Images/FemaleAlien.png");
+		roger.setPreferredSize(new Dimension(450,600));
 		roger.setOpaque(false);
-		add(roger,BorderLayout.WEST);
+		
+		ImagePanel pinkHeader = new ImagePanel("Images/PinkHeaderBackground.jpg");
+		pinkHeader.setPreferredSize(new Dimension(2200, 50));
+		pinkHeader.add(jlWelcome);
+		add(pinkHeader, BorderLayout.NORTH);
+		
+		jpCenter.setLayout(new GridLayout(1, 2));
+		jpCenter.add(roger);
+		jpCenter.add(textList);
+		
+		add(jpCenter, BorderLayout.CENTER);
 		
 		textList.setPreferredSize(new Dimension(440,500));
 		
 		chatRoomModel.addElement("Try to hook up with her! \n");	
 		
-		add(textList, BorderLayout.EAST);
 		setSize(700,520);
 		
 	}
