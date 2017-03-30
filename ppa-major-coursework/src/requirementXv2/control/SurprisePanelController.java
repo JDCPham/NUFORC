@@ -7,7 +7,6 @@ import javax.swing.JButton;
 
 import requirementXv2.model.SurprisePanelModel;
 import requirementXv2.view.ChatRoomFrame;
-import requirementXv2.view.SurprisePanel;
 
 public class SurprisePanelController implements ActionListener {
 
