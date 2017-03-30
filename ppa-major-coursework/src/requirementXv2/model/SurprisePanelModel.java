@@ -6,7 +6,7 @@ public class SurprisePanelModel  {
 	private int score;
 	private ArrayList<Question> questions = new ArrayList<Question>();
 	private ArrayList<String> rewrite = new ArrayList<String>();
-	private int[] markScheme = new int[4];
+	private int[] markScheme = new int[10];
 	
 	public SurprisePanelModel() {
 		
