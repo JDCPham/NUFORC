@@ -9,7 +9,6 @@ import java.util.ArrayList;
  * @author Emmanuel
  *
  */
-
 public class SurprisePanelModel  {
 	private int score;														//Instance variable for the score
 	private ArrayList<Question> questions = new ArrayList<Question>();		//Instance variable for the list of questions
@@ -74,7 +73,6 @@ public class SurprisePanelModel  {
 		markScheme[9] = 1;
 	}
 
-	
 	/**
 	 * Method to get the answer chosen.
 	 * @param question
@@ -86,7 +84,6 @@ public class SurprisePanelModel  {
 
 	}
 
-	
 	/**
 	 * Method to add answers to the rewrite 
 	 * array list.
@@ -119,7 +116,7 @@ public class SurprisePanelModel  {
 	 * @param answer
 	 */
 	public void checkAnswer(int question, int answer) {
-		System.out.println(score);
+	
 		if (markScheme[question] == answer) {
 			score++;
 		}
@@ -134,19 +131,6 @@ public class SurprisePanelModel  {
 		return score;
 	}
 
-	public boolean checkScore() {
-
-		if (score > 5) {
-
-			System.out.println("GJ, You won.");
-			return true;
-
-		} else {
-
-			System.out.println("You're going to die alone.");
-			return false;
-
-		}
-	}
+	
 
 }
