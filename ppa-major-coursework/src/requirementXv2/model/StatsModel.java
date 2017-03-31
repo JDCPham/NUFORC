@@ -15,12 +15,14 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
 import java.util.ArrayList;
+import java.util.ListIterator;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.Observable;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.TreeSet;
 
 import org.json.JSONObject;
 
@@ -107,7 +109,7 @@ public class StatsModel extends Observable implements Serializable {
 		stats[4] = new Statistic("Total Sightings");
 		stats[5] = new Statistic("Most Common Year");
 		stats[6] = new Statistic("Sent Anonymously");
-		stats[7] = new Statistic("8");
+		stats[7] = new Statistic("State with least no of incidents");
 
 	}
 
@@ -230,7 +232,7 @@ public class StatsModel extends Observable implements Serializable {
 		stats[4].setStat(calculateTotalSightings());
 		stats[5].setStat(calculateMostCommonYear());
 		stats[6].setStat(calculateAnonymousCount());
-		stats[7].setStat("S");
+		stats[7].setStat(calculateLeastLikeliestState());
 
 		setChanged();
 		notifyObservers("Stats Box Changed");
@@ -349,6 +351,24 @@ public class StatsModel extends Observable implements Serializable {
 		return state;
 
 	}
+	
+	
+	
+	/**
+	 * Calculates the state which has received the smallest number of reports.
+	 * @return State with the smallest number of reports.
+	 */
+	private String calculateLeastLikeliestState() {
+
+		int count = 0;
+		int max = 0;
+		String state = minValue(mainModel.getIncidentCounts());
+
+		if (state.equals("Not specified.")) state = "N/A";
+
+		return state;
+
+	}
 
 
 	
@@ -420,6 +440,10 @@ public class StatsModel extends Observable implements Serializable {
 	}
 
 
+	
+	
+
+
     /**
      * Returns the key of a treemap with the greatest value.
      * @param map Map with String Keys and Integer values.
@@ -449,6 +473,39 @@ public class StatsModel extends Observable implements Serializable {
 		}
 
 		return maxKey;
+	}
+	
+	
+	
+	 /**
+     * Returns the key of a treemap with the smallest value.
+     * @param map Map with String Keys and Integer values.
+     * @return Key with the smallest corresponding value.
+     */
+	private String minValue(TreeMap<String, Integer> map) {
+
+		int count = 0;
+		int minValue = 0;
+		String minKey = "N/A";
+
+		Set<Entry<String, Integer>> tempSet;
+
+		tempSet = map.entrySet();
+
+		if (!map.isEmpty()) minValue = map.firstEntry().getValue();
+
+		for (Entry<String, Integer> entry: tempSet) {
+
+			if (entry.getValue() <= minValue) {
+
+				minValue = entry.getValue();
+				minKey = entry.getKey();
+
+			}	
+
+		}
+
+		return minKey;
 	}
 
 
