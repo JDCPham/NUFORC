@@ -2,13 +2,25 @@ package requirementXv2.model;
 
 import java.util.ArrayList;
 
-public class SurprisePanelModel {
-	private int score;
-	private ArrayList<Question> questions = new ArrayList<Question>();
-	private ArrayList<String> rewrite = new ArrayList<String>();
-	private int[] markScheme = new int[11];
+/**
+ * This class is the model for the fourth panel.
+ * It contains the questions, answers and mark scheme
+ * for the chat.
+ * @author Emmanuel
+ *
+ */
 
-	public SurprisePanelModel() {
+public class SurprisePanelModel  {
+	private int score;														//Instance variable for the score
+	private ArrayList<Question> questions = new ArrayList<Question>();		//Instance variable for the list of questions
+	private ArrayList<String> rewrite = new ArrayList<String>();			//Instance variable for list of chosen options
+	private int[] markScheme = new int[10];									//Instance variable for mark scheme array of size 10
+	
+	/**
+	 * Class constructor. When this class is created, the 10
+	 * questions with each of their correct answers are also created.
+	 */
+	 public SurprisePanelModel() {
 
 		Question question1 = new Question("What planet are you from?");
 		question1.addAnswers("A:Earth", "B:Neptune", "C:Jupiter", "D:Uranus");
@@ -42,7 +54,7 @@ public class SurprisePanelModel {
 		markScheme[5] = 2;
 
 		Question question7 = new Question("What is your favourite place to eat?");
-		question7.addAnswers("A:King's Canteen", "B:McDonald's", "C:Tesco �3 meal deal", "D:The Fridge");
+		question7.addAnswers("A:King's Canteen", "B:McDonald's", "C:Tesco \u00A33 meal deal", "D:The Fridge");
 		questions.add(question7);
 		markScheme[6] = 3;
 
@@ -62,15 +74,34 @@ public class SurprisePanelModel {
 		markScheme[9] = 1;
 	}
 
+	
+	/**
+	 * Method to get the answer chosen.
+	 * @param question
+	 * @param answer
+	 * @return the chosen answer
+	 */
 	public String getAnswerPicked(int question, int answer) {
 		return questions.get(question).getQuestion(answer);
 
 	}
 
+	
+	/**
+	 * Method to add answers to the rewrite 
+	 * array list.
+	 * @param line
+	 */
 	public void write(String line) {
 		rewrite.add(line);
 	}
 
+	
+	/**
+	 * Method to remove unchosen answers
+	 * from the array list.
+	 * @return the array list with only the chosen answer
+	 */
 	public ArrayList<String> rewrite() {
 		rewrite.remove(rewrite.size() - 1);
 		rewrite.remove(rewrite.size() - 1);
@@ -80,6 +111,13 @@ public class SurprisePanelModel {
 		return rewrite;
 	}
 
+	
+	/**
+	 * Method to check the answer against the mark scheme
+	 * and update the score.
+	 * @param question
+	 * @param answer
+	 */
 	public void checkAnswer(int question, int answer) {
 		System.out.println(score);
 		if (markScheme[question] == answer) {
@@ -87,6 +125,11 @@ public class SurprisePanelModel {
 		}
 	}
 
+	
+	/**
+	 * Method to get the score.
+	 * @return
+	 */
 	public int getScore() {
 		return score;
 	}

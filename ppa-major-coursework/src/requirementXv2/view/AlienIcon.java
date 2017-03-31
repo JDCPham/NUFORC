@@ -1,5 +1,7 @@
+// Package
 package requirementXv2.view;
 
+// Imports
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.image.BufferedImage;
@@ -15,13 +17,23 @@ import requirementXv2.model.MapModel;
 
 public class AlienIcon extends JPanel {
 
+	// Fields
 	private BufferedImage background;
 	private MapModel mapModel;
 	private JButton button;
 	private String state;
 
-	/** Constructor **/
-
+	
+	
+	/**
+	 * Constructor method.
+	 * Sets the state of the alien icon.
+	 * Sets the map model.
+	 * Initialises the widget by paining the alien icon, and setting the button.
+	 * @param size The size of the alien icon from 1 to 5.
+	 * @param state The state the alien icon is stored.
+	 * @param mapModel The map model.
+	 */
 	public AlienIcon(int size, String state, MapModel mapModel) {
 
 		this.state = state;
@@ -31,12 +43,19 @@ public class AlienIcon extends JPanel {
 	}
 
 
+	
+	/**
+	 * Initialises the widgets for the GUI of the Alien Icon.
+	 * @param size Size of alien icon from 1 to 5.
+	 */
 	public void initWidgets(int size) {
 
+		// Layout and Properties
 		setLayout(new GridLayout(1, 1));
 		setOpaque(false);
 		setBackgroundImage("resources/alien-"+ size +".png");
 		
+		// Create buttons
 		button = new JButton();
 		button.setName(state);
 		button.setOpaque(false);
@@ -48,9 +67,10 @@ public class AlienIcon extends JPanel {
 	}
 
 
-
-	/** Useful **/
-
+	/**
+	 * Sets the background image.
+	 * @param path The string in which the path of the image is stored.
+	 */
 	public void setBackgroundImage(String path) {
 
 		try {
@@ -65,9 +85,10 @@ public class AlienIcon extends JPanel {
 
 	}
 
-
-	/** Other **/
-
+	
+	/**
+	 * Paints the background with supplied image.
+	 */
 	protected void paintComponent(Graphics g) {
 
 		super.paintComponent(g);

@@ -1,5 +1,7 @@
+// Package
 package requirementXv2.view;
 
+// Imports
 import java.awt.GridLayout;
 import java.awt.image.BufferedImage;
 import java.util.Observable;
@@ -26,8 +28,14 @@ public class StatsPanel extends JPanel implements Observer{
 	private BufferedImage background;
 
 
-	/** Constructor **/
-
+	/**
+	 * Constructor Method
+	 * Sets the main model and the stats model.
+	 * Adds observers to the models.
+	 * Calls initWidgets method.
+	 * @param mainModel Model for the main application.
+	 * @param statsModel Model for the stats panel.
+	 */
 	public StatsPanel(MainModel mainModel, StatsModel statsModel) {
 
 		this.mainModel = mainModel;
@@ -39,8 +47,9 @@ public class StatsPanel extends JPanel implements Observer{
 	}
 
 
-	/** Creating widgets **/
-
+	/**
+	 * Initialises the widgets and sets layout of the current panel.
+	 */
 	public void initWidgets() {
 
 		// Set Layout of panel

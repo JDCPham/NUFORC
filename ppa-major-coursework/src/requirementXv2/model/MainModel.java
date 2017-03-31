@@ -1,5 +1,7 @@
+// Package
 package requirementXv2.model;
 
+// Imports
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.ListIterator;
@@ -42,8 +44,15 @@ public class MainModel extends Observable implements Serializable{
 	// Incidents
 	private ArrayList<Incident> incidents;
 
-	/** Constructor **/
-
+	
+	/**
+	 * Constructor Method.
+	 * Sets up Ripley API with Public and Private Keys.
+	 * Sets the current panel to the welcome panel.
+	 * Gets the first and latest year recorded by the ripley API.
+	 * Gets and sets the date and time the API was last updated.
+	 * Set the default selection years.
+	 */
 	public MainModel() {
 
 		// Set up Ripley
@@ -63,14 +72,30 @@ public class MainModel extends Observable implements Serializable{
 		fromSelectionYear = NO_SELECTION;
 		toSelectionYear = NO_SELECTION;
 		
-
+		// Prints the Ripley Acknowledgement String
+		System.out.println(ripley.getAcknowledgementString());
+		
 	}
 	
 
-	/** Useful **/
-
-	public int toInt(String s) { return Integer.parseInt(s); }
+	/**
+	 * Converts a string into an integer
+	 * @param s A string containing a number.
+	 * @return Number from String as type Integer.
+	 */
+	public int toInt(String s) { 
+		
+		return Integer.parseInt(s); 
+		
+	}
 	
+	
+	
+	/**
+	 * Checks if the supplied selection is a valid year.
+	 * @param s String from drop-down combo box.
+	 * @return Boolean. True if string is valid selection.
+	 */
 	public boolean isSelection(String s) { 
 		
 		if (s.equals("-")) return false;
@@ -79,22 +104,30 @@ public class MainModel extends Observable implements Serializable{
 	}
 	
 	
+	
+	/**
+	 * Checks if the dates selected were valid.
+	 * Ensures the from year selection is before or equal to the to year selection.
+	 * @return Boolean. True if date selection was valid.
+	 */
 	public boolean isDateValid() {
 		
 		if ((fromSelectionYear <= toSelectionYear) && (fromSelectionYear != NO_SELECTION) && (toSelectionYear != NO_SELECTION)) {
 			
 			return true;
 			
-		} else {
-			
-			return false;
-			
-		}
+		} else return false;
 			
 	}
 	
-	/** Retrieving data from Ripley **/
-
+	
+	
+	/**
+	 * Returns an arraylist of incidents from ripley from a given date range.
+	 * @param from The year from which the query is requesting incident reports from.
+	 * @param to The year from which the query is requesting incident reports to.
+	 * @return Array List of Incidents in a given date range.
+	 */
 	public ArrayList<Incident> ripleyIncidents(int from, int to) { 
 
 		String fromYear = Integer.toString(from);
@@ -104,11 +137,14 @@ public class MainModel extends Observable implements Serializable{
 
 	}
 	
+
 	
-	
-	/** Useful **/
-	
-	
+	/**
+	 * Determines all the different states that have been recorded from the current array list of incidents into a treemap.
+	 * Initialises the treemap with the State name as a Key, and 0 as the value.
+	 * Then counts the number of incidents each states have received.
+	 * @return TreeMap with all states with number of incidents recorded for that state.
+	 */
 	public TreeMap<String, Integer> getIncidentCounts() {
 
 		TreeSet<String> set;
@@ -141,27 +177,62 @@ public class MainModel extends Observable implements Serializable{
 	}
 
 
-	/** Getters **/
-
+	
+	/**
+	 * @return The integer representing the current panel being displayed.
+	 */
 	public int getCurrentPanel() { return currentPanel; }
 
+	
+	
+	/**
+	 * @return The integer of the first year the ripley API has incidents recorded.
+	 */
 	public int getStartYear() { return startYear; }
 
+	
+	/**
+	 * @return The integer of the last year the ripley API has incidents recorded.
+	 */
 	public int getLatestYear() { return latestYear; }
 
+	
+	/**
+	 * @return The integer of the selected 'From' year made by the user.
+	 */
 	public int getFromSelectionYear() { return fromSelectionYear; }
 
+	
+	/**
+	 * @return The integer of the selected 'To' year made by the user.
+	 */
 	public int getToSelectionYear() { return toSelectionYear; }
 
+	
+	/**
+	 * @return String with date and time of when the ripley API was last updated.
+	 */
 	public String getLastUpdated() { return lastUpdated; }
 	
+	
+	/**
+	 * @return The model representing and maintaining the map panel of the application.
+	 */
 	public MapModel getMapModel() { return mapModel; }
 	
+	
+	/**
+	 * @return Current array list of incidents from a selected date range.
+	 */
 	public ArrayList<Incident> getIncidents() { return incidents; }
 
 
-	/** Setters **/
-
+	
+	/**
+	 * Sets the selection year. If selection year is not valid, then set the field to a final field representing no selection.
+	 * Notifies observers to check if the date range is valid and get relevant data.
+	 * @param year A string with a year to get list of incidents from.
+	 */
 	public void setFromSelectionYear(String year){
 
 		if (isSelection(year)) fromSelectionYear = toInt(year);
@@ -171,6 +242,12 @@ public class MainModel extends Observable implements Serializable{
 
 	}
 
+	
+	/**
+	 * Sets the selection year. If selection year is not valid, then set the field to a final field representing no selection.
+	 * Notifies observers to check if the date range is valid and get relevant data.
+	 * @param year A string with a year to get list of incidents to.
+	 */
 	public void setToSelectionYear(String year){
 
 		if (isSelection(year)) toSelectionYear = toInt(year);
@@ -180,6 +257,13 @@ public class MainModel extends Observable implements Serializable{
 
 	}
 
+	
+	
+	/**
+	 * Determines the current panel and calculates what the next panel is when the right button is pressed.
+	 * Then sets the current panel to the next panel.
+	 * Notifies observers so this change is reflected on screen.
+	 */
 	public void setNextPanel() {
 
 		if (currentPanel != SURPRISE_PANEL) {
@@ -192,6 +276,13 @@ public class MainModel extends Observable implements Serializable{
 
 	}
 
+	
+	
+	/**
+	 * Determines the current panel and calculates what the previous panel is when the left button is pressed.
+	 * Then sets the current panel to the previous panel.
+	 * Notifies observers so this change is reflected on screen.
+	 */
 	public void setPreviousPanel() {
 
 		if (currentPanel != WELCOME_PANEL) {
@@ -204,6 +295,12 @@ public class MainModel extends Observable implements Serializable{
 
 	}
 	
+	
+	
+	/**
+	 * Notifies observers to say that the data for the selected date range has been retrieved.
+	 * And allows users to view the data via various panels.
+	 */
 	public void setDataReady() {
 		
 		setChanged();
@@ -211,6 +308,12 @@ public class MainModel extends Observable implements Serializable{
 		
 	}
 	
+	
+	
+	/**
+	 * Sets the Arraylist of incidents.
+	 * @param incidents Arraylist containing incident objects.
+	 */
 	public void setIncidents(ArrayList<Incident> incidents) {
 		
 		this.incidents = incidents;

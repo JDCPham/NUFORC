@@ -116,7 +116,6 @@ public class WelcomePanel extends JPanel implements Observer{
 		int intMillis = (int) (millis);
 		int minutes = (intMillis / (1000 * 60)) % 60;
 		int seconds = (intMillis / 1000) % 60;
-		System.out.println(millis);
 		
 		return minutes + " minutes and " + seconds + " seconds.";
 

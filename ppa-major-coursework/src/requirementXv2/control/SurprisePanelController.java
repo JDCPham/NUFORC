@@ -27,7 +27,7 @@ public class SurprisePanelController implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (questionCount < 9 ) {
+		if (questionCount < 10 ) {
 			System.out.println("questionCount " + questionCount);
 			if (((JButton)e.getSource()).getName().equals("buttonA")) {
 				
@@ -69,7 +69,9 @@ public class SurprisePanelController implements ActionListener {
 			model.checkAnswer(questionCount, answer);
 			System.out.println(model.getScore());
 			questionCount++;
-			showQuestion();
+			if (questionCount < 10) {
+				showQuestion();
+			}
 		}	
 	}
 	
