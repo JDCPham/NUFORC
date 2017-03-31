@@ -7,20 +7,26 @@ import javax.swing.JButton;
 
 import requirementXv2.model.SurprisePanelModel;
 import requirementXv2.view.ChatRoomFrame;
+
 /**
- * 
+ * This class is the controller for the surprise panel.
  * @author caokynguyen
  * 
  */
 public class SurprisePanelController implements ActionListener {
 
-	private ChatRoomFrame view;
+	// Field that holds the surprise panel view.
+	private ChatRoomFrame view;	
+	// Field that holds the surprise panel model.
 	private SurprisePanelModel model;
+	// Field to track the number of questions.
 	private int questionCount;
+	// Field to track the answer.
 	private int answer;
 
 	/**
 	 * When this class is created, 
+	 * this adds the question and answers to the jlist.
 	 * @param view
 	 * @param model
 	 */
@@ -36,7 +42,8 @@ public class SurprisePanelController implements ActionListener {
 
 	@Override
 	/**
-	 * Method to check what button the user clicked.
+	 * Method to check what button the user clicked,
+	 * and to check game outcome when finished.
 	 */
 	public void actionPerformed(ActionEvent e) {
 		if (questionCount < 10) {
@@ -83,20 +90,17 @@ public class SurprisePanelController implements ActionListener {
 				showQuestion();
 			} else {
 				if (model.getScore() > 6) {
-					view.write("Congratulations you have won!");
-				}else{
-					view.write("You have lost!");
-				}
-				
-				view.write("<html><b>MR STEAL YOUR GIRL AKA MARTIN CHAPMAN HAS STOLEN YOUR GIRL</b></html>");
-				view.write("<html><b>BETTER LUCK NEXT TIME</b></html>Ï");
+					view.write("<html><b>Congratulations you have won!</b></html>");
+				} else {
+					view.write("<html><b>You have lost!</b></html>");
 
+				}
 			}
 		}
 	}
-	
+
 	/**
-	 * 
+	 * Method that shows the question on the list.
 	 */
 	public void showQuestion() {
 		for (int i = 0; i < 5; i++) {
