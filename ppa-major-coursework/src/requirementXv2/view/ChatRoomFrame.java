@@ -39,6 +39,7 @@ public class ChatRoomFrame extends JPanel {
 	private JPanel jpSouth;								//Instance variable for south panel
 	private JPanel jpCenter;							//Instance variable for center panel	
 	private SurprisePanelController controller;			//Instance variable for controller
+	private JScrollPane jspChatRoom;
 	
 	/**
 	 * Class constructor. When class is created,
@@ -92,6 +93,9 @@ public class ChatRoomFrame extends JPanel {
 		jpSouth.add(jbC);
 		jpSouth.add(jbD);
 		
+		//Add list to scroll pane
+		jspChatRoom = new JScrollPane(textList);
+		
 		/*
 		 * Add south panel with buttons to the south of the
 		 * frame
@@ -123,7 +127,7 @@ public class ChatRoomFrame extends JPanel {
 		 */
 		jpCenter.setLayout(new GridLayout(1, 2));
 		jpCenter.add(roger);
-		jpCenter.add(textList);
+		jpCenter.add(jspChatRoom);
 		
 		//Add center panel to center of frame
 		add(jpCenter, BorderLayout.CENTER);
