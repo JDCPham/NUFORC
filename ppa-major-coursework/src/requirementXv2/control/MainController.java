@@ -20,6 +20,7 @@ public class MainController {
 	private WelcomeModel welcomeModel;
 	private MapModel mapModel;
 	private StatsModel statsModel;
+
 	
 		
 	
@@ -36,6 +37,7 @@ public class MainController {
 		this.welcomeModel = welcomeModel;
 		this.mapModel = mapModel;
 		this.statsModel = statsModel;
+	
 		
 	}
 	
@@ -96,7 +98,7 @@ public class MainController {
 				end = System.currentTimeMillis();
 				time = end - start;
 				welcomeModel.setDataGrabTime(time);
-				System.out.println(time + "ms");
+				
 			} 
 			
 		}
@@ -134,7 +136,7 @@ public class MainController {
 				end = System.currentTimeMillis();
 				time = end - start;
 				welcomeModel.setDataGrabTime(time);
-				System.out.println(time + "ms");
+				
 				
 			}
 			

@@ -7,7 +7,6 @@ import javax.swing.JButton;
 
 import requirementXv2.model.SurprisePanelModel;
 import requirementXv2.view.ChatRoomFrame;
-import requirementXv2.view.SurprisePanel;
 
 public class SurprisePanelController implements ActionListener {
 
@@ -28,49 +27,52 @@ public class SurprisePanelController implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if (questionCount < 10 ) {
+			System.out.println("questionCount " + questionCount);
+			if (((JButton)e.getSource()).getName().equals("buttonA")) {
+				
+				view.write(model.rewrite());
+				view.write(model.getAnswerPicked(questionCount, 1));
+				model.write(model.getAnswerPicked(questionCount, 1));
+				
+				System.out.println("button A pressed");
+				answer = 1;
+				
+			}
+			if (((JButton)e.getSource()).getName().equals("buttonB")) {
+				
+				view.write(model.rewrite());
+				view.write(model.getAnswerPicked(questionCount, 2));
+				model.write(model.getAnswerPicked(questionCount, 2));
+				
+				System.out.println("button B pressed");
+				answer = 2;
+			}
+			if (((JButton)e.getSource()).getName().equals("buttonC")) {
+				
+				view.write(model.rewrite());
+				view.write(model.getAnswerPicked(questionCount, 3));
+				model.write(model.getAnswerPicked(questionCount, 3));
+				System.out.println("button C pressed");
+				answer = 3;
+				
+			}
+			if (((JButton)e.getSource()).getName().equals("buttonD")) {
+				
+				view.write(model.rewrite());
+				view.write(model.getAnswerPicked(questionCount, 4));
+				model.write(model.getAnswerPicked(questionCount, 4));
+				System.out.println("button D pressed");
+				answer = 4;
 		
-		
-		if (((JButton)e.getSource()).getName().equals("buttonA")) {
-			
-			view.write(model.rewrite());
-			view.write(model.getAnswerPicked(questionCount, 1));
-			model.write(model.getAnswerPicked(questionCount, 1));
-			
-			System.out.println("button A pressed");
-			answer = 1;
-			
-		}
-		if (((JButton)e.getSource()).getName().equals("buttonB")) {
-			
-			view.write(model.rewrite());
-			view.write(model.getAnswerPicked(questionCount, 2));
-			model.write(model.getAnswerPicked(questionCount, 2));
-			
-			System.out.println("button B pressed");
-			answer = 2;
-		}
-		if (((JButton)e.getSource()).getName().equals("buttonC")) {
-			
-			view.write(model.rewrite());
-			view.write(model.getAnswerPicked(questionCount, 3));
-			model.write(model.getAnswerPicked(questionCount, 3));
-			System.out.println("button C pressed");
-			answer = 3;
-			
-		}
-		if (((JButton)e.getSource()).getName().equals("buttonD")) {
-			
-			view.write(model.rewrite());
-			view.write(model.getAnswerPicked(questionCount, 4));
-			model.write(model.getAnswerPicked(questionCount, 4));
-			System.out.println("button D pressed");
-			answer = 4;
-	
-		}
-		model.checkAnswer(questionCount, answer);
-		System.out.println(model.getScore());
-		questionCount++;
-		showQuestion();
+			}
+			model.checkAnswer(questionCount, answer);
+			System.out.println(model.getScore());
+			questionCount++;
+			if (questionCount < 10) {
+				showQuestion();
+			}
+		}	
 	}
 	
 	public void showQuestion() {
