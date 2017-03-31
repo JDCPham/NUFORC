@@ -15,14 +15,12 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
 import java.util.ArrayList;
-import java.util.ListIterator;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.Observable;
 import java.util.Set;
 import java.util.TreeMap;
-import java.util.TreeSet;
 
 import org.json.JSONObject;
 
