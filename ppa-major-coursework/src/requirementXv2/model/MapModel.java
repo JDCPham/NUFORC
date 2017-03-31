@@ -1,5 +1,7 @@
+// Package
 package requirementXv2.model;
 
+// Imports
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ListIterator;
@@ -27,8 +29,14 @@ public class MapModel extends Observable {
 
 
 
-	/** Constructor **/
-
+	/**
+	 * Constructor method.
+	 * Sets the main model.
+	 * Sets up new arraylists designed to hold the list of sightings from the given date range.
+	 * Every arraylist is sorted by various properties. 
+	 * Eg. sightingsByCity is sorted in alphabetical order by city name.
+	 * @param mainModel
+	 */
 	public MapModel(MainModel mainModel) {
 
 		// Set up Main Model
@@ -46,9 +54,12 @@ public class MapModel extends Observable {
 
 
 
-
-	/** Main **/
-
+	/**
+	 * Sets the list of incidents by calling the ripleyIncidents method. Passing from and to selection years.
+	 * Sets this list of incidents in the main model.
+	 * Counts the number of incidents for each state.
+	 * Notifies observers to update the map.
+	 */
 	public void updateStates() {
 
 		incidents = mainModel.ripleyIncidents(mainModel.getFromSelectionYear(), mainModel.getToSelectionYear());
@@ -62,9 +73,12 @@ public class MapModel extends Observable {
 	}
 
 
-	/** Useful **/
 	
-	
+	/**
+	 * Sets up a treemap and puts all states in which incidents have been recorded as a Key.
+	 * The value of the treemap is initialised to 0.
+	 * @param ripleyIncidents ArrayList of incidents.
+	 */
 	public void initialStates(ArrayList<Incident> ripleyIncidents) {
 
 		TreeSet<String> set;
@@ -82,7 +96,10 @@ public class MapModel extends Observable {
 
 	
 	
-
+	/**
+	 * Given an arraylist of incidents, counts the number of incidents recorded for each state in the US.
+	 * @param ripleyIncidents Array list of incidents.
+	 */
 	public void countIncidents(ArrayList<Incident> ripleyIncidents) {
 
 		ListIterator<Incident> incidents;
@@ -104,6 +121,10 @@ public class MapModel extends Observable {
 
 
 
+	/**
+	 * Adds a Sighting to the sighting array list.
+	 * @param sighting A custom class representing an incident.
+	 */
 	public void addSighting(Sighting sighting) {
 
 		sightings.add(sighting);
@@ -111,15 +132,20 @@ public class MapModel extends Observable {
 	}
 
 	
-	
+	/**
+	 * Sorts the sightings arraylist into other arraylists.
+	 * The order of sightings varies.
+	 */
 	public void sortSightings() {
 
+		// New ArrayLists
 		sightingsByCity = new ArrayList<Sighting>();
 		sightingsByShape = new ArrayList<Sighting>();
 		sightingsByDuration = new ArrayList<Sighting>();
 		sightingsByDate = new ArrayList<Sighting>();
 		sightingsByPosted = new ArrayList<Sighting>();
 
+		// Add all sightings to all array lists.
 		for (Sighting s: sightings) {
 
 			sightingsByCity.add(s);
@@ -130,6 +156,7 @@ public class MapModel extends Observable {
 
 		}
 
+		// Sorts all arraylists using custom comparators.
 		Collections.sort(sightingsByCity, new CustomComparators(). new CityComparator());
 		Collections.sort(sightingsByShape, new CustomComparators(). new ShapeComparator());
 		Collections.sort(sightingsByDuration, new CustomComparators(). new DurationComparator());
@@ -139,24 +166,57 @@ public class MapModel extends Observable {
 	}
 
 
-	/** Getters **/
-
+	/**
+	 * @return Returns an iterable set of states from the list of incidents.
+	 */
 	public Set<String> getStatesIterable() { return states.keySet(); }
 
+	
+	/**
+	 * @return Treemap of states and number of incidents recorded for each state.
+	 */
 	public TreeMap<String, Integer> getStateCount() { return states; }
 
+	
+	/**
+	 * @return Arraylist of incidents from a given date range.
+	 */
 	public ArrayList<Incident> getIncidents() { return incidents; }
 
+	
+	/**
+	 * @return Arraylist of sightings from a given date range.
+	 */
 	public ArrayList<Sighting> getSightings() { return sightings; }
 
+	
+	/**
+	 * @return Arraylist of sightings from a given date range sorted by city name.
+	 */
 	public ArrayList<Sighting> getSightingsByCity() { return sightingsByCity; }
 
+	
+	/**
+	 * @return Arraylist of sightings from a given date range sorted by shape.
+	 */
 	public ArrayList<Sighting> getSightingsByShape() { return sightingsByShape; }
 
+	
+	/**
+	 * @return Arraylist of sightings from a given date range sorted by duration.
+	 */
 	public ArrayList<Sighting> getSightingsByDuration() { return sightingsByDuration; }
 
+	
+	/**
+	 * @return Arraylist of sightings from a given date range sorted by date.
+	 */
 	public ArrayList<Sighting> getSightingsByDate() { return sightingsByDate; }
 
+	
+	/**
+	 * @return Arraylist of sightings from a given date range sorted by date posted.
+	 */
 	public ArrayList<Sighting> getSightingsByPosted() { return sightingsByPosted; }
 
 
