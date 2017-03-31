@@ -41,7 +41,7 @@ public class SurprisePanelModel  {
 		markScheme[5] = 2;
 		
 		Question question7 = new Question("What is your favourite place to eat?");
-		question7.addAnswers("A:King's Canteen", "B:McDonald's", "C:Tesco £3 meal deal", "D:The Fridge");
+		question7.addAnswers("A:King's Canteen", "B:McDonald's", "C:Tesco ï¿½3 meal deal", "D:The Fridge");
 		questions.add(question7);
 		markScheme[6] = 3;
 		
