@@ -27,8 +27,8 @@ public class SurprisePanelController implements ActionListener {
 	/**
 	 * When this class is created, 
 	 * this adds the question and answers to the jlist.
-	 * @param view
-	 * @param model
+	 * @param view View of the surprise panel.
+	 * @param model Model of the surprise panel.
 	 */
 	public SurprisePanelController(ChatRoomFrame view, SurprisePanelModel model) {
 		this.view = view;
@@ -42,6 +42,7 @@ public class SurprisePanelController implements ActionListener {
 
 	@Override
 	/**
+	 * Action listener for the buttons.
 	 * Method to check what button the user clicked,
 	 * and to check game outcome when finished.
 	 */
