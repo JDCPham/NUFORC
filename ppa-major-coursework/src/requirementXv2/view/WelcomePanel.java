@@ -5,7 +5,6 @@ package requirementXv2.view;
 import java.awt.GridLayout;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.concurrent.TimeUnit;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
