@@ -5,7 +5,6 @@ package requirementXv2.view;
 import java.awt.GridLayout;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.concurrent.TimeUnit;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -116,7 +115,6 @@ public class WelcomePanel extends JPanel implements Observer{
 		int intMillis = (int) (millis);
 		int minutes = (intMillis / (1000 * 60)) % 60;
 		int seconds = (intMillis / 1000) % 60;
-		System.out.println(millis);
 		
 		return minutes + " minutes and " + seconds + " seconds.";
 

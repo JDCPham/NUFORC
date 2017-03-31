@@ -20,15 +20,24 @@ public class MainController {
 	private WelcomeModel welcomeModel;
 	private MapModel mapModel;
 	private StatsModel statsModel;
+
 	
-	/** Constructor **/
+		
 	
+	/**
+	 * Sets all models required for the main controller.
+	 * @param mainModel Model for main frame.
+	 * @param welcomeModel Model for welcome panel.
+	 * @param mapModel Model for Map panel.
+	 * @param statsModel Model for Stats panel.
+	 */
 	public MainController(MainModel mainModel, WelcomeModel welcomeModel, MapModel mapModel, StatsModel statsModel) {
 		
 		this.mainModel = mainModel;
 		this.welcomeModel = welcomeModel;
 		this.mapModel = mapModel;
 		this.statsModel = statsModel;
+	
 		
 	}
 	
@@ -89,7 +98,7 @@ public class MainController {
 				end = System.currentTimeMillis();
 				time = end - start;
 				welcomeModel.setDataGrabTime(time);
-				System.out.println(time + "ms");
+				
 			} 
 			
 		}
@@ -127,7 +136,7 @@ public class MainController {
 				end = System.currentTimeMillis();
 				time = end - start;
 				welcomeModel.setDataGrabTime(time);
-				System.out.println(time + "ms");
+				
 				
 			}
 			

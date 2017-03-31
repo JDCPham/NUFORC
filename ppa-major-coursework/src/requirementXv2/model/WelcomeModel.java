@@ -1,5 +1,7 @@
+// Package
 package requirementXv2.model;
 
+// Imports
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.TreeMap;
@@ -17,8 +19,12 @@ public class WelcomeModel extends Observable{
 	private ArrayList<Incident> incidents;
 	private TreeMap<String, Integer> states;
 
-	/** Constructor **/
 
+	/**
+	 * Constructor Method
+	 * Sets the main model, and gets the version of ripley API.
+	 * @param mainModel Model for main frame.
+	 */
 	public WelcomeModel(MainModel mainModel) {
 
 		// Set main model
@@ -30,15 +36,19 @@ public class WelcomeModel extends Observable{
 	}
 
 
-	/** Retrieving data from Ripley **/
-
+	/**
+	 * Retrieves a double of the version number of ripley API.
+	 * @return Ripley Version.
+	 */
 	public double ripleyVersion() { return mainModel.ripley.getVersion(); }
 
-
-	/** Useful **/
 	
-	/** Setters **/
 	
+	/**
+	 * Sets how long it took between the user selecting a date range, and the finishing of the retrieval of data.
+	 * Notifies observers to update the welcome panel with the duration of time taken.
+	 * @param time The time taken.
+	 */
 	public void setDataGrabTime(long time) { 
 		
 		this.dataGrabTime = time; 
@@ -48,10 +58,17 @@ public class WelcomeModel extends Observable{
 	}
 	
 
-	/** Getters **/
-
+	/**
+	 * Returns version of ripley.
+	 * @return Current Ripley version.
+	 */
 	public double getVersion() { return version; }
 	
+	
+	/**
+	 * Returns the length of time taken to grab data.
+	 * @return Length of time taken to grab data.
+	 */
 	public long getDataGrabTime() { return dataGrabTime; }
 
 }
