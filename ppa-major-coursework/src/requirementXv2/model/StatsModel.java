@@ -253,7 +253,7 @@ public class StatsModel extends Observable implements Serializable {
 		String fromDate = mainModel.getFromSelectionYear() + "-01-01T00:00:00Z";
 		String charset = StandardCharsets.UTF_8.name(); 
 		String fullURL = url + "?part=snippet&q=" + search + "&publishedAfter=" + fromDate + "&key=AIzaSyCpb31Vn10CczseYpYg2m9yAz8CJ02ZyYA" ;	
-		System.out.println(fullURL);
+		
 		// Creating URL and HTTP Objects
 		URL urlObj = new URL(fullURL);
 		HttpURLConnection connection = (HttpURLConnection) urlObj.openConnection();

@@ -72,6 +72,7 @@ public class MainModel extends Observable implements Serializable{
 		fromSelectionYear = NO_SELECTION;
 		toSelectionYear = NO_SELECTION;
 		
+		// Prints the Ripley Acknowledgement String
 		System.out.println(ripley.getAcknowledgementString());
 		
 	}

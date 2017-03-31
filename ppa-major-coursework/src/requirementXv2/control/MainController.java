@@ -96,7 +96,7 @@ public class MainController {
 				end = System.currentTimeMillis();
 				time = end - start;
 				welcomeModel.setDataGrabTime(time);
-				System.out.println(time + "ms");
+				
 			} 
 			
 		}
@@ -134,7 +134,7 @@ public class MainController {
 				end = System.currentTimeMillis();
 				time = end - start;
 				welcomeModel.setDataGrabTime(time);
-				System.out.println(time + "ms");
+				
 				
 			}
 			
