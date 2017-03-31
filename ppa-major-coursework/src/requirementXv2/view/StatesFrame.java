@@ -1,5 +1,7 @@
+// Package
 package requirementXv2.view;
 
+// Imports
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -19,6 +21,7 @@ import requirementXv2.model.Sighting;
 
 public class StatesFrame extends JFrame{
 
+	// Fields
 	private MapModel mapModel;
 	private JList<Sighting> listA;
 	DefaultListModel<Sighting> modelA;
@@ -26,8 +29,15 @@ public class StatesFrame extends JFrame{
 	private String state;
 
 
-	/** Constructor **/
-
+	/**
+	 * Constructor method.
+	 * Sets the map model, and the name of the state.
+	 * Calls initWidgets method.
+	 * Calls the add sightings method.
+	 * Calls updateList method.
+	 * @param mapModel
+	 * @param state
+	 */
 	public StatesFrame(MapModel mapModel, String state) {
 
 		super();
@@ -40,8 +50,11 @@ public class StatesFrame extends JFrame{
 	}
 
 
-	/** Creating widgets **/
-
+	/**
+	 * Initialises all widgets used in this frame including the JList and JComboBox.
+	 * Sets the layout and properties of the frame.
+	 * Also generates a default list model which will store the list of all sightings.
+	 */
 	public void initWidgets() {
 
 		// Frame properties
@@ -94,6 +107,11 @@ public class StatesFrame extends JFrame{
 	}
 
 
+	/**
+	 * Converts a state abbreviation to its full name. Eg CA to California.
+	 * @param state The state abbreviation.
+	 * @return The full name of the state.
+	 */
 	public String getStateName(String state) {
 
 		if (state.equals("CA")) return "California";
@@ -155,6 +173,10 @@ public class StatesFrame extends JFrame{
 
 
 	
+	/**
+	 * Gets the list of all incidents from the map model, and only adds the incident to the list, if the state of the incident matches the supplied state.
+	 * @param s The state abbreviation of which incidents are to be added to the JList.
+	 */
 	public void addSightings(String s) {
 		
 		mapModel.getSightings().clear();
@@ -170,6 +192,10 @@ public class StatesFrame extends JFrame{
 
 	
 	
+	/**
+	 * Clears the List model and re-adds all sightings from the sighting array list.
+	 * @param s
+	 */
 	public void updateList(ArrayList<Sighting> s) {
 
 		modelA.clear();
@@ -180,6 +206,11 @@ public class StatesFrame extends JFrame{
 
 	
 
+	/**
+	 * Converts an Incident object into a Sighting object.
+	 * @param i The incident to be converted
+	 * @return The sighting of the incident.
+	 */
 	public Sighting setSighting(Incident i) {
 
 		Sighting s = new Sighting();
@@ -199,6 +230,11 @@ public class StatesFrame extends JFrame{
 
 	
 
+	/**
+	 * Returns the value of the combo box.
+	 * @param e
+	 * @return The selected value of the combo box.
+	 */
 	public String getValue(ActionEvent e) {
 
 		JComboBox<String> combo = (JComboBox<String>) e.getSource();

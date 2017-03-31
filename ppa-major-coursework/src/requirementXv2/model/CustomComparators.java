@@ -1,12 +1,19 @@
+// Package
 package requirementXv2.model;
 
+// Import
 import java.util.Comparator;
 import java.util.Date;
 
 public class CustomComparators {
 
 
-
+	/**
+	 * A comparator for a date.
+	 * Returns -1 if date is less, 0 if equal, and 1 if greater than current date.
+	 * @author JP
+	 *
+	 */
 	public class DateComparator implements Comparator<Sighting> {
 
 		@Override
@@ -23,6 +30,12 @@ public class CustomComparators {
 
 
 
+	/**
+	 * A comparator for a duration.
+	 * Returns -1 if duration is less, 0 if equal, and 1 if greater than current duration.
+	 * @author JP
+	 *
+	 */
 	public class DurationComparator implements Comparator<Sighting> {
 
 		@Override
@@ -38,6 +51,13 @@ public class CustomComparators {
 	}
 	
 	
+	
+	/**
+	 * A comparator for a city. (Alphabetical)
+	 * Returns -1 if city name is before, 0 if equal, and 1 if after than current city name.
+	 * @author JP
+	 *
+	 */
 	public class CityComparator implements Comparator<Sighting> {
 
 		@Override
@@ -53,6 +73,13 @@ public class CustomComparators {
 	}
 	
 	
+	
+	/**
+	 * A comparator for a posted date..
+	 * Returns -1 if date is less, 0 if equal, and 1 if greater than current date.
+	 * @author JP
+	 *
+	 */
 	public class PostedComparator implements Comparator<Sighting> {
 		
 		@Override
@@ -68,6 +95,13 @@ public class CustomComparators {
 	}
 	
 	
+	
+	/**
+	 * A comparator for a shape. (Alphabetical)
+	 * Returns -1 if string is before, 0 if equal, and 1 if after than current shape string.
+	 * @author JP
+	 *
+	 */
 	public class ShapeComparator implements Comparator<Sighting>{
 
 		@Override
