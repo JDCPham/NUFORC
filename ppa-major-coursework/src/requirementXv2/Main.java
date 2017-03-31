@@ -1,10 +1,15 @@
+/**
+ * JOHN PHAM | EMMANUEL WONDIMU | MATEN REHIMI | CAOKY NGUYEN
+ */
+
+
 // Package
 package requirementXv2;
 
+// Imports
 import requirementXv2.model.MainModel;
 import requirementXv2.model.MapModel;
 import requirementXv2.model.StatsModel;
-import requirementXv2.model.SurpriseModel;
 import requirementXv2.model.WelcomeModel;
 import requirementXv2.view.MainFrame;
 
@@ -26,11 +31,14 @@ public class Main {
 		mainModel.addObserver(mainFrame);
 		mapModel.addObserver(mainFrame);
 		welcomeModel.addObserver(mainFrame);
+		
 
 		// Set visibility to true
 		mainFrame.setVisible(true); 
 		mainFrame.setResizable(true);
+		
 
 	}
 
 }
+ 

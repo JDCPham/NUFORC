@@ -1,5 +1,7 @@
+// Package
 package requirementXv2.view;
 
+// Imports
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -27,6 +29,7 @@ public class MainFrame extends JFrame implements Observer {
 	private WelcomeModel welcomeModel;
 	private MapModel mapModel;
 	private StatsModel statsModel;
+	
 
 	// Controller
 	protected MainController mainController;
@@ -41,8 +44,17 @@ public class MainFrame extends JFrame implements Observer {
 	private JPanel[] panels;
 
 
-	/** Constructor **/
-
+	/**
+	 * Constructor Method.
+	 * Sets the model for main frame, the model for welcome panel, model for map panel and model for stats panel.
+	 * Creates the panels, and supplies it with relevant models.
+	 * Creates a new controller.
+	 * Initialises the GUI by creating widgets and setting layouts.
+	 * @param mainModel Data model for the main application.
+	 * @param welcomeModel Welcome model for the welcome panel.
+	 * @param mapModel Map model for the map panel.
+	 * @param statsModel Stats Model for the stats panel.
+	 */
 	public MainFrame(MainModel mainModel, WelcomeModel welcomeModel, MapModel mapModel, StatsModel statsModel){
 
 		super();
@@ -50,6 +62,7 @@ public class MainFrame extends JFrame implements Observer {
 		this.welcomeModel = welcomeModel;
 		this.mapModel = mapModel;
 		this.statsModel = statsModel;
+	
 		this.mainController = new MainController(mainModel, welcomeModel, mapModel, statsModel);
 		initPanels(mainModel, welcomeModel, mapModel, statsModel);
 		initWidgets();
@@ -57,8 +70,11 @@ public class MainFrame extends JFrame implements Observer {
 	}
 
 
-	/** Creating Widgets **/
-
+	
+	/**
+	 * Creates the widgets, and adds it to the current panel.
+	 * Also sets the properties of widgets.
+	 */
 	public void initWidgets(){
 
 		// Set frame properties and layout
@@ -120,7 +136,14 @@ public class MainFrame extends JFrame implements Observer {
 	}
 
 
-
+	/**
+	 * Creates new panels and supplies them with relevant models.
+	 * Places each panel into the panels array.
+	 * @param mainModel
+	 * @param welcomeModel
+	 * @param mapModel
+	 * @param statsModel
+	 */
 	public void initPanels(MainModel mainModel, WelcomeModel welcomeModel, MapModel mapModel, StatsModel statsModel) {
 
 		panels = new JPanel[4];
@@ -134,7 +157,12 @@ public class MainFrame extends JFrame implements Observer {
 	}
 
 
-
+	/**
+	 * Generates the combobox.
+	 * Selections are all years between the first year ripley started, and the latest year.
+	 * Also adds a "-" selection which represents No Selection.
+	 * @return The Combo Box with all selections added as options.
+	 */
 	public JComboBox<String> makeComboBox() {
 
 		int latestYear;
@@ -164,6 +192,10 @@ public class MainFrame extends JFrame implements Observer {
 	}
 	
 	
+	/**
+	 * Creates the panel, model, and controller for the fourth panel of the application.
+	 * @return The final panel of type ChatRoomFrame. 
+	 */
 	private ChatRoomFrame initSurprisePanel() {
 		
 		ChatRoomFrame panel = new ChatRoomFrame();
@@ -175,8 +207,12 @@ public class MainFrame extends JFrame implements Observer {
 	}
 
 
-	/** Updating view **/
-
+	
+	/**
+	 * Updates the main frame. Checking the main model.
+	 * If the data is ready then the buttons are enabled.
+	 * Also checks what the current panels displayed are and repaints the panel.
+	 */
 	public void updatePanel() {
 
 		int current;

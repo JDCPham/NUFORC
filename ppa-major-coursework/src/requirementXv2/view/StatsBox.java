@@ -1,5 +1,7 @@
+// Package
 package requirementXv2.view;
 
+// Imports
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -16,15 +18,27 @@ import requirementXv2.model.StatsModel;
 
 public class StatsBox extends JPanel implements Observer {
 
+	// Model field
 	private StatsModel statsModel;
 
+	// Widget Fields
 	private JLabel title;
 	private JLabel stat;
 	private JButton right;
 	private JButton left;
 
+	// Position of the stat box
 	private String position;
 
+	
+	/**
+	 * Constructor Method.
+	 * Sets the model fields and the position of this stat box.
+	 * Adds observers.
+	 * Calls initWidgets method, and updates the stats in this box.
+	 * @param statsModel Data model for the stats panel.
+	 * @param position An integer representing where this box is displayed within the statistics panel.
+	 */
 	public StatsBox(StatsModel statsModel, String position) {
 
 		this.statsModel = statsModel;
@@ -35,6 +49,12 @@ public class StatsBox extends JPanel implements Observer {
 
 	}
 
+	
+	
+	/**
+	 * Initialises widgets and sets layouts.
+	 * Adds action listeners to right and left buttons to move between the stat boxes.
+	 */
 	public void initWidgets() {
 
 		// Set Layout
@@ -92,6 +112,10 @@ public class StatsBox extends JPanel implements Observer {
 	}
 
 
+	/**
+	 * Updates the title and statistic of the box from the model.
+	 * @param position The position of the statistic box to be updated.
+	 */
 	public void updateStat(String position) {
 
 		title.setText((statsModel.getStat(position)).getTitle());

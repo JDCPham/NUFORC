@@ -1,5 +1,7 @@
+// Package
 package requirementXv2.view;
 
+// Import
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -28,8 +30,15 @@ public class MapPanel extends JPanel implements Observer, Serializable {
 	private BufferedImage background;
 
 
-	/** Constructor **/
-
+	
+	/**
+	 * Constructor Method
+	 * Sets the main model and map model.
+	 * Sets the observers of both models.
+	 * Calls initWidgets method which sets up widgets and GUI
+	 * @param mainModel Model for main frame.
+	 * @param mapModel Model for the map panel.
+	 */
 	public MapPanel(MainModel mainModel, MapModel mapModel) {
 
 		this.mainModel = mainModel;
@@ -41,8 +50,11 @@ public class MapPanel extends JPanel implements Observer, Serializable {
 	}
 	
 	
-	/** Creating widgets **/
 	
+	/**
+	 * Initialises the layout to null so absolute positioning can be used.
+	 * Sets the background image.
+	 */
 	public void initWidgets() {
 		
 		setBackgroundImage("resources/map.png");
@@ -52,8 +64,10 @@ public class MapPanel extends JPanel implements Observer, Serializable {
 	}
 	
 	
-	/** Alien heads **/
-	
+	/**
+	 * Determines what the size of each alien icon should be for each state and places them.
+	 * Repaints the map so this change is reflected.
+	 */
 	public void placeIcons() {
 		
 		removeAll();
@@ -110,8 +124,10 @@ public class MapPanel extends JPanel implements Observer, Serializable {
 	
 	
 	
-	/** Useful **/
-	
+	/**
+	 * Sets the background image.
+	 * @param path The string in which the path of the image is stored.
+	 */
 	public void setBackgroundImage(String path) {
 		
 		try { background = ImageIO.read(new File(path)); } 
@@ -120,6 +136,12 @@ public class MapPanel extends JPanel implements Observer, Serializable {
 	}
 	
 	
+	/**
+	 * Creates a new alien icon.
+	 * Places the alien icon at the correct coordinate on the map.
+	 * @param size The size of the alien icon from 1 to 5,
+	 * @param location The states where the alien icon is to be placed.
+	 */
 	public void addIcon(int size, String location) {
 		
 		AlienIcon icon = new AlienIcon(size, location, mapModel);
@@ -182,6 +204,12 @@ public class MapPanel extends JPanel implements Observer, Serializable {
 	}
 	
 	
+	/**
+	 * Determines the maximum number of sightings recorded for each state.
+	 * @param states The set of all states.
+	 * @param sightings A treemap containing the state as the key and number of sightings as its value.
+	 * @return The max number of sightings.
+	 */
 	public double mostSightings(Set<String> states, TreeMap<String, Integer> sightings) {
 		
 		int current;
@@ -204,8 +232,9 @@ public class MapPanel extends JPanel implements Observer, Serializable {
 	
 	
 	
-	/** Other **/
-	
+	/**
+	 * Paints the background with supplied image.
+	 */
 	protected void paintComponent(Graphics g) {
 		
 		super.paintComponent(g);

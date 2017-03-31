@@ -2,6 +2,7 @@ package requirementXv2.control;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -19,15 +20,24 @@ public class MainController {
 	private WelcomeModel welcomeModel;
 	private MapModel mapModel;
 	private StatsModel statsModel;
+
 	
-	/** Constructor **/
+		
 	
+	/**
+	 * Sets all models required for the main controller.
+	 * @param mainModel Model for main frame.
+	 * @param welcomeModel Model for welcome panel.
+	 * @param mapModel Model for Map panel.
+	 * @param statsModel Model for Stats panel.
+	 */
 	public MainController(MainModel mainModel, WelcomeModel welcomeModel, MapModel mapModel, StatsModel statsModel) {
 		
 		this.mainModel = mainModel;
 		this.welcomeModel = welcomeModel;
 		this.mapModel = mapModel;
 		this.statsModel = statsModel;
+	
 		
 	}
 	
@@ -72,12 +82,23 @@ public class MainController {
 			mainModel.setFromSelectionYear(year);
 			
 			if (mainModel.isDateValid()) {
-				mapModel.updateStates();
-				mainModel.setDataReady();
-				statsModel.updateStats();
+				
+				try {
+					
+					mapModel.updateStates();
+					mainModel.setDataReady();
+					statsModel.updateStats();
+					
+				} catch (IOException e1) {
+					
+					e1.printStackTrace();
+					
+				}
+				
 				end = System.currentTimeMillis();
 				time = end - start;
 				welcomeModel.setDataGrabTime(time);
+				
 			} 
 			
 		}
@@ -99,12 +120,24 @@ public class MainController {
 			mainModel.setToSelectionYear(year);
 			
 			if (mainModel.isDateValid()) {
-				mapModel.updateStates();
-				mainModel.setDataReady();
-				statsModel.updateStats();
+				
+				try {
+					
+					mapModel.updateStates();
+					mainModel.setDataReady();
+					statsModel.updateStats();
+					
+				} catch (IOException e1) {
+	
+					e1.printStackTrace();
+					
+				}
+				
 				end = System.currentTimeMillis();
 				time = end - start;
 				welcomeModel.setDataGrabTime(time);
+				
+				
 			}
 			
 		}
@@ -137,6 +170,9 @@ public class MainController {
 		return (String) comboBox.getSelectedItem(); 
 		
 	}
+	
+	
+	
 	
 	public String getState(ActionEvent e) {
 		

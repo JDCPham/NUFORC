@@ -1,5 +1,7 @@
+// Package
 package requirementXv2.view;
 
+// Imports
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -13,10 +15,17 @@ import requirementXv2.control.MapController;
 
 public class SightingDialog extends JDialog {
 	
+	// Widget Fields
 	JPanel bottom;
 	JLabel label;
 	JButton button;
 	
+	
+	/**
+	 * Constructor Method
+	 * Initialises Widgets
+	 * @param s The summary of the incident in String format.
+	 */
 	public SightingDialog(String s) {
 		
 		initWidgets(s);
@@ -24,6 +33,11 @@ public class SightingDialog extends JDialog {
 	}
 	
 	
+	/**
+	 * Initialises widgets by setting the layouts, and properties of the current dialog.
+	 * Also creates a button which closes after clicking on it.
+	 * @param s Text to be displayed in the middle of the frame.
+	 */
 	public void initWidgets(String s) {
 		
 		setPreferredSize(new Dimension(400, 200));
