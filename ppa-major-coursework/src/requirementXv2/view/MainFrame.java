@@ -29,6 +29,7 @@ public class MainFrame extends JFrame implements Observer {
 	private WelcomeModel welcomeModel;
 	private MapModel mapModel;
 	private StatsModel statsModel;
+	
 
 	// Controller
 	protected MainController mainController;
@@ -61,6 +62,7 @@ public class MainFrame extends JFrame implements Observer {
 		this.welcomeModel = welcomeModel;
 		this.mapModel = mapModel;
 		this.statsModel = statsModel;
+	
 		this.mainController = new MainController(mainModel, welcomeModel, mapModel, statsModel);
 		initPanels(mainModel, welcomeModel, mapModel, statsModel);
 		initWidgets();

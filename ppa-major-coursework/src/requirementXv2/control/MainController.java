@@ -20,6 +20,7 @@ public class MainController {
 	private WelcomeModel welcomeModel;
 	private MapModel mapModel;
 	private StatsModel statsModel;
+
 	
 		
 	
@@ -36,6 +37,7 @@ public class MainController {
 		this.welcomeModel = welcomeModel;
 		this.mapModel = mapModel;
 		this.statsModel = statsModel;
+	
 		
 	}
 	
